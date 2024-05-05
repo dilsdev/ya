@@ -18,3 +18,14 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('admin/', function () {
+    return view('admin.index');
+})->name('admin.index');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('admin/menu', App\Livewire\Admin\Menu::class)->name('admin.menu');
+    Route::get('admin/pesanan', App\Livewire\Admin\Pesanan::class)->name('admin.pesanan');
+    Route::get('admin/pesananditerima', App\Livewire\Admin\PesananDiterima::class)->name('admin.pesananditerima');
+    Route::get('admin/menu/edit/{id}', App\Livewire\Admin\MenuEdit::class)->name('admin.menuedit');
+});

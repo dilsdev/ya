@@ -31,15 +31,24 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'nomor_telepon' => ['required', 'string', 'max:20'], // Sesuaikan aturan validasi dengan kebutuhan Anda
+            'alamat' => ['required', 'string', 'max:255'], // Sesuaikan aturan validasi dengan kebutuhan Anda
+            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'nomor_telepon.required' => 'Nomor telepon wajib diisi.',
+            'nomor_telepon.max' => 'Nomor telepon tidak boleh lebih dari :max karakter.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'alamat.max' => 'Alamat tidak boleh lebih dari :max karakter.',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+                'name' => $request->name,
+                'email' => strtolower($request->email),
+                'nomor_telepon' => $request->nomor_telepon,
+                'alamat' => $request->alamat, 
+                'password' => Hash::make($request->password),
+            ]);
 
         event(new Registered($user));
 
