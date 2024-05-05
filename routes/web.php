@@ -29,3 +29,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/pesananditerima', App\Livewire\Admin\PesananDiterima::class)->name('admin.pesananditerima');
     Route::get('admin/menu/edit/{id}', App\Livewire\Admin\MenuEdit::class)->name('admin.menuedit');
 });
+
+Route::get('user/index', App\Livewire\User\Index::class)->name('user.index');

@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
                 'name' => $request->name,
                 'email' => strtolower($request->email),
                 'nomor_telepon' => $request->nomor_telepon,
-                'alamat' => $request->alamat, 
+                'alamat' => $request->alamat,
                 'password' => Hash::make($request->password),
             ]);
 
@@ -54,6 +54,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // return redirect(route('dashboard', absolute: false));
+        return redirect(route('user'));
     }
 }
