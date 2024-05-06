@@ -47,7 +47,7 @@
                 <p class="card-text">Rp. {{ $makanan->harga }}</p>
             </div>
             <div class="card-footer">
-                <button class="btn btn-info" style="float: right;">+card</button>
+<button wire:click="addKeranjang({{ $makanan->id }})" class="btn btn-info" style="float: right;">+card</button>
             </div>
         </div>
         @endforeach

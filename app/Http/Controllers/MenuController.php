@@ -12,11 +12,11 @@ class MenuController extends Controller
         return response()->json($menus);
     }
     public function makanan(){
-        $makanans = Menu::where('jenis', 'makanan');
+        $makanans = Menu::where('jenis', 'makanan')->get();
         return response()->json($makanans);
     }
     public function minuman(){
-        $minumans = Menu::where('jenis', 'minuman');
+        $minumans = Menu::where('jenis', 'minuman')->get();
         return response()->json($minumans);
     }
 }
