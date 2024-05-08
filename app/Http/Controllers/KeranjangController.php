@@ -10,7 +10,7 @@ class KeranjangController extends Controller
     public function keranjang($id){
         $keranjangs = Keranjang::select('keranjangs.id', 'keranjangs.jumlah', 'users.name','nemus.nama')
         ->join('users', 'users.id', '=', 'keranjangs.user_id')
-        ->join('nemus', 'menus.id', '=', 'keranjang.menu_id')
+        ->join('menus', 'menus.id', '=', 'keranjang.menu_id')
         ->where('user_id',$id)->get();
         // $keranjangs = Keranjang::all();
         return response()->json($keranjangs);
