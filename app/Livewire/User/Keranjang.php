@@ -34,14 +34,16 @@ class Keranjang extends Component
         return response('oke');
     }
     public function hapuskeranjang($id){
-        $data = ModelsKeranjang::find($id);
-        $data->delete();
+        ModelsKeranjang::destroy($id);
+        // $data->delete();
 
     }
     public function kurangikeranjang($id){
         $data = ModelsKeranjang::find($id);
-        $data->jumlah -= 1;
-        $data->save();
+        if($data->jumlah > 0){
+            $data->jumlah -= 1;
+            $data->save();
+        }
     }
     public function tambahkeranjang($id){
         $data = ModelsKeranjang::find($id);

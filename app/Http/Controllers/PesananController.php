@@ -14,7 +14,7 @@ class PesananController extends Controller
     {
         $pendings = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
             ->join('users', 'users.id', '=', 'pesanans.user_id')
-            ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'pending'])
+            ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'di pending'])
             ->get();
 
         return response()->json($pendings);
@@ -23,7 +23,7 @@ class PesananController extends Controller
     {
         $proseses = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
             ->join('users', 'users.id', '=', 'pesanans.user_id')
-            ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'proses'])
+            ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'di proses'])
             ->get();
 
         return response()->json($proseses);

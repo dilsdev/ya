@@ -38,6 +38,22 @@ class KeranjangController extends Controller
         return response()->json('message', 'Berhasil di tambah keranjang');
     }
 
+    public function kurangikeranjang($id)
+    {
+        $data = Keranjang::find($id);
+        if ($data->jumlah > 0) {
+            $data->jumlah -= 1;
+            $data->save();
+        }
+        return response()->json($data->jumlah);
+    }
+    public function tambahkeranjang($id)
+    {
+        $data = Keranjang::find($id);
+        $data->jumlah += 1;
+        $data->save();
+        return response()->json($data->jumlah);
+    }
     public function delete($id){
         $data = Keranjang::find($id);
         $data->delete();

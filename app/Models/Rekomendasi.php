@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Rekomendasi extends Model
 {
     use HasFactory;
+    protected $fillable = ['nama_promosi', 'image', 'url'];
+
 }
