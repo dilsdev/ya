@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="m-2 input-icon">
+    <div class="input-icon m-2">
         <input type="text" value="" class="form-control" placeholder="Search…">
         <span class="input-icon-addon">
             <!-- Download SVG icon from http://tabler-icons.io/i/search -->
@@ -11,34 +11,35 @@
             </svg>
         </span>
     </div>
-    <div class="mb-2 row">
-        <div class="m-2 col-2">
-            <div class="col-auto"><span class="shadow-none avatar"
-                    style="background-image: url({{ asset('./asset/makanan.png') }})"></span></div>
+    <div class="row mb-2">
+        <div class="col-2 m-2">
+            <div class="col-auto"><span class="avatar"
+                    style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span></div>
         </div>
-        <div class="m-2 col-2">
-            <div class="col-auto"><span class="shadow-none avatar"
-                    style="background-image: url({{ asset('./asset/minuman.png') }})"></span></div>
+        <div class="col-2 m-2">
+            <div class="col-auto"><span class="avatar"
+                    style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span></div>
         </div>
-
+        <div class="col-2 m-2">
+            <div class="col-auto"><span class="avatar"
+                    style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span></div>
+        </div>
     </div>
-    @foreach ($rekomendasi as $rekomendasi2)
-    <div class="border img-responsive img-responsive-3x1 rounded-3"
-    style="background-image: url({{ asset('/storage/rekomendasi/'.$rekomendasi2->image) }})">
-</div>
-@endforeach
-    <div class="mt-2 row g-2 align-items-center">
+    <div class="img-responsive img-responsive-3x1 rounded-3 border"
+        style="background-image: url({{ asset('./static/photos/group-of-people-brainstorming-and-taking-notes-2.jpg') }})">
+    </div>
+    <div class="row g-2 mt-2 align-items-center">
         <div class="col">
             <h2 class="page-title">
                 Best Seller
             </h2>
         </div>
     </div>
-    <div class="mt-2 d-flex"
+    <div class="d-flex mt-2"
         style="width: 100%; overflow-y: hidden; overflow-x: auto; white-space: nowrap; /* Menyebabkan elemen-elemen fleksibel tetap dalam satu baris */">
 
         @foreach ($makanans as  $makanan)
-        <div class="m-2 card" style="min-width: 180px;">
+        <div class="card m-2" style="min-width: 180px;">
             <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
             <div class="card-body">
                 <img class="mb-2" src="{{ asset('/storage/menu/'.$makanan->image) }}" alt="" style="width: 140px; height: 190px; object-fit: cover;">
@@ -52,18 +53,18 @@
         @endforeach
         <!-- Tambahkan lebih banyak kartu di sini -->
     </div>
-    <div class="mt-2 row g-2 align-items-center">
+    <div class="row g-2 mt-2 align-items-center">
         <div class="col">
             <h2 class="page-title">
                 Best Seller
             </h2>
         </div>
     </div>
-    <div class="mt-2 d-flex"
+    <div class="d-flex mt-2"
         style="width: 100%; overflow-y: hidden; overflow-x: auto; white-space: nowrap; /* Menyebabkan elemen-elemen fleksibel tetap dalam satu baris */">
 
          @foreach ($minumans as  $minuman)
-        <div class="m-2 card" style="min-width: 180px;">
+        <div class="card m-2" style="min-width: 180px;">
             <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
             <div class="card-body">
                 <img class="mb-2" src="{{ asset('/storage/menu/'.$minuman->image) }}" alt="" style="width: 140px; height: 190px; object-fit: cover;">

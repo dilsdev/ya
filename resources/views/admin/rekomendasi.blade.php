@@ -7,7 +7,8 @@
     {{-- Nothing in the world is as soft and yielding as water. --}}
     @foreach ($data as $item)
         <br>{{ $item->nama_promosi }}
-        <br>{{ $item->image }}
+        <br><img style="width: 200px" src="{{ asset('/storage/rekomendasi/'.$item->image) }}" alt="">
         <br>{{ $item->url }}
+        <br><button wire:navigate wire:click="destroy({{ $item->id }})">DELETE</button>
     @endforeach
 </div>

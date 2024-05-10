@@ -3,10 +3,9 @@
     @if(strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false)
     <!-- Tampilan untuk perangkat seluler -->
     @include('user.mobile.index')
-@else
+    @else
     <!-- Tampilan untuk desktop -->
     {{-- @include('desktop_content') --}}
-
-     <h1>laptop oke</h1>
+    @include('user.web.index')
 @endif
 

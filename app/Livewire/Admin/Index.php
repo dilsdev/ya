@@ -8,7 +8,6 @@ class Index extends Component
 {
     public function render()
     {
-        $i = 'oke';
-        return view('admin.index', ['i'=>$i]);
+        return view('admin.index');
     }
 }

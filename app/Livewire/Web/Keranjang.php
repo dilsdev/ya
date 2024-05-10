@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\Web;
 
 use App\Models\Item_pesanan;
 use App\Models\Keranjang as ModelsKeranjang;
@@ -26,7 +26,7 @@ class Keranjang extends Component
             ->get();
         $this->total();
         // $this->rendercheckbox();
-        return view('user.mobile.keranjang');
+        return view('user.web.keranjang');
     }
 
     //     public function rendercheck()

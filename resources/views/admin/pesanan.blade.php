@@ -2,7 +2,7 @@
     @foreach ($pesanans as $pesanan)
     <br>{{ $pesanan->user_id }}
     <br>{{ $pesanan->tanggal_pesan }}
-    <br>{{ $pesanan->total_harga }}
+    <br>Rp{{ number_format($pesanan->total_harga, 0, ',', '.') }}
     <br>{{ $pesanan->jumlah_diskon }}
     <br>{{ $pesanan->bayar }}
     <br>{{ $pesanan->kembalian }}

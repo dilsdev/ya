@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\Web;
 
 use App\Models\Pesanan;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +14,13 @@ class Myorder extends Component
     public function render()
     {
 
-        return view('user.mobile.myorder');
+        return view('user.web.myorder');
     }
     public function pending()
     {
         $user = Auth::user();
         $id_user = $user->id;
-        $this->pendings = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id', 'pesanans.status')
+        $this->pendings = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id','pesanans.tanggal_pesan','pesanans.bayar', 'pesanans.kembalian', 'pesanans.status')
         ->join('users', 'users.id', '=', 'pesanans.user_id')
         ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'di pending'])
         ->get();
@@ -32,7 +32,7 @@ class Myorder extends Component
     {
         $user = Auth::user();
         $id_user = $user->id;
-        $this->proseses = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id', 'pesanans.status')
+        $this->proseses = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id','pesanans.tanggal_pesan','pesanans.bayar', 'pesanans.kembalian', 'pesanans.status')
         ->join('users', 'users.id', '=', 'pesanans.user_id')
         ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'di proses'])
         ->get();
@@ -43,7 +43,7 @@ class Myorder extends Component
     {
         $user = Auth::user();
         $id_user = $user->id;
-        $this->selesais = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id', 'pesanans.status')
+        $this->selesais = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id','pesanans.tanggal_pesan','pesanans.bayar', 'pesanans.kembalian', 'pesanans.status')
         ->join('users', 'users.id', '=', 'pesanans.user_id')
         ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'selesai'])
         ->get();

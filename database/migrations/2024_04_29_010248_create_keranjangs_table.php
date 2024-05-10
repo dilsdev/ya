@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('menu_id');
             $table->integer('jumlah');
+            $table->string('checkbox', 20);
             $table->timestamps();
         });
     }

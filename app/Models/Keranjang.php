@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Keranjang extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'menu_id', 'jumlah'];
+    protected $fillable = ['user_id', 'menu_id', 'jumlah', 'checkbox'];
 }

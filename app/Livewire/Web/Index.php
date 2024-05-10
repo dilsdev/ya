@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\Web;
 
 use App\Models\Keranjang;
 use App\Models\Menu;
-use App\Models\Rekomendasi;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -20,9 +19,8 @@ class Index extends Component
         ->latest()
             ->take(5)
             ->get();
-        $rekomendasi = Rekomendasi::all()->take(1);
 
-        return view('user.index', ['makanans'=>$makanans, 'minumans'=>$minumans, 'rekomendasi'=> $rekomendasi]);
+        return view('user.index', ['makanans'=>$makanans, 'minumans'=>$minumans]);
     }
     public function addKeranjang($id)
     {
@@ -35,7 +33,6 @@ class Index extends Component
                 'checkbox'=> 'true'
             ]);
         }
-        // Lakukan apa yang Anda inginkan setelah operasi selesai
-        return redirect()->route('user.keranjang'); // Gantilah 'route.name' dengan nama route yang sesuai.
+        return redirect()->route('web.keranjang');
     }
 }

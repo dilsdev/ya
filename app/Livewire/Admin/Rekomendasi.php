@@ -29,7 +29,7 @@ class Rekomendasi extends Component
         ModelsRekomendasi::create([
             'nama_promosi' => $this->nama_promosi,
             'image' => $this->image->hashName(),
-            'url' => 'http://127.0.0.1:8000/storage/rekomendasi' . $this->image->hashName(),
+            'url' => 'http://127.0.0.1:8000/storage/rekomendasi/' . $this->image->hashName(),
         ]);
 
         return redirect()->route('admin.rekomendasi');
@@ -38,6 +38,6 @@ class Rekomendasi extends Component
     {
         ModelsRekomendasi::destroy($id);
         session()->flash('message', 'Data Berhasil Dihapus.');
-        return redirect()->route('admin.rekomandasi');
+        return redirect()->route('admin.rekomendasi');
     }
 }
