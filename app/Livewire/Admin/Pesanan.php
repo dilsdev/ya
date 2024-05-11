@@ -9,16 +9,16 @@ class Pesanan extends Component
 {
     public function render()
     {
-        $pesanans = ModelsPesanan::all();
+        $pesanans = ModelsPesanan::where('status','di pending')->get();
         return view('admin.pesanan', ['pesanans' => $pesanans]);
     }
      public function terima($id){
         $pesanan = \App\Models\Pesanan::find($id);
         $pesanan->status = 'di proses';
         $pesanan->save();
-        return redirect()->route('admin.pesanan');
+        return redirect()->route('admin.pesananditerima');
          }
-     public function ditolak($id){
+     public function tolak($id){
         $pesanan = \App\Models\Pesanan::find($id);
         $pesanan->status = 'di tolak';
         $pesanan->save();

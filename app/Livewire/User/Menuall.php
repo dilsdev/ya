@@ -7,30 +7,15 @@ use App\Models\Menu as ModelsMenu;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class Menu extends Component
+class Menuall extends Component
 {
     public $menus;
-    public $type= 'all';
-
-    public function mount($type)
-    {
-        if($type !== null){
-            $this->type = $type;
-        }
-    }
     public function render()
     {
-        $this->type();
-        return view('user.mobile.menu');
-    }
-
-    public function type()
-    {
-        if($this->type == 'all'){
+        if ($this->menus === null) {
             $this->menus = ModelsMenu::all();
-        } else {
-            $this->menus = ModelsMenu::where('jenis', $this->type)->get();
         }
+        return view('user.mobile.menu');
     }
     public function addKeranjang($id)
     {
@@ -45,5 +30,4 @@ class Menu extends Component
         }
         return redirect()->route('user.keranjang');
     }
-
 }

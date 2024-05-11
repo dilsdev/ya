@@ -5,26 +5,38 @@
 
 
     <div class="container-xl">
-                    <h4 m-1 mb-3>
+                    <h4>
                         Keranjang
                     </h4>
                     @foreach ($keranjangs as $keranjang)
-                    <div class="card ">
+                    <div class="card" style="height: 200px">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-1">
-                                    <input class="form-check-input" type="checkbox">
+                                     @if ($keranjang->checkbox == 'true')
+                                <input wire:click='uncheck({{ $keranjang->id }})' class="form-check-input" checked
+                                    type="checkbox">
+                            @else
+                                <input wire:click='check({{ $keranjang->id }})' class="form-check-input" type="checkbox">
+                            @endif
                                 </div>
-                                <div class="col-5">
-                                    <a href="#" class="d-block">
-                                        <img src="{{ asset('/storage/menu/'.$keranjang->image) }}"
-                                            class="card-img-top"></a>
+                                <div class="col-2">
+                                    <a href="#" >
+                                        <div class="img-responsive img-responsive-1x1 rounded border" style="background-image: url({{ asset('/storage/menu/'.$keranjang->image) }})"></div>
+                                    </a>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-3">
+                                    <h2 class="mb-1">{{ $keranjang->nama}}</h2>
+                                    <span>{{ $keranjang->deskripsi }}</span>
+                                </div>
+                                <div class="col-1">
+                                    <h4 class="mt-2">{{ number_format($keranjang->harga, 0, ',', '.')}}</h4>
+                                </div>
+                                <div class="col-2">
                                     <div class="row">
-                                        <h4>{{ $keranjang->nama}}</h4>
-                                        <div class="col d-flex gap-1">
-                                            <div class="card d-flex"
+                                        {{-- <h4>{{ $keranjang->nama}}</h4> --}}
+                                        <div class="gap-1 col d-flex">
+                                            <button class="card d-flex"
                                                 style="justify-content:center ; align-items: center;">
                                                 <svg wire:click='kurangikeranjang({{ $keranjang->id }})' xmlns="http://www.w3.org/2000/svg" width="24" height="24"                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -32,12 +44,12 @@
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path d="M5 12l14 0" />
                                                 </svg>
-                                            </div>
+                                            </button>
                                             <div class="card d-flex"
                                                 style="justify-content:center ; align-items: center;">
                                                 <h4 class="p-2 m-auto">{{ $keranjang->jumlah}}</h4>
                                             </div>
-                                            <div wire:click='tambahkeranjang({{ $keranjang->id }})' class="card d-flex"
+                                            <button wire:click='tambahkeranjang({{ $keranjang->id }})' class="card d-flex"
                                                 style="justify-content:center ; align-items: center;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -47,10 +59,12 @@
                                                     <path d="M12 5l0 14" />
                                                     <path d="M5 12l14 0" />
                                                 </svg>
-                                            </div>
+                                            </button>
                                         </div>
-
                                     </div>
+                                </div>
+                                <div class="col-2">
+                                    <h4 class="mt-2">{{ number_format($keranjang->harga, 0, ',', '.')}}</h4>
                                 </div>
                                 <div class="col-1">
                                     <svg wire:click='hapuskeranjang({{ $keranjang->id }})' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -69,22 +83,22 @@
                         </div>
                     </div>
                     @endforeach
-                </div>
-        <div class="container card" style="position:sticky;">
-            <div class="row d-flex">
-                <div class="col-2 m-2 d-flex justify-content-center align-items-center">
+                    <div class="container card" style="position:sticky;">
+                        <div class="row d-flex">
+                {{-- <div class="m-2 col-2 d-flex justify-content-center align-items-center">
                     <input class="form-check-input" style="width: 25px; height: 25px;" type="checkbox">
-                </div>
-                <div class="col m-2 ">
+                </div> --}}
+                <div class="m-2 col ">
                     <div class="d-flex align-items-center" style="height: 100%;">
-                        <h3 style="margin: 0; padding: 0;">Total: <strong>Rp{{ $total }}</strong></h3>
+                        <h3 style="margin: 0; padding: 0;">Total: <strong>Rp{{ number_format($total, 0, ',', '.') }}</strong></h3>
                     </div>
                 </div>
-                <div class="col m-2">
+                <div class="m-2 col">
                     <div class="card">
-                        <button class="btn btn-primary">Cekout</button>
+                        <button wire:click='pesan' class="btn btn-primary">Cekout</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>

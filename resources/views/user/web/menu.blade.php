@@ -1,8 +1,24 @@
 <div>
-     <div class="container d-flex" style="flex-wrap: wrap;">
+     <div class="container">
+        <div class="mb-2 row">
+            <div class="m-2 mr-3 col-1" >
+                <a wire:navigate href="{{ route('web.menu', 'all') }}" class="col-auto"><span class="shadow-none avatar"
+                        style="background-image: url({{ asset('./asset/food.png') }})"></span></a>
+            </div>
+            <div class="m-2 col-1">
+                <a wire:navigate href="{{ route('web.menu', 'makanan') }}" class="col-auto"><span
+                        class="shadow-none avatar"
+                        style="background-image: url({{ asset('./asset/makanan.png') }})"></span></a>
+            </div>
+            <div class="m-2 col-1">
+                <a wire:navigate href="{{ route('web.menu', 'minuman') }}" class="col-auto"><span
+                        class="shadow-none avatar"
+                        style="background-image: url({{ asset('./asset/minuman.png') }})"></span></a>
+            </div>
+        </div>
+        <div class="d-flex" style="flex-wrap: wrap;">
          @foreach ($menus as $menu)
     <div class="m-2 card" style="max-width: 190px;">
-     <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
      <div class="card-body">
       <img class="mb-2" src="{{ asset('/storage/menu/'.$menu->image) }}" alt="" style="width: 140px; height: 160px; object-fit: cover;">
       <h4 class="card-text">{{ $menu->nama }}</h4>
@@ -12,7 +28,5 @@
     </div>
     @endforeach
    </div>
-    {{-- <button wire:click='render()'>makanan</button> --}}
-    <button wire:click='makanan()'>makanan</button>
-    <button wire:click='minuman()'>minuman</button>
+   </div>
 </div>

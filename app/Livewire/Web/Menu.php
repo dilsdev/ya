@@ -10,13 +10,27 @@ use Livewire\Component;
 class Menu extends Component
 {
     public $menus;
+    public $type = 'all';
 
+    public function mount($type)
+    {
+        if ($type !== null) {
+            $this->type = $type;
+        }
+    }
     public function render()
     {
-        if ($this->menus === null) {
-            $this->menus = ModelsMenu::all();
-        }
+        $this->type();
         return view('user.web.menu');
+    }
+
+    public function type()
+    {
+        if ($this->type == 'all') {
+            $this->menus = ModelsMenu::all();
+        } else {
+            $this->menus = ModelsMenu::where('jenis', $this->type)->get();
+        }
     }
     public function addKeranjang($id)
     {
@@ -26,19 +40,9 @@ class Menu extends Component
                 'user_id' => $user->id,
                 'menu_id' => $id,
                 'jumlah' => 1,
-                'checkbox'=> 'true'
+                'checkbox' => 'true'
             ]);
         }
-        // Lakukan apa yang Anda inginkan setelah operasi selesai
-        return redirect()->route('web.keranjang'); // Gantilah 'route.name' dengan nama route yang sesuai.
-    }
-    public function makanan()
-    {
-        $this->menus = ModelsMenu::where('jenis', 'makanan')->get();
-    }
-
-    public function minuman()
-    {
-        $this->menus = ModelsMenu::where('jenis', 'minuman')->get();
+        return redirect()->route('web.keranjang');
     }
 }

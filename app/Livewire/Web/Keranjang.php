@@ -19,7 +19,7 @@ class Keranjang extends Component
     {
         $user = Auth::user();
         // $keranjangs = Keranjang::where('user_id', $user->id);
-        $this->keranjangs = ModelsKeranjang::select('menus.image', 'users.name', 'menus.harga', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
+        $this->keranjangs = ModelsKeranjang::select('menus.image', 'users.name', 'menus.harga', 'menus.deskripsi', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
             ->join('users', 'users.id', '=', 'keranjangs.user_id')
             ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
             ->where('user_id', $user->id)
@@ -158,6 +158,7 @@ class Keranjang extends Component
             }
         }
         $this->total();
+        return view('user.web.myorder');
         }
 
         // public function checkall()

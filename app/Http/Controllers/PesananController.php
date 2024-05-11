@@ -38,7 +38,7 @@ class PesananController extends Controller
         return response()->json($selesais);
     }
 
-    public function detail($id)
+    public function detail($id, $id_user)
     {
         $data = Item_pesanan::select('menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
         ->join('menus', 'menus.menu_id', '=', 'item_pesanans.menu_id')

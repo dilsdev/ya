@@ -158,6 +158,7 @@ class Keranjang extends Component
             }
         }
         $this->total();
+        return view('user.mobile.myorder');
         }
 
         // public function checkall()

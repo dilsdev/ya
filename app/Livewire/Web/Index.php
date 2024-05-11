@@ -4,6 +4,7 @@ namespace App\Livewire\Web;
 
 use App\Models\Keranjang;
 use App\Models\Menu;
+use App\Models\Rekomendasi;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -20,7 +21,9 @@ class Index extends Component
             ->take(5)
             ->get();
 
-        return view('user.index', ['makanans'=>$makanans, 'minumans'=>$minumans]);
+        $rekomendasi = Rekomendasi::all()->take(1);
+
+        return view('user.index', ['makanans' => $makanans, 'minumans' => $minumans, 'rekomendasi' => $rekomendasi]);
     }
     public function addKeranjang($id)
     {
