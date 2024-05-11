@@ -48,7 +48,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-info" type="submit">bayar</button>
-                        <a href="{{ route('user.myorder') }}" class="btn btn-warning">kembali</a>
+                        <a href="{{ route('admin.pesananselesai') }}" class="btn btn-warning">kembali</a>
                     </div>
                 </form>
             </div>

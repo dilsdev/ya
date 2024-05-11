@@ -16,34 +16,22 @@ class Menu extends Component
         return view('admin.menu', ['menus' => $menus]);
     }
 
-    public $nama;
-    public $deskripsi;
-    public $harga;
-    public $image;
-    public $jenis;
-    public $status;
-    public function store()
-    {
-        $this->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        $this->image->storeAs('public/menu', $this->image->hashName());
-
-        ModelMenu::create([
-            'nama'=> $this->nama,
-            'deskripsi' => $this->deskripsi ,
-            'harga'=>$this->harga ,
-            'image'=>$this->image->hashName() ,
-            'status'=>$this->status,
-            'jenis'=>$this->jenis
-        ]);
-
-        return redirect()->route('admin.menu');
-    }
+    
     public function destroy($id)
     {
         ModelMenu::destroy($id);
         session()->flash('message', 'Data Berhasil Dihapus.');
         return redirect()->route('admin.menu');
+    }
+    public function updatestatus($id){
+        $data = ModelMenu::find($id);
+        if($data->status == 'ready'){
+            $data->status = 'notready';
+            $data->save();
+        }else{
+            $data->status = 'ready';
+            $data->save();
+        }
+
     }
 }

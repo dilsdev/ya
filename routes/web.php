@@ -23,12 +23,14 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/index', App\Livewire\Admin\Index::class)->name('admin.index');
     Route::get('admin/menu', App\Livewire\Admin\Menu::class)->name('admin.menu');
+    Route::get('admin/tambahmenu', App\Livewire\Admin\Tambahmenu::class)->name('admin.tambahmenu');
     Route::get('admin/menu/edit/{id}', App\Livewire\Admin\MenuEdit::class)->name('admin.menuedit');
     Route::get('admin/rekomendasi', App\Livewire\Admin\Rekomendasi::class)->name('admin.rekomendasi');
     Route::get('admin/pesanan', App\Livewire\Admin\Pesanan::class)->name('admin.pesanan');
     Route::get('admin/pesananditerima', App\Livewire\Admin\PesananDiterima::class)->name('admin.pesananditerima');
     Route::get('admin/pesananselesai', App\Livewire\Admin\PesananSelesai::class)->name('admin.pesananselesai');
     Route::post('admin/pembayaran', App\Livewire\Admin\Pembayaran::class)->name('admin.pembayaran');
+    Route::get('admin/detail/{id}/{url}', App\Livewire\Admin\Detail::class)->name('admin.detail');
 });
 Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/index', App\Livewire\User\Index::class)->name('user.index');

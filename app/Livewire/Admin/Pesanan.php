@@ -9,7 +9,9 @@ class Pesanan extends Component
 {
     public function render()
     {
-        $pesanans = ModelsPesanan::where('status','di pending')->get();
+        $pesanans = ModelsPesanan::select('users.name', 'pesanans.total_harga', 'pesanans.id', 'pesanans.tanggal_pesan',  'pesanans.status')
+            ->join('users', 'users.id', '=', 'pesanans.user_id')
+            ->where('status','di pending')->get();
         return view('admin.pesanan', ['pesanans' => $pesanans]);
     }
      public function terima($id){

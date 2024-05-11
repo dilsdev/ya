@@ -1,25 +1,56 @@
 <div>
-    <form wire:submit="store" enctype="multipart/form-data">
-        <input type="text" placeholder="nama" wire:model="nama">
-        <input type="text" placeholder="deskripsi" wire:model="deskripsi">
-        <input type="number" placeholder="harga" wire:model="harga">
-        <input type="file" placeholder="image" wire:model="image">
-        <input type="text" placeholder="status" wire:model="status">
-        <input type="text" placeholder="jenis" wire:model="jenis">
-        <button type="submit">oke</button>
-    </form>
-<br>
----------------------------------
-    @foreach ($menus as $menu)
-        <br>No:{{ $menu->id }}
-        <br>Menu:{{ $menu->nama }}
-        <br>Deskripsi:{{ $menu->deskripsi }}
-        <br>Harga: Rp.{{ $menu->harga }}
-        <br><img style="width: 200px" src="{{ asset('/storage/menu/'.$menu->image) }}" alt="">
-        <br>Status:{{ $menu->status }}
-        <button wire:navigate wire:click="destroy({{ $menu->id }})">DELETE</button>
-        <br>
-        <a wire:navigate href="/admin/menu/edit/{{ $menu->id }}" wire:navigate class="btn btn-sm btn-primary">EDIT</a>
-        <---------------------------------------------------------------------->
-        @endforeach
+    <div class="container-xl">
+        <a href="{{ route('admin.tambahmenu') }}" class="btn btn-warning mb-3">
+            Tambah menu
+        </a>
+
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Deskripsi</th>
+                            <th>Harga</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Hapus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($menus as $key => $menu)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td class="text-secondary">
+                                    {{ $menu->name }}
+                                </td>
+                                <td class="text-secondary">{{ $menu->deskripsi }}</td>
+                                <td class="text-secondary">
+                                    Rp.{{ number_format($menu->harga, 0, ',', '.') }}
+                                </td>
+                                <td>
+                                    @if ($menu->status == 'ready')
+                                        <button class="btn btn-success"
+                                            wire:click='updatestatus({{ $menu->id }})'>{{ $menu->status }}</button>
+                                    @else
+                                        <button class="btn btn-danger"
+                                            wire:click='updatestatus({{ $menu->id }})'>{{ $menu->status }}</button>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a wire:navigate href="/admin/menu/edit/{{ $menu->id }}"
+                                        class="btn btn-primary">EDIT</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger"
+                                        wire:click='destroy({{ $menu->id }})'>Delete</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
