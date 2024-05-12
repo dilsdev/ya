@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Pesanan;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Keranjang extends Component
 {
@@ -30,30 +31,30 @@ class Keranjang extends Component
     }
 
     //     public function rendercheck()
-//     {
-//         $user = Auth::user();
-//         $render = ModelsKeranjang::select('keranjangs.checkbox')
-//         ->join('users', 'users.id', '=', 'keranjangs.user_id')
-//         ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
-//         ->where('user_id', $user->id)
-//             ->get();
+    //     {
+    //         $user = Auth::user();
+    //         $render = ModelsKeranjang::select('keranjangs.checkbox')
+    //         ->join('users', 'users.id', '=', 'keranjangs.user_id')
+    //         ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
+    //         ->where('user_id', $user->id)
+    //             ->get();
 
     //         foreach ($this->keranjangs as $key => $isi) {
-//             $isi->checkbox = $render[$key]->checkbox;
-//         }
-//     }
-// public function rendercheckbox(){
-//     // if($this->checkbox == 'false'){
-//             $this->htmlcheckbox = <<<'HTML'
-//                 <input wire:click='checkall' class="form-check-input" style="width: 25px; height: 25px;"type="checkbox">
-//             HTML;
-//     // }else{
-//     //         $this->htmlcheckbox = <<<'HTML'
-//     //                         <input wire:click='uncheckall' checked class="form-check-input" style="width: 25px; height: 25px;"type="checkbox">
-//     //             HTML;
+    //             $isi->checkbox = $render[$key]->checkbox;
+    //         }
+    //     }
+    // public function rendercheckbox(){
+    //     // if($this->checkbox == 'false'){
+    //             $this->htmlcheckbox = <<<'HTML'
+    //                 <input wire:click='checkall' class="form-check-input" style="width: 25px; height: 25px;"type="checkbox">
+    //             HTML;
+    //     // }else{
+    //     //         $this->htmlcheckbox = <<<'HTML'
+    //     //                         <input wire:click='uncheckall' checked class="form-check-input" style="width: 25px; height: 25px;"type="checkbox">
+    //     //             HTML;
 
     //     // }
-// }
+    // }
     public function addkeranjang($id)
     {
         $user = Auth::user();
@@ -106,103 +107,110 @@ class Keranjang extends Component
         //     $this->rendercheckbox();
     }
 
-    public function total(){
-            foreach ($this->keranjangs as $isi) {
+    public function total()
+    {
+        foreach ($this->keranjangs as $isi) {
             $oke = 0;
-            if($isi->checkbox == 'true'){
+            if ($isi->checkbox == 'true') {
                 $oke += $isi->jumlah * $isi->harga;
             }
             $this->total = $oke;
         }
     }
-        public function pesan(){
+    public function pesan()
+    {
         $dataArray = [];
         $i = 0;
         foreach ($this->keranjangs as $isi) {
             if ($isi->checkbox == 'true') {
                 $dataArray[$i] = $isi->id;
+                $i++;
             }
         }
-
-        $i = 0;
-        $total_harga = 0;
-        $pesanan = Pesanan::create([
-            'user_id' =>  0,
-            'tanggal_pesan' => date('Y-m-d'),
-            'jumlah_diskon' => 0,
-            'bayar' => 0,
-            'kembalian' => 0,
-            'total_harga' => 0,
-            'status' => "di pending",
-        ]);
-        foreach ($dataArray as $data) {
-            $data_keranjang = ModelsKeranjang::find($data);
-            $menu = Menu::find($data_keranjang->menu_id);
-            // dd($menu);
-            $subtotal = $menu->harga * $data_keranjang->jumlah;
-            $item_pesanan = Item_pesanan::create([
-                'pesanan_id' => $pesanan->id,
-                'menu_id' => $data_keranjang->menu_id,
-                'jumlah' => $data_keranjang->jumlah,
-                'subtotal_harga' => $subtotal,
+        if (isset($dataArray[$i])) {
+            $i = 0;
+            $total_harga = 0;
+            $pesanan = Pesanan::create([
+                'user_id' =>  0,
+                'tanggal_pesan' => date('Y-m-d'),
+                'jumlah_diskon' => 0,
+                'bayar' => 0,
+                'kembalian' => 0,
+                'total_harga' => 0,
+                'status' => "di pending",
             ]);
-            $total_harga = +$subtotal;
-            $i++;
-        }
-        $pesanan->user_id = $data_keranjang->user_id;
-        $pesanan->total_harga = $total_harga;
-        $pesanan->save();
-        foreach ($this->keranjangs as $isi) {
-            if ($isi->checkbox == 'true') {
-                $isi->delete();
+            foreach ($dataArray as $data) {
+                $data_keranjang = ModelsKeranjang::find($data);
+                $menu = Menu::find($data_keranjang->menu_id);
+                // dd($menu);
+                $subtotal = $menu->harga * $data_keranjang->jumlah;
+                $item_pesanan = Item_pesanan::create([
+                    'pesanan_id' => $pesanan->id,
+                    'menu_id' => $data_keranjang->menu_id,
+                    'jumlah' => $data_keranjang->jumlah,
+                    'subtotal_harga' => $subtotal,
+                ]);
+                $total_harga = +$subtotal;
+                $i++;
             }
+            $pesanan->user_id = $data_keranjang->user_id;
+            $pesanan->total_harga = $total_harga;
+            $pesanan->save();
+            foreach ($this->keranjangs as $isi) {
+                if ($isi->checkbox == 'true') {
+                    $isi->delete();
+                }
+            }
+            $this->total();
+            return view('user.mobile.myorder');
+        } else {
+            Alert::error('Warning', 'Keranjang kosong');
+            return redirect()->route('user.keranjang');
         }
-        $this->total();
-        return view('user.mobile.myorder');
-        }
+    }
 
-        // public function checkall()
-        // {
-        //     if( $this->checkbox = 'false'){
-        //         $this->checkbox = 'true';
-        //         $user = Auth::user();
-        //         $data = ModelsKeranjang::where('user_id', $user->id)->get();
-        //         foreach ($data as $item) {
-        //             $item->checkbox = 'true';
-        //             $item->save();
-        //         }
-        //         if ($this->rendercheckbox()) {
-        //             dd('oke');
-        //         }
-        //         return response('oke');
-        //     }else{
-        //         $this->checkbox = 'false';
-        //         $user = Auth::user();
-        //         $data = ModelsKeranjang::where('user_id', $user->id)->get();
-        //         foreach ($data as $item) {
-        //             $item->checkbox = 'false';
-        //             $item->save();
-        //         }
-        //         if ($this->rendercheckbox()) {
-        //             dd('oke');
-        //         }
-        //         return response('oke');
-        //     }
+    // public function checkall()
+    // {
+    //     if( $this->checkbox = 'false'){
+    //         $this->checkbox = 'true';
+    //         $user = Auth::user();
+    //         $data = ModelsKeranjang::where('user_id', $user->id)->get();
+    //         foreach ($data as $item) {
+    //             $item->checkbox = 'true';
+    //             $item->save();
+    //         }
+    //         if ($this->rendercheckbox()) {
+    //             dd('oke');
+    //         }
+    //         return response('oke');
+    //     }else{
+    //         $this->checkbox = 'false';
+    //         $user = Auth::user();
+    //         $data = ModelsKeranjang::where('user_id', $user->id)->get();
+    //         foreach ($data as $item) {
+    //             $item->checkbox = 'false';
+    //             $item->save();
+    //         }
+    //         if ($this->rendercheckbox()) {
+    //             dd('oke');
+    //         }
+    //         return response('oke');
+    //     }
 
 
-        // }
+    // }
 
-        // public function uncheckall()
-        // {
-        //     $this->checkbox = 'false';
-        //     $user = Auth::user();
-        //     $data = ModelsKeranjang::where('user_id', $user->id)->get();
-        //     foreach ($data as $item) {
-        //         $item->checkbox = 'false';
-        //         $item->save();
-        //     }
-        //     $this->rendercheckbox();
-        // }
+    // public function uncheckall()
+    // {
+    //     $this->checkbox = 'false';
+    //     $user = Auth::user();
+    //     $data = ModelsKeranjang::where('user_id', $user->id)->get();
+    //     foreach ($data as $item) {
+    //         $item->checkbox = 'false';
+    //         $item->save();
+    //     }
+    //     $this->rendercheckbox();
+    // }
 
 
 
