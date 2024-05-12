@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Rekomendasi;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Index extends Component
 {
@@ -31,18 +32,20 @@ class Index extends Component
             $krjg = keranjang::where([
                 'user_id' => $user->id,
                 'menu_id' => $id,
-            ])->get();
-            if($krjg){
+            ])->first();
+            if ($krjg) {
+                Alert::error('Warning', 'Barang sudah ada di keranjang');
+                return redirect()->route('user.index');
+            } else {
                 Keranjang::create([
                     'user_id' => $user->id,
                     'menu_id' => $id,
                     'jumlah' => 1,
                     'checkbox' => 'true'
                 ]);
-            } else {
-                return redirect()->route('user.menu')->with('message', 'keranjang sudah ada');;
+                return redirect()->route('user.keranjang');
+                // return redirect()->route('user.menu')->with('message', 'keranjang sudah ada');;
             }
         }
-        return redirect()->route('user.keranjang');
     }
 }

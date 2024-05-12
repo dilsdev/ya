@@ -35,6 +35,7 @@
 
 <body>
     <script src={{ asset('./dist/js/demo-theme.min.js?1684106062') }}></script>
+            @include('sweetalert::alert')
     @if (Auth::user()->role == 'admin')
         <aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent">
             <div class="container-fluid">

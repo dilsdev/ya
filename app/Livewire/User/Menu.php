@@ -6,6 +6,7 @@ use App\Models\Keranjang;
 use App\Models\Menu as ModelsMenu;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Menu extends Component
 {
@@ -35,23 +36,25 @@ class Menu extends Component
     public function addKeranjang($id)
     {
         $user = Auth::user();
-        if (Menu::find($id)) {
+        if (ModelsMenu::find($id)) {
             $krjg = keranjang::where([
                 'user_id' => $user->id,
                 'menu_id' => $id,
-            ])->get();
+            ])->first();
             if ($krjg) {
+                Alert::error('Warning', 'Barang sudah ada di keranjang');
+                return redirect()->route('user.menuall');
+            } else {
                 Keranjang::create([
                     'user_id' => $user->id,
                     'menu_id' => $id,
                     'jumlah' => 1,
                     'checkbox' => 'true'
                 ]);
-            }else{
-                return redirect()->route('user.menu')->with('message', 'keranjang sudah ada');;
+                return redirect()->route('user.keranjang');
+                // return redirect()->route('user.menu')->with('message', 'keranjang sudah ada');;
             }
         }
-        return redirect()->route('user.keranjang');
     }
 
 }
