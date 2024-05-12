@@ -89,7 +89,7 @@
             </div>
             <div class="m-2 col">
                 <div class="card">
-                    <button wire:click='pesan' class="btn btn-primary">Cekout</button>
+                    <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan' class="btn btn-primary">Cekout</button>
                 </div>
             </div>
         </div>

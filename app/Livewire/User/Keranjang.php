@@ -127,7 +127,7 @@ class Keranjang extends Component
                 $i++;
             }
         }
-        if (isset($dataArray[$i])) {
+        if (isset($dataArray[0])) {
             $i = 0;
             $total_harga = 0;
             $pesanan = Pesanan::create([

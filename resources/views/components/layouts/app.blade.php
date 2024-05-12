@@ -240,7 +240,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark">
-                    <a wire:navigate href="{{ route('user.index') }}">
+                    <a href="{{ route('user.index') }}">
                         <img src="../static/logo.svg" width="110" height="32" alt="Tabler"
                             class="navbar-brand-image">
                     </a>
@@ -274,7 +274,7 @@
                 <div class="collapse navbar-collapse" id="sidebar-menu">
                     <ul class="navbar-nav pt-lg-3">
                         <li class="nav-item">
-                            <a wire:navigate class="nav-link" href="{{ route('user.index') }}">
+                            <a class="nav-link" href="{{ route('user.index') }}">
                                 <span
                                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -292,7 +292,7 @@
                             </a>
                             </li>
                         <li class="nav-item">
-                            <a wire:navigate class="nav-link" href="{{ route('user.menuall') }}">
+                            <a class="nav-link" href="{{ route('user.menuall') }}">
                                 <span
                                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -310,7 +310,7 @@
                             </a>
                             </li>
                         <li class="nav-item">
-                            <a wire:navigate class="nav-link" href="{{ route('user.keranjang') }}">
+                            <a class="nav-link" href="{{ route('user.keranjang') }}">
                                 <span
                                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
@@ -328,7 +328,7 @@
                             </a>
                             </li>
                         <li class="nav-item">
-                            <a wire:navigate class="nav-link" href="{{ route('user.myorder') }}">
+                            <a class="nav-link" href="{{ route('user.myorder') }}">
                                 <span
                                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"

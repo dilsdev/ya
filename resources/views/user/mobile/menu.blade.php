@@ -31,24 +31,25 @@
                 </svg>
             </span>
         </div>
-        <div class="d-flex justify-content-center" style="flex-wrap: wrap">
-            @if ($menus)
-                @foreach ($menus as $menu)
-                    <div class="m-2 card" style="width: 150px; ">
+        <div class="row row-cols-2 row-cols-sm-2">
+             @if ($menus)
+        @foreach ($menus as $menu)
+            <div class="mb-4 col">
+                <div class="card" style="">
                         <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                         <div class="card-body">
                             <img class="mb-2" src="{{ asset('/storage/menu/' . $menu->image) }}" alt=""
-                                style="width: 140px; height: 160px; object-fit: cover;">
+                                style="width: 100%; height: 170px; object-fit: cover;">
                             <h4 class="card-text">{{ $menu->nama }}</h4>
                             <p class="card-text">Rp. {{ $menu->harga }}</p>
                             <button wire:click="addKeranjang({{ $menu->id }})" class="btn btn-info"
                         style="float: right;">+card</button>
                         </div>
                     </div>
-                @endforeach
-            @endif
-
-        </div>
+            </div>
+        @endforeach
+        @endif
+    </div>
     </div>
 
 </div>
