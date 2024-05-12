@@ -35,13 +35,21 @@ class Menu extends Component
     public function addKeranjang($id)
     {
         $user = Auth::user();
-        if (ModelsMenu::find($id)) {
-            Keranjang::create([
+        if (Menu::find($id)) {
+            $krjg = keranjang::where([
                 'user_id' => $user->id,
                 'menu_id' => $id,
-                'jumlah' => 1,
-                'checkbox' => 'true'
-            ]);
+            ])->get();
+            if ($krjg) {
+                Keranjang::create([
+                    'user_id' => $user->id,
+                    'menu_id' => $id,
+                    'jumlah' => 1,
+                    'checkbox' => 'true'
+                ]);
+            }else{
+                return redirect()->route('user.menu')->with('message', 'keranjang sudah ada');;
+            }
         }
         return redirect()->route('user.keranjang');
     }

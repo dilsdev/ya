@@ -28,14 +28,21 @@ class Index extends Component
     {
         $user = Auth::user();
         if (Menu::find($id)) {
-            Keranjang::create([
+            $krjg = keranjang::where([
                 'user_id' => $user->id,
                 'menu_id' => $id,
-                'jumlah' => 1,
-                'checkbox'=> 'true'
-            ]);
+            ])->get();
+            if($krjg){
+                Keranjang::create([
+                    'user_id' => $user->id,
+                    'menu_id' => $id,
+                    'jumlah' => 1,
+                    'checkbox' => 'true'
+                ]);
+            } else {
+                return redirect()->route('user.menu')->with('message', 'keranjang sudah ada');;
+            }
         }
-        // Lakukan apa yang Anda inginkan setelah operasi selesai
-        return redirect()->route('user.keranjang'); // Gantilah 'route.name' dengan nama route yang sesuai.
+        return redirect()->route('user.keranjang');
     }
 }
