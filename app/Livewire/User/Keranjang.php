@@ -109,8 +109,8 @@ class Keranjang extends Component
 
     public function total()
     {
+        $oke = 0;
         foreach ($this->keranjangs as $isi) {
-            $oke = 0;
             if ($isi->checkbox == 'true') {
                 $oke += $isi->jumlah * $isi->harga;
             }

@@ -53,8 +53,11 @@
                     <p class="card-text">Rp. {{ $makanan->harga }}</p>
                 </div>
                 <div class="card-footer">
-                    <button wire:click="addKeranjang({{ $makanan->id }})" class="btn btn-info"
-                        style="float: right;">+card</button>
+                    @if ($makanan->status == 'ready')
+                            <button wire:click="addKeranjang({{ $makanan->id }})" class="btn btn-info" style="float: right;">+card</button>
+                            @else
+                            <button disabled class="btn btn-danger" style="float: right;">not ready</button>
+                            @endif
                 </div>
             </div>
         @endforeach
@@ -80,8 +83,11 @@
                     <p class="card-text">Rp. {{ $minuman->harga }}</p>
                 </div>
                 <div class="card-footer">
-                    <button wire:click="addKeranjang({{ $minuman->id }})" class="btn btn-info"
-                        style="float: right;">+card</button>
+                   @if ($minuman->status == 'ready')
+                            <button wire:click="addKeranjang({{ $minuman->id }})" class="btn btn-info" style="float: right;">+card</button>
+                            @else
+                            <button disabled class="btn btn-danger" style="float: right;">not ready</button>
+                            @endif
                 </div>
             </div>
         @endforeach

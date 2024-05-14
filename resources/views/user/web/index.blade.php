@@ -38,18 +38,24 @@
     <div class="d-flex mt-2"
         style="width: 100%; overflow-y: hidden; overflow-x: auto; white-space: nowrap; /* Menyebabkan elemen-elemen fleksibel tetap dalam satu baris */">
 
-        @foreach ($makanans as  $makanan)
-        <div class="card m-2" style="min-width: 180px;">
-            <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
-            <div class="card-body">
-                <img class="mb-2" src="{{ asset('/storage/menu/'.$makanan->image) }}" alt="" style="width: 140px; height: 190px; object-fit: cover;">
-                <h4 class="card-text">{{ $makanan->nama }}</h4>
-                <p class="card-text">Rp. {{ $makanan->harga }}</p>
+        @foreach ($makanans as $makanan)
+            <div class="card m-2" style="min-width: 180px;">
+                <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
+                <div class="card-body">
+                    <img class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
+                        style="width: 140px; height: 190px; object-fit: cover;">
+                    <h4 class="card-text">{{ $makanan->nama }}</h4>
+                    <p class="card-text">Rp. {{ $makanan->harga }}</p>
+                </div>
+                <div class="card-footer">
+                    @if ($makanan->status == 'ready')
+                        <button wire:click="addKeranjang({{ $makanan->id }})" class="btn btn-info"
+                            style="float: right;">+card</button>
+                    @else
+                        <button disabled class="btn btn-danger" style="float: right;">not ready</button>
+                    @endif
+                </div>
             </div>
-            <div class="card-footer">
-<button wire:click="addKeranjang({{ $makanan->id }})" class="btn btn-info" style="float: right;">+card</button>
-            </div>
-        </div>
         @endforeach
         <!-- Tambahkan lebih banyak kartu di sini -->
     </div>
@@ -63,18 +69,24 @@
     <div class="d-flex mt-2"
         style="width: 100%; overflow-y: hidden; overflow-x: auto; white-space: nowrap; /* Menyebabkan elemen-elemen fleksibel tetap dalam satu baris */">
 
-         @foreach ($minumans as  $minuman)
-        <div class="card m-2" style="min-width: 180px;">
-            <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
-            <div class="card-body">
-                <img class="mb-2" src="{{ asset('/storage/menu/'.$minuman->image) }}" alt="" style="width: 140px; height: 190px; object-fit: cover;">
-                <h4 class="card-text">{{ $minuman->nama }}</h4>
-                <p class="card-text">Rp. {{ $minuman->harga }}</p>
+        @foreach ($minumans as $minuman)
+            <div class="card m-2" style="min-width: 180px;">
+                <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
+                <div class="card-body">
+                    <img class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}" alt=""
+                        style="width: 140px; height: 190px; object-fit: cover;">
+                    <h4 class="card-text">{{ $minuman->nama }}</h4>
+                    <p class="card-text">Rp. {{ $minuman->harga }}</p>
+                </div>
+                <div class="card-footer">
+                    @if ($minuman->status == 'ready')
+                        <button wire:click="addKeranjang({{ $minuman->id }})" class="btn btn-info"
+                            style="float: right;">+card</button>
+                    @else
+                        <button disabled class="btn btn-danger" style="float: right;">not ready</button>
+                    @endif
+                </div>
             </div>
-            <div class="card-footer">
-                <button class="btn btn-info" style="float: right;">+card</button>
-            </div>
-        </div>
         @endforeach
 
-</div>
+    </div>

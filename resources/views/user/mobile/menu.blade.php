@@ -42,8 +42,11 @@
                                 style="width: 100%; height: 170px; object-fit: cover;">
                             <h4 class="card-text">{{ $menu->nama }}</h4>
                             <p class="card-text">Rp. {{ $menu->harga }}</p>
-                            <button wire:click="addKeranjang({{ $menu->id }})" class="btn btn-info"
-                        style="float: right;">+card</button>
+                            @if ($menu->status == 'ready')
+                            <button wire:click="addKeranjang({{ $menu->id }})" class="btn btn-info" style="float: right;">+card</button>
+                            @else
+                            <button disabled class="btn btn-danger" style="float: right;">not ready</button>
+                            @endif
                         </div>
                     </div>
             </div>

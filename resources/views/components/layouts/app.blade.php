@@ -214,7 +214,7 @@
                                     CAFE SMKN 6 JEMBER
                                 </div>
                                 <h2 class="page-title">
-                                    apalah ga tau di sini apa
+                                    cafe 6
                                 </h2>
                             </div>
                             <!-- Page title actions -->
