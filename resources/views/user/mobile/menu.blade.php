@@ -32,7 +32,7 @@
             </span>
         </div>
         <div class="row row-cols-2 row-cols-sm-2">
-             @if ($menus)
+        @if ($menus)
         @foreach ($menus as $menu)
             <div class="mb-4 col">
                 <div class="card" style="">
@@ -47,6 +47,22 @@
                             @else
                             <button disabled class="btn btn-danger" style="float: right;">not ready</button>
                             @endif
+                        </div>
+                    </div>
+            </div>
+        @endforeach
+        @endif
+        @if ($menusnot)
+        @foreach ($menusnot as $menunot)
+            <div class="mb-4 col">
+                <div class="card" style="">
+                        <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
+                        <div class="card-body">
+                            <img class="mb-2" src="{{ asset('/storage/menu/' . $menunot->image) }}" alt=""
+                                style="width: 100%; height: 170px; object-fit: cover;">
+                            <h4 class="card-text">{{ $menunot->nama }}</h4>
+                            <p class="card-text">Rp. {{ $menunot->harga }}</p>
+                            <p class="btn btn-danger disabled" style="float: right;">not ready</p>
                         </div>
                     </div>
             </div>

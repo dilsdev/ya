@@ -11,6 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class Menu extends Component
 {
     public $menus;
+    public $menusnot;
     public $type = 'all';
 
     public function mount($type)
@@ -28,9 +29,11 @@ class Menu extends Component
     public function type()
     {
         if ($this->type == 'all') {
-            $this->menus = ModelsMenu::all();
+            $this->menus = ModelsMenu::where(['status' => 'ready'])->get();
+            $this->menusnot = ModelsMenu::where(['status' => 'notready'])->get();
         } else {
-            $this->menus = ModelsMenu::where('jenis', $this->type)->get();
+            $this->menus = ModelsMenu::where(['jenis' => $this->type, 'status' => 'ready'])->get();
+            $this->menusnot = ModelsMenu::where(['jenis' => $this->type, 'status' => 'notready'])->get();
         }
     }
     public function addKeranjang($id)

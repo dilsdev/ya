@@ -13,11 +13,11 @@ class Index extends Component
 {
     public function render()
     {
-        $makanans = Menu::where('jenis', 'makanan')
+        $makanans = Menu::where(['jenis'=>'makanan', 'status'=>'ready'])
         ->latest()
             ->take(5)
             ->get();
-        $minumans = Menu::where('jenis', 'minuman')
+        $minumans = Menu::where(['jenis'=> 'minuman', 'status'=>'ready'])
         ->latest()
             ->take(5)
             ->get();

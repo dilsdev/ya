@@ -11,10 +11,12 @@ use RealRashid\SweetAlert\Facades\Alert;
 class Menuall extends Component
 {
     public $menus;
+    public $menusnot;
     public function render()
     {
         if ($this->menus === null) {
-            $this->menus = ModelsMenu::all();
+            $this->menus = ModelsMenu::where(['status' => 'ready'])->get();
+            $this->menusnot = ModelsMenu::where(['status' => 'notready'])->get();
         }
         return view('user.web.menu');
     }

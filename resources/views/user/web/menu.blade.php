@@ -31,6 +31,18 @@
                             @endif                    </div>
                 </div>
             @endforeach
+            @if ($menusnot)
+        @foreach ($menusnot as $menunot)
+        <div class="m-2 card" style="max-width: 190px;">
+                    <div class="card-body">
+                        <img class="mb-2" src="{{ asset('/storage/menu/' . $menunot->image) }}" alt=""
+                            style="width: 140px; height: 160px; object-fit: cover;">
+                        <h4 class="card-text">{{ $menunot->nama }}</h4>
+                        <p class="card-text">Rp. {{ $menunot->harga }}</p>
+                        <p class="btn btn-danger disabled" style="float: right;">not ready</p>              </div>
+                </div>
+        @endforeach
+        @endif
         </div>
     </div>
 </div>
