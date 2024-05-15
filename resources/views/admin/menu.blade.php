@@ -23,7 +23,7 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td class="text-secondary">
-                                    {{ $menu->name }}
+                                    {{ $menu->nama }}
                                 </td>
                                 <td class="text-secondary">{{ $menu->deskripsi }}</td>
                                 <td class="text-secondary">
