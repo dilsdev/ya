@@ -10,7 +10,7 @@
         {{ $selesais }}
         </div> --}}
     <div class="container">
-        <h4>My Order</h4>
+        <h4>Di pending</h4>
         <div class="card">
             <div class="table-responsive">
                 <table class="table table-vcenter card-table">
@@ -42,7 +42,7 @@
             </div>
         </div>
         <br>
-        <h4>My Order</h4>
+        <h4>Di proses</h4>
         <div class="card">
             <div class="table-responsive">
                 <table class="table table-vcenter card-table">
@@ -74,7 +74,7 @@
             </div>
         </div>
         <br>
-        <h4>My Order</h4>
+        <h4>Selesai</h4>
         <div class="card">
             <div class="table-responsive">
                 <table class="table table-vcenter card-table">

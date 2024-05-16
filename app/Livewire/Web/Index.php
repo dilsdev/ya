@@ -21,9 +21,26 @@ class Index extends Component
         ->latest()
             ->take(5)
             ->get();
-        $rekomendasi = Rekomendasi::all()->take(1);
 
-        return view('user.index', ['makanans' => $makanans, 'minumans' => $minumans, 'rekomendasi' => $rekomendasi]);
+        $rekomendasi = Rekomendasi::all();
+
+        if ($rekomendasi->count() > 0) {
+            if ($rekomendasi->count() == 1) {
+                $rekomendasi1 = $rekomendasi;
+                $rekomendasi2 = $rekomendasi;
+            } else {
+                $chunks = $rekomendasi->chunk(max(1, floor($rekomendasi->count() / 2)));
+
+                $rekomendasi1 = $chunks[0];
+                $rekomendasi2 = $chunks[1] ?? collect(); 
+            }
+        } else {
+            $rekomendasi1 = collect();
+            $rekomendasi2 = collect();
+        }
+
+
+        return view('user.index', ['makanans' => $makanans, 'minumans' => $minumans, 'rekomendasi1' => $rekomendasi1, 'rekomendasi2' => $rekomendasi2]);
     }
     public function addKeranjang($id)
     {

@@ -36,7 +36,7 @@
     <div class="mt-2 row g-2 align-items-center">
         <div class="col">
             <h2 class="page-title">
-                Best Seller
+                Rekomendasi makanan 
             </h2>
         </div>
     </div>
@@ -66,7 +66,7 @@
     <div class="mt-2 row g-2 align-items-center">
         <div class="col">
             <h2 class="page-title">
-                Best Seller
+                Rekomendasi minuman
             </h2>
         </div>
     </div>

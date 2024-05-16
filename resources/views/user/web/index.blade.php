@@ -11,82 +11,87 @@
             </svg>
         </span>
     </div>
-    <div class="row mb-2">
-        <div class="col-2 m-2">
-            <div class="col-auto"><span class="avatar"
-                    style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span></div>
+    <div class="mb-2 row">
+        <div class="m-2 col-2">
+            <a wire:navigate href="{{ route('user.menu', 'all') }}" class="col-auto"><span class="shadow-none avatar"
+                    style="background-image: url({{ asset('./asset/food.png') }})"></span></a>
         </div>
-        <div class="col-2 m-2">
-            <div class="col-auto"><span class="avatar"
-                    style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span></div>
+        <div class="m-2 col-2">
+            <a wire:navigate href="{{ route('user.menu', 'makanan') }}" class="col-auto"><span
+                    class="shadow-none avatar"
+                    style="background-image: url({{ asset('./asset/makanan.png') }})"></span></a>
         </div>
-        <div class="col-2 m-2">
-            <div class="col-auto"><span class="avatar"
-                    style="background-image: url({{ asset('./static/avatars/000m.jpg') }})"></span></div>
+        <div class="m-2 col-2">
+            <a wire:navigate href="{{ route('user.menu', 'minuman') }}" class="col-auto"><span
+                    class="shadow-none avatar"
+                    style="background-image: url({{ asset('./asset/minuman.png') }})"></span></a>
         </div>
+
     </div>
     <div class="row">
         <div class="col-6">
-        <div id="carouselExampleAutoplaying1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="http://127.0.0.1:8000/storage/rekomendasi/bNXoy6vhXseSsMYltXxmopWWa3d5VskYV4hps9I7.png"
-                        class="d-block w-100" alt="...">
+            <div id="carouselExampleAutoplaying1" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach ($rekomendasi1 as $r1)
+                        <div class="carousel-item @if ($i == 0) active @endif">
+                            <img src="{{ asset('/storage/rekomendasi/' . $r1->image) }}" class="d-block w-100"
+                                style="height: 170px; object-fit:cover;" alt="...">
+                        </div>
+                        @php
+                            $i++;
+                        @endphp
+                    @endforeach
                 </div>
-                <div class="carousel-item">
-                    <img src="http://127.0.0.1:8000/storage/rekomendasi/bNXoy6vhXseSsMYltXxmopWWa3d5VskYV4hps9I7.png"
-                        class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="http://127.0.0.1:8000/storage/rekomendasi/bNXoy6vhXseSsMYltXxmopWWa3d5VskYV4hps9I7.png"
-                        class="d-block w-100" alt="...">
-                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying1"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying1"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying1"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying1"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
         </div>
         <div class="col-6">
-        <div id="carouselExampleAutoplaying2" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="http://127.0.0.1:8000/storage/rekomendasi/bNXoy6vhXseSsMYltXxmopWWa3d5VskYV4hps9I7.png"
-                        class="d-block w-100" alt="...">
+            <div id="carouselExampleAutoplaying2" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @php
+                        $j = 0;
+                    @endphp
+                    @foreach ($rekomendasi2 as $r2)
+                        <div class="carousel-item @if ($j == 0) active @endif">
+                            <img src="{{ asset('/storage/rekomendasi/' . $r2->image) }}" class="d-block w-100"
+                                style="height: 170px; object-fit:cover;" alt="...">
+                        </div>
+                        @php
+                            $j++;
+                        @endphp
+                    @endforeach
                 </div>
-                <div class="carousel-item">
-                    <img src="http://127.0.0.1:8000/storage/rekomendasi/bNXoy6vhXseSsMYltXxmopWWa3d5VskYV4hps9I7.png"
-                        class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="http://127.0.0.1:8000/storage/rekomendasi/bNXoy6vhXseSsMYltXxmopWWa3d5VskYV4hps9I7.png"
-                        class="d-block w-100" alt="...">
-                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying2"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying2"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying2"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying2"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
         </div>
     </div>
     <div class="row g-2 mt-2 align-items-center">
         <div class="col">
             <h2 class="page-title">
-                Best Seller
+                Rekomendasi makanan
             </h2>
         </div>
     </div>
@@ -117,7 +122,7 @@
     <div class="row g-2 mt-2 align-items-center">
         <div class="col">
             <h2 class="page-title">
-                Best Seller
+                Rekomendasi minuman
             </h2>
         </div>
     </div>
