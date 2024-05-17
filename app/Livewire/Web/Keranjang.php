@@ -16,6 +16,7 @@ class Keranjang extends Component
     // public $checkbox = 'false';
     // public $htmlcheckbox = '';
     public $keranjangs;
+    public $dataArray = [];
     public function render()
     {
         $user = Auth::user();
@@ -110,24 +111,19 @@ class Keranjang extends Component
     public function total()
     {
         $oke = 0;
+        $i = 0;
         foreach ($this->keranjangs as $isi) {
             if ($isi->checkbox == 'true'&& $isi->status == 'ready') {
                 $oke += $isi->jumlah * $isi->harga;
+                $this->dataArray[$i] = $isi->id;
+                $i++;
             }
             $this->total = $oke;
         }
     }
     public function pesan()
     {
-        $dataArray = [];
-        $i = 0;
-        foreach ($this->keranjangs as $isi) {
-            if ($isi->checkbox == 'true' && $isi->status == 'ready') {
-                $dataArray[$i] = $isi->id;
-                $i++;
-            }
-        }
-        if(isset($dataArray[0])){
+        if(isset($this->dataArray[0])){
             $i = 0;
             $total_harga = 0;
             $pesanan = Pesanan::create([
@@ -139,7 +135,7 @@ class Keranjang extends Component
                 'total_harga' => 0,
                 'status' => "di pending",
             ]);
-            foreach ($dataArray as $data) {
+            foreach ($this->dataArray as $data) {
                 $data_keranjang = ModelsKeranjang::find($data);
                 $menu = Menu::find($data_keranjang->menu_id);
                 // dd($menu);

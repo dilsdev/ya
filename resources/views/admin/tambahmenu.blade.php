@@ -1,4 +1,4 @@
-<div>
+<div class="container">
    <form wire:submit="store" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="nama" class="form-label">Nama</label>
