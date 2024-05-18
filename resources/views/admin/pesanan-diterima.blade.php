@@ -13,7 +13,7 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody wire:poll>
                         @foreach ($data as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td>

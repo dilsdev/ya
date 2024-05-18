@@ -17,6 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'user' => \App\Http\Middleware\User::class,
             'mobile' => \App\Http\Middleware\Mobile::class,
             'web' => \App\Http\Middleware\Web::class,
+            'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keranjang;
+use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Livewire\Attributes\Validate;
 
 class KeranjangController extends Controller
 {
-    public function keranjang($id){
-        $keranjangs = Keranjang::select('keranjangs.id', 'keranjangs.jumlah', 'users.name','nemus.nama')
+    public function keranjang($token){
+        $user = User::where('remember_token',$token)->first();
+        $keranjangs = Keranjang::select('keranjangs.id', 'keranjangs.jumlah', 'users.name', 'menus.nama')
         ->join('users', 'users.id', '=', 'keranjangs.user_id')
-        ->join('menus', 'menus.id', '=', 'keranjang.menu_id')
-        ->where('user_id',$id)->get();
-        // $keranjangs = Keranjang::all();
+        ->join('menus', 'menus.id', '=', 'keranjangs.menu_id') 
+        ->where('user_id', $user->id)
+        ->get();
+
         return response()->json($keranjangs);
     }
 
@@ -39,40 +42,64 @@ class KeranjangController extends Controller
 
         return response()->json('message', 'Berhasil di tambah keranjang');
     }
-
-    public function kurangikeranjang($id, $id_user)
+    public function kurangikeranjang($id, $token)
     {
-        $data = Keranjang::find($id);
-        if ($data->jumlah > 0) {
+        $user = User::where('remember_token', $token)->first();
+        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
+        if($data){
             $data->jumlah -= 1;
             $data->save();
+            return response()->json($data->jumlah);
+        }else{
+            return response()->json(401);
         }
-        return response()->json($data->jumlah);
+
     }
-    public function tambahkeranjang($id, $id_user)
+    public function tambahkeranjang($id, $token)
     {
-        $data = Keranjang::find($id);
-        $data->jumlah += 1;
-        $data->save();
-        return response()->json($data->jumlah);
+        $user = User::where('remember_token', $token)->first();
+        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
+        if($data){
+            $data->jumlah += 1;
+            $data->save();
+            return response()->json($data->jumlah);
+        }else{
+            return response()->json(401);
+        }
+
     }
-    public function check($id)
+    public function check($id, $token)
     {
-        $data = Keranjang::find($id);
-        $data->checkbox = 'true';
-        $data->save();
-        return response()->json(200);
+        $user = User::where('remember_token', $token)->first();
+        $data = Keranjang::where(['id'=>$id, 'user_id'=>$user->id]);
+        if($data){
+            $data->checkbox = 'true';
+            $data->save();
+            return response()->json(200);
+        }else{
+            return response()->json(401);
+        }
     }
-    public function uncheck($id)
+    public function uncheck($id, $token)
     {
-        $data = Keranjang::find($id);
-        $data->checkbox = 'false';
-        $data->save();
-        return response()->json(200);
+        $user = User::where('remember_token', $token)->first();
+        $data = Keranjang::where(['id'=>$id, 'user_id'=>$user->id]);
+        if($data){
+            $data->checkbox = 'false';
+            $data->save();
+            return response()->json(200);
+        }else{
+            return response()->json(401);
+        }
     }
-    public function delete($id, $id_user){
-        $data = Keranjang::find($id);
-        $data->delete();
-        return response()->json('message', 'barang di hapus');
+    public function delete($id, $token){
+        $user = User::where('remember_token', $token)->first();
+        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
+        if ($data) {
+            $data->delete();
+            return response()->json(200);
+        } else {
+            return response()->json(401);
+        }
     }
 }

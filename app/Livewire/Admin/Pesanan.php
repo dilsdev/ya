@@ -18,12 +18,12 @@ class Pesanan extends Component
         $pesanan = \App\Models\Pesanan::find($id);
         $pesanan->status = 'di proses';
         $pesanan->save();
-        return redirect()->route('admin.pesananditerima');
+        
          }
      public function tolak($id){
         $pesanan = \App\Models\Pesanan::find($id);
         $pesanan->status = 'di tolak';
         $pesanan->save();
-        return redirect()->route('admin.pesanan');
+        // return redirect()->route('admin.pesanan');
          }
 }
