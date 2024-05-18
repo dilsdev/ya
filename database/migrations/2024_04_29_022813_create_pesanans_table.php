@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('tanggal_pesan');
             $table->integer('total_harga');
             $table->string('jumlah_diskon');
+            $table->string('token')->nullable();
+            $table->string('metode_pembayaran')->nullable();
             $table->integer('bayar');
             $table->integer('kembalian');
             $table->string('status');

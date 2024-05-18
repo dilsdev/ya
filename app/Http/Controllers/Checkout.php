@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Item_pesanan;
+use App\Models\Pesanan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class Checkout extends Controller
+{
+    public function index($id, $token){
+        $user = Auth::user();
+        $pesanan = Pesanan::find($id);
+        if ($user->id == $pesanan->user_id) {
+            $data = Item_pesanan::select('menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
+            ->join('menus', 'menus.id', '=', 'item_pesanans.menu_id')
+            ->where('pesanan_id', $id)
+                ->get();
+            return view('user.web.checkout', ['data' => $data, 'token'=>$token]);
+        } else {
+            return back();
+        }
+    }
+}

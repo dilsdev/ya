@@ -157,7 +157,15 @@
             </div>
             <div class="m-2 col">
                 <div class="card">
-                    <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan' class="btn btn-primary">Cekout</button>
+                   @if ($metode_pembayaran == 'cod')
+                            <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan'
+                                class="btn btn-primary">Cekout</button>
+                        @elseif ($metode_pembayaran == 'online')
+                            <button wire:click='pesanmidtrans'
+                                class="btn btn-primary">Cekout</button>
+                        @else
+                            <button class="btn btn-primary disabled" disabled>Cekout</button>
+                        @endif
                 </div>
             </div>
         </div>

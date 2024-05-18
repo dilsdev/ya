@@ -20,6 +20,7 @@
     <link href={{ asset('./dist/css/tabler-payments.min.css?1684106062') }} rel="stylesheet" />
     <link href={{ asset('./dist/css/tabler-vendors.min.css?1684106062') }} rel="stylesheet" />
     <link href={{ asset('./dist/css/demo.min.css?1684106062') }} rel="stylesheet" />
+    
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -34,6 +35,7 @@
 </head>
 
 <body>
+    
     <script src={{ asset('./dist/js/demo-theme.min.js?1684106062') }}></script>
     @include('sweetalert::alert')
     @if (Auth::user()->role == 'admin')
@@ -384,10 +386,10 @@
                                     </span>
                                     <form method="POST" class="nav-link-title" action="{{ route('logout') }}">
                                         @csrf
-                                        <a :href="route('logout')"
+                                        <a href="{{ route('logout')  }}"
                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                            {{ __('Log Out') }}
+                                            Logout
                                         </a>
                                     </form>
                                 </div>
@@ -409,7 +411,7 @@
         </div>
     @endif
 
-
+       
     <!-- Libs JS -->
     <script src={{ asset('./dist/libs/apexcharts/dist/apexcharts.min.js?1684106062') }} defer></script>
     <script src={{ asset('./dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062') }} defer></script>

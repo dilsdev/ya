@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Pesanan extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'tanggal_pesan', 'total_harga', 'jumlah_diskon', 'status', 'bayar', 'kembalian'];
+    protected $fillable = ['user_id', 'metode_pembayaran','token', 'tanggal_pesan', 'total_harga', 'jumlah_diskon', 'status', 'bayar', 'kembalian'];
 }

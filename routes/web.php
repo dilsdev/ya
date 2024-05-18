@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Checkout;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,8 +41,9 @@ Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/myorder', App\Livewire\User\Myorder::class)->name('user.myorder');
     Route::get('user/detail/{id}', App\Livewire\User\Detail::class)->name('user.detail');
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
-
+    
 });
+Route::get('checkout/{id}/{token}',[Checkout::class, 'index'])->name('checkout');
 Route::middleware(['auth', 'user', 'web'])->group(function () {
     Route::get('web/index', App\Livewire\Web\Index::class)->name('web.index');
     Route::get('web/keranjang', App\Livewire\Web\Keranjang::class)->name('web.keranjang');

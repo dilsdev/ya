@@ -16,6 +16,7 @@ class Keranjang extends Component
     // public $checkbox = 'false';
     // public $htmlcheckbox = '';
     public $keranjangs;
+    public $token;
     public $dataArray = [];
     public function render()
     {
@@ -158,57 +159,85 @@ class Keranjang extends Component
                     $isi->delete();
                 }
             }
-            $this->total();
             return view('user.mobile.myorder');
         } else {
             Alert::error('Warning', 'Keranjang kosong');
-            return redirect()->route('user.keranjang');
+            return redirect()->route('web.keranjang');
         }
     }
+    public function pesanmidtrans()
+    {
+        if (empty($this->dataArray)) {
+            Alert::error('Warning', 'Keranjang kosong');
+            return redirect()->route('web.keranjang');
+        }
 
-    // public function checkall()
-    // {
-    //     if( $this->checkbox = 'false'){
-    //         $this->checkbox = 'true';
-    //         $user = Auth::user();
-    //         $data = ModelsKeranjang::where('user_id', $user->id)->get();
-    //         foreach ($data as $item) {
-    //             $item->checkbox = 'true';
-    //             $item->save();
-    //         }
-    //         if ($this->rendercheckbox()) {
-    //             dd('oke');
-    //         }
-    //         return response('oke');
-    //     }else{
-    //         $this->checkbox = 'false';
-    //         $user = Auth::user();
-    //         $data = ModelsKeranjang::where('user_id', $user->id)->get();
-    //         foreach ($data as $item) {
-    //             $item->checkbox = 'false';
-    //             $item->save();
-    //         }
-    //         if ($this->rendercheckbox()) {
-    //             dd('oke');
-    //         }
-    //         return response('oke');
-    //     }
+        $pesanan = Pesanan::create([
+            'user_id' => 0,
+            'tanggal_pesan' => date('Y-m-d'),
+            'jumlah_diskon' => 0,
+            'bayar' => 0,
+            'kembalian' => 0,
+            'total_harga' => 0,
+            'status' => "di pending",
+        ]);
 
+        $total_harga = 0;
+        $item_details = [];
 
-    // }
+        foreach ($this->dataArray as $data) {
+            $data_keranjang = ModelsKeranjang::find($data);
+            $menu = Menu::find($data_keranjang->menu_id);
+            $subtotal = $menu->harga * $data_keranjang->jumlah;
 
-    // public function uncheckall()
-    // {
-    //     $this->checkbox = 'false';
-    //     $user = Auth::user();
-    //     $data = ModelsKeranjang::where('user_id', $user->id)->get();
-    //     foreach ($data as $item) {
-    //         $item->checkbox = 'false';
-    //         $item->save();
-    //     }
-    //     $this->rendercheckbox();
-    // }
+            $item_details[] = [
+                'id' => $pesanan->id,
+                'price' => $menu->harga,
+                'quantity' => $data_keranjang->jumlah,
+                'name' => $menu->nama
+            ];
 
+            Item_pesanan::create([
+                'pesanan_id' => $pesanan->id,
+                'menu_id' => $data_keranjang->menu_id,
+                'jumlah' => $data_keranjang->jumlah,
+                'subtotal_harga' => $subtotal,
+            ]);
 
+            $total_harga += $subtotal;
+        }
+
+        $pesanan->user_id = Auth::user()->id;
+        $pesanan->total_harga = $total_harga;
+        $pesanan->save();
+
+        foreach ($this->keranjangs as $isi) {
+            if ($isi->checkbox == 'true') {
+                $isi->delete();
+            }
+        }
+
+        // Set Midtrans configurations
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => $pesanan->id,
+                'gross_amount' => $total_harga,
+            ],
+            'item_details' => $item_details,
+        ];
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $pesanan->token = $snapToken;
+        $this->token = $snapToken;
+        $pesanan->save();
+
+        $this->total();
+        return redirect("checkout/$pesanan->id/$snapToken");
+    }
 
 }
