@@ -109,7 +109,7 @@ class Keranjang extends Component
     }
     public function pesan()
     {
-        if (Siswa::where(['user_id' => Auth::user()->id, 'status' => 'di_terima'])) {
+        if (Siswa::where(['user_id' => Auth::user()->id, 'status' => 'di_terima'])->exists()) {
             if (isset($this->dataArray[0])) {
                 $i = 0;
                 $total_harga = 0;
