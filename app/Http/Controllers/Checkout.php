@@ -17,7 +17,7 @@ class Checkout extends Controller
             ->join('menus', 'menus.id', '=', 'item_pesanans.menu_id')
             ->where('pesanan_id', $id)
                 ->get();
-            return view('user.web.checkout', ['data' => $data, 'token'=>$token]);
+            return view('user.checkout', ['data' => $data, 'token'=>$token]);
         } else {
             return back();
         }

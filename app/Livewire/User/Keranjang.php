@@ -17,6 +17,7 @@ class Keranjang extends Component
     // public $htmlcheckbox = '';
     public $keranjangs;
     public $token;
+    public $metode_pembayaran = '';
     public $dataArray = [];
     public function render()
     {

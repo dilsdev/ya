@@ -32,3 +32,5 @@ Route::get('user/pesanan/pesan/{token}', [PesananController::class, 'pesan']);
 Route::post('/register', [Auth::class, 'register']);
 Route::post('/login', [Auth::class, 'login']);
 
+
+Route::get('succes', [PesananController::class, 'pesan']);

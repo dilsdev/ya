@@ -44,6 +44,9 @@ Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     
 });
 Route::get('checkout/{id}/{token}',[Checkout::class, 'index'])->name('checkout');
+Route::get('success', function () {
+    return view('user.success');
+});
 Route::middleware(['auth', 'user', 'web'])->group(function () {
     Route::get('web/index', App\Livewire\Web\Index::class)->name('web.index');
     Route::get('web/keranjang', App\Livewire\Web\Keranjang::class)->name('web.keranjang');

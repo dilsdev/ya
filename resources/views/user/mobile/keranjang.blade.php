@@ -144,18 +144,26 @@
         @endforeach
     </div>
     <div class="container card" style="position:sticky;">
-        <div class="row d-flex">
+        <div class="row d-flex" style="flex-wrap: wrap">
             {{-- <div class="m-2 col-2 d-flex justify-content-center align-items-center" wire:init='rendercheckbox' wire:poll='rendercheckbox'>
                 {{ $checkbox }}
                 {!! $htmlcheckbox !!}
             </div> --}}
             {{-- <button wire:click='rendercheckbox'>oke</button> --}}
-            <div class="m-2 col ">
+            <div class="m-2">
                 <div class="d-flex align-items-center" style="height: 100%;">
                     <h3 style="margin: 0; padding: 0;">Total: <strong>Rp{{ number_format($total, 0, ',', '.') }}</strong></h3>
                 </div>
             </div>
-            <div class="m-2 col">
+            <div class="m-2">
+                        <select class="form-select form-select-xl" name="ok" id="ok"
+                            wire:model.live="metode_pembayaran">
+                            <option selected>Pilih metode pembayaran</option>
+                            <option value="cod">Bayar langsung</option>
+                            <option value="online">Bayar online</option>
+                        </select>
+            </div>
+            <div class="m-2">
                 <div class="card">
                    @if ($metode_pembayaran == 'cod')
                             <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan'
