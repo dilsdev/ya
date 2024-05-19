@@ -31,6 +31,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/pesananditerima', App\Livewire\Admin\PesananDiterima::class)->name('admin.pesananditerima');
     Route::get('admin/pesananselesai', App\Livewire\Admin\PesananSelesai::class)->name('admin.pesananselesai');
     Route::post('admin/pembayaran', App\Livewire\Admin\Pembayaran::class)->name('admin.pembayaran');
+    Route::get('admin/siswa', App\Livewire\Admin\Siswas::class)->name('admin.siswa');
     Route::get('admin/detail/{id}/{url}', App\Livewire\Admin\Detail::class)->name('admin.detail');
 });
 Route::middleware(['auth', 'user', 'mobile'])->group(function () {
@@ -41,6 +42,8 @@ Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/myorder', App\Livewire\User\Myorder::class)->name('user.myorder');
     Route::get('user/detail/{id}', App\Livewire\User\Detail::class)->name('user.detail');
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
+    Route::get('user/siswa', App\Livewire\User\Siswas::class)->name('user.siswa');
+    Route::get('user/unpaid', App\Livewire\User\Unpaid::class)->name('user.unpaid');
     
 });
 Route::get('checkout/{id}/{token}',[Checkout::class, 'index'])->name('checkout');
@@ -54,6 +57,8 @@ Route::middleware(['auth', 'user', 'web'])->group(function () {
     Route::get('web/menu/{type}', App\Livewire\Web\Menu::class)->name('web.menu');
     Route::get('web/myorder', App\Livewire\Web\Myorder::class)->name('web.myorder');
     Route::get('web/detail/{id}', App\Livewire\Web\Detail::class)->name('web.detail');
-    Route::get('web/profile', App\Livewire\Web\Profile::class)->name('web.profile');
-    Route::get('user/keranjang/add/{id}', [App\Livewire\User\Keranjang::class, 'addkeranjang'])->name('user.addkeranjang');
+Route::get('web/profile', App\Livewire\Web\Profile::class)->name('web.profile');
+Route::get('web/siswa', App\Livewire\Web\Siswas::class)->name('web.siswa');
+Route::get('web/unpaid', App\Livewire\Web\Unpaid::class)->name('web.unpaid');
+Route::get('user/keranjang/add/{id}', [App\Livewire\User\Keranjang::class, 'addkeranjang'])->name('user.addkeranjang');
 });

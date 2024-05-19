@@ -6,6 +6,7 @@ use App\Models\Item_pesanan;
 use App\Models\Keranjang as ModelsKeranjang;
 use App\Models\Menu;
 use App\Models\Pesanan;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,9 +20,16 @@ class Keranjang extends Component
     public $token;
     public $metode_pembayaran = '';
     public $dataArray = [];
+    public $message;
     public function render()
     {
         $user = Auth::user();
+        $data = Siswa::where('user_id', $user->id)->first();
+        if ($data->status == 'belum_diterima') {
+            $this->message = 'belum_diterima';
+        } elseif ($data->status == 'di_terima') {
+            $this->message = 'di_terima';
+        };
         // $keranjangs = Keranjang::where('user_id', $user->id);
         $this->keranjangs = ModelsKeranjang::select('menus.image', 'users.name', 'menus.status', 'menus.harga', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
             ->join('users', 'users.id', '=', 'keranjangs.user_id')
@@ -126,45 +134,48 @@ class Keranjang extends Component
     }
     public function pesan()
     {
-        if (isset($this->dataArray[0])) {
-            $i = 0;
-            $total_harga = 0;
-            $pesanan = Pesanan::create([
-                'user_id' =>  0,
-                'tanggal_pesan' => date('Y-m-d'),
-                'jumlah_diskon' => 0,
-                'bayar' => 0,
-                'kembalian' => 0,
-                'total_harga' => 0,
-                'status' => "di pending",
-            ]);
-            foreach ($this->dataArray as $data) {
-                $data_keranjang = ModelsKeranjang::find($data);
-                $menu = Menu::find($data_keranjang->menu_id);
-                // dd($menu);
-                $subtotal = $menu->harga * $data_keranjang->jumlah;
-                $item_pesanan = Item_pesanan::create([
-                    'pesanan_id' => $pesanan->id,
-                    'menu_id' => $data_keranjang->menu_id,
-                    'jumlah' => $data_keranjang->jumlah,
-                    'subtotal_harga' => $subtotal,
+        if (Siswa::where(['user_id' => Auth::user()->id, 'status' => 'di_terima'])) {
+            if (isset($this->dataArray[0])) {
+                $i = 0;
+                $total_harga = 0;
+                $pesanan = Pesanan::create([
+                    'user_id' => 0,
+                    'tanggal_pesan' => date('Y-m-d'),
+                    'jumlah_diskon' => 0,
+                    'bayar' => 0,
+                    'kembalian' => 0,
+                    'total_harga' => 0,
+                    'status' => "di pending",
                 ]);
-                $total_harga = +$subtotal;
-                $i++;
-            }
-            $pesanan->user_id = $data_keranjang->user_id;
-            $pesanan->total_harga = $total_harga;
-            $pesanan->save();
-            foreach ($this->keranjangs as $isi) {
-                if ($isi->checkbox == 'true') {
-                    $isi->delete();
+                foreach ($this->dataArray as $data) {
+                    $data_keranjang = ModelsKeranjang::find($data);
+                    $menu = Menu::find($data_keranjang->menu_id);
+                    // dd($menu);
+                    $subtotal = $menu->harga * $data_keranjang->jumlah;
+                    $item_pesanan = Item_pesanan::create([
+                        'pesanan_id' => $pesanan->id,
+                        'menu_id' => $data_keranjang->menu_id,
+                        'jumlah' => $data_keranjang->jumlah,
+                        'subtotal_harga' => $subtotal,
+                    ]);
+                    $total_harga = +$subtotal;
+                    $i++;
                 }
+                $pesanan->user_id = $data_keranjang->user_id;
+                $pesanan->total_harga = $total_harga;
+                $pesanan->save();
+                foreach ($this->keranjangs as $isi) {
+                    if ($isi->checkbox == 'true') {
+                        $isi->delete();
+                    }
+                }
+                return view('user.mobile.myorder');
+            } else {
+                Alert::error('Warning', 'Keranjang kosong');
+                return redirect()->route('web.keranjang');
             }
-            return view('user.mobile.myorder');
-        } else {
-            Alert::error('Warning', 'Keranjang kosong');
-            return redirect()->route('web.keranjang');
         }
+        return redirect()->route('web.keranjang');
     }
     public function pesanmidtrans()
     {
@@ -180,7 +191,7 @@ class Keranjang extends Component
             'bayar' => 0,
             'kembalian' => 0,
             'total_harga' => 0,
-            'status' => "di pending",
+            'status' => "belum bayar",
         ]);
 
         $total_harga = 0;

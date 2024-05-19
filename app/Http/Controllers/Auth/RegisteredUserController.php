@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // return redirect(route('dashboard', absolute: false));
-        // return redirect(route('user.index'));
-        return response()->json('oke');
+        return redirect(route('user.index'));
+        // return response()->json('oke');
     }
 }

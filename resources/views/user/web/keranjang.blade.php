@@ -5,6 +5,9 @@
 
 
     <div class="container-xl">
+        @if($message != 'di_terima')
+        <div class="alert alert-success" role="alert">Akun anda belum verifikasi, kami tidak bisa menerima pesanan cod. untuk menghindari order palsu, terimakasih...</div>
+      @endif
         <h4>
             Keranjang
         </h4>
@@ -196,7 +199,9 @@
                         <select class="form-select form-select-xl" name="ok" id="ok"
                             wire:model.live="metode_pembayaran">
                             <option selected>Pilih metode pembayaran</option>
-                            <option value="cod">Bayar langsung</option>
+                            <option value="cod" @if ($message != 'di_terima')
+                                disabled
+                            @endif>Bayar langsung</option>
                             <option value="online">Bayar online</option>
                         </select>
                     </div>
@@ -205,10 +210,10 @@
                     <div class="card">
                         @if ($metode_pembayaran == 'cod')
                             <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan'
-                                class="btn btn-primary">Cekout</button>
+                                class="btn btn-primary">Bayar langsung</button>
                         @elseif ($metode_pembayaran == 'online')
                             <button wire:click='pesanmidtrans'
-                                class="btn btn-primary">Cekout</button>
+                                class="btn btn-primary">Bayar online</button>
                         @else
                             <button class="btn btn-primary disabled" disabled>Cekout</button>
                         @endif

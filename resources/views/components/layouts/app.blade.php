@@ -135,6 +135,20 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a wire:navigate class="nav-link" href="{{ route('admin.siswa') }}">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                        width="24px" fill="#e8eaed">
+                                        <path
+                                            d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm80-80h480L570-520 450-360l-90-120-120 160Zm-80 80v-480 480Z" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">
+                                    Daftar siswa
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <div class="nav-link">
                                 <span
                                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -209,6 +223,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <a href="{{ route('user.profile') }}" class="dropdown-item">Profile</a>
+                                <a href="{{ route('user.siswa') }}" class="dropdown-item">Verifikasi</a>
                                 <form method="POST" class="dropdown-item" action="{{ route('logout') }}">
                                     @csrf
 
@@ -279,6 +294,21 @@
                                     </span>
                                     <span class="nav-link-title">
                                         My Order
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.unpaid') }}">
+                                    <span
+                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                            viewBox="0 -960 960 960" width="24px" fill="#999999">
+                                            <path
+                                                d="m691-150 139-138-42-42-97 95-39-39-42 43 81 81ZM240-600h480v-80H240v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40ZM120-80v-680q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v267q-19-9-39-15t-41-9v-243H200v562h243q5 31 15.5 59T486-86l-6 6-60-60-60 60-60-60-60 60-60-60-60 60Zm120-200h203q3-21 9-41t15-39H240v80Zm0-160h284q38-37 88.5-58.5T720-520H240v80Zm-40 242v-562 562Z" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        Belum di bayar
                                     </span>
                                 </a>
                             </li>
@@ -356,6 +386,21 @@
                                     </span>
                                     <span class="nav-link-title">
                                         My Order
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a wire:navigate class="nav-link" href="{{ route('web.unpaid') }}">
+                                    <span
+                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                            viewBox="0 -960 960 960" width="24px" fill="#999999">
+                                            <path
+                                                d="m691-150 139-138-42-42-97 95-39-39-42 43 81 81ZM240-600h480v-80H240v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40ZM120-80v-680q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v267q-19-9-39-15t-41-9v-243H200v562h243q5 31 15.5 59T486-86l-6 6-60-60-60 60-60-60-60 60-60-60-60 60Zm120-200h203q3-21 9-41t15-39H240v80Zm0-160h284q38-37 88.5-58.5T720-520H240v80Zm-40 242v-562 562Z" />
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        Belum di bayar
                                     </span>
                                 </a>
                             </li>

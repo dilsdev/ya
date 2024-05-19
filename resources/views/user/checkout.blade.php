@@ -48,7 +48,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                <a href="{{ route('user.keranjang') }}" class="btn btn-warning">kembali</a>
+                <a href="{{ route('user.unpaid') }}" class="btn btn-warning">kembali</a>
                 <button id="pay-button" class="btn btn-primary">Bayar</button>
             </div>
         </div>
