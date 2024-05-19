@@ -1,6 +1,7 @@
 <div>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <div class="container">
+      
       @if($message == 'belum_diterima')
         <div class="alert alert-success" role="alert">Akun anda sedang di verifikasi, harap tunggu dan bersabar</div>
       @endif

@@ -40,32 +40,7 @@ class Keranjang extends Component
         return view('user.mobile.keranjang');
     }
 
-    //     public function rendercheck()
-    //     {
-    //         $user = Auth::user();
-    //         $render = ModelsKeranjang::select('keranjangs.checkbox')
-    //         ->join('users', 'users.id', '=', 'keranjangs.user_id')
-    //         ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
-    //         ->where('user_id', $user->id)
-    //             ->get();
-
-    //         foreach ($this->keranjangs as $key => $isi) {
-    //             $isi->checkbox = $render[$key]->checkbox;
-    //         }
-    //     }
-    // public function rendercheckbox(){
-    //     // if($this->checkbox == 'false'){
-    //             $this->htmlcheckbox = <<<'HTML'
-    //                 <input wire:click='checkall' class="form-check-input" style="width: 25px; height: 25px;"type="checkbox">
-    //             HTML;
-    //     // }else{
-    //     //         $this->htmlcheckbox = <<<'HTML'
-    //     //                         <input wire:click='uncheckall' checked class="form-check-input" style="width: 25px; height: 25px;"type="checkbox">
-    //     //             HTML;
-
-    //     // }
-    // }
-    public function addkeranjang($id)
+       public function addkeranjang($id)
     {
         $user = Auth::user();
         // $menu = Menu::find($id);
@@ -145,7 +120,9 @@ class Keranjang extends Component
                     'bayar' => 0,
                     'kembalian' => 0,
                     'total_harga' => 0,
+                    'metode_pembayaran' => "cod",
                     'status' => "di pending",
+                    'status_bayar' => "belum bayar",
                 ]);
                 foreach ($this->dataArray as $data) {
                     $data_keranjang = ModelsKeranjang::find($data);
@@ -191,7 +168,9 @@ class Keranjang extends Component
             'bayar' => 0,
             'kembalian' => 0,
             'total_harga' => 0,
-            'status' => "belum bayar",
+            'metode_pembayaran' => "bayar online",
+            'status' => "di pending",
+            'status_bayar' => "belum bayar",
         ]);
 
         $total_harga = 0;

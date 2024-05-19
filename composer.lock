@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f68b853cb0bb553fa0e137761578bb5",
+    "content-hash": "7152aeca19d6321ab2d541d45f171689",
     "packages": [
         {
             "name": "brick/math",
@@ -6163,6 +6163,72 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "jn-jairo/laravel-ngrok",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jn-jairo/laravel-ngrok.git",
+                "reference": "6bfe611dbfb06759d1e43e1de08298a9592961d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jn-jairo/laravel-ngrok/zipball/6bfe611dbfb06759d1e43e1de08298a9592961d0",
+                "reference": "6bfe611dbfb06759d1e43e1de08298a9592961d0",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.5.8|^7.4.5",
+                "illuminate/console": "^8.83|^9.0|^10.0|^11.0",
+                "illuminate/http": "^8.83|^9.0|^10.0|^11.0",
+                "illuminate/pagination": "^8.83|^9.0|^10.0|^11.0",
+                "illuminate/routing": "^8.83|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.83|^9.0|^10.0|^11.0",
+                "php": "^8.1",
+                "symfony/process": "^5.4|^6.0|^7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.24|^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.22|^2.34",
+                "phpspec/prophecy": "^1.17",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "webmozart/assert": "^1.11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JnJairo\\Laravel\\Ngrok\\NgrokServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JnJairo\\Laravel\\Ngrok\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jairo Correa",
+                    "email": "jn.j41r0@gmail.com"
+                }
+            ],
+            "description": "Share Laravel application with ngrok.",
+            "homepage": "https://github.com/jn-jairo/laravel-ngrok",
+            "keywords": [
+                "jn-jairo",
+                "laravel-ngrok"
+            ],
+            "support": {
+                "issues": "https://github.com/jn-jairo/laravel-ngrok/issues",
+                "source": "https://github.com/jn-jairo/laravel-ngrok/tree/v3.0.2"
+            },
+            "time": "2024-03-14T23:34:46+00:00"
         },
         {
             "name": "laravel/breeze",

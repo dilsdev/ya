@@ -10,6 +10,8 @@
                             <th>Nama</th>
                             <th>Tanggal</th>
                             <th>Total harga</th>
+                            <th>Status bayar</th>
+                            <th>Metode pembayaran</th>
                             <th>Detail</th>
                             <th>Aksi</th>
                         </tr>
@@ -24,6 +26,12 @@
                                 <td class="text-secondary">{{ $item->tanggal_pesan }}</td>
                                 <td class="text-secondary">
                                     Rp.{{ number_format($item->total_harga, 0, ',', '.') }}
+                                </td>
+                                <td>
+                                    {{ $item->status_bayar }}
+                                </td>
+                                <td>
+                                    {{ $item->metode_pembayaran }}
                                 </td>
                                 <td>
                                     <a href=" {{ route('admin.detail', [$item->id, 'admin.pesanan']) }}">Detail</a>

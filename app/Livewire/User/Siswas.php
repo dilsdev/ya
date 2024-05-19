@@ -18,6 +18,7 @@ class Siswas extends Component
     public $kelas;
     public $image_kp;
     public $nama_lengkap;
+    public $message;
 
     protected $rules = [
         'nisn' => 'required|numeric|digits:10|unique:siswas,nisn',
@@ -31,6 +32,7 @@ class Siswas extends Component
 
     public function render()
     {
+        $this->user();
         return view('user.mobile.siswas');
     }
 
@@ -51,5 +53,15 @@ class Siswas extends Component
             'image_kp' => $this->image_kp->hashName(),
         ]);
         return redirect()->route('user.profile');
+    }
+    public function user()
+    {
+        $user = Auth::user();
+        $data = Siswa::where('user_id', $user->id)->first();
+        if ($data->status == 'belum_diterima') {
+            $this->message = 'belum_diterima';
+        } elseif ($data->status == 'di_terima') {
+            $this->message = 'di_terima';
+        };
     }
 }

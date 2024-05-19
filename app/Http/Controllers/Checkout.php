@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item_pesanan;
 use App\Models\Pesanan;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,5 +22,17 @@ class Checkout extends Controller
         } else {
             return back();
         }
+    }
+
+    public function oke(Request $request){
+        if($request->transaction_status == 'settlement'){
+            $pesanan = Pesanan::find($request->order_id);
+            $pesanan->bayar = $request->gross_amount;
+            $pesanan->metode_pembayaran = $request->payment_type;
+            $pesanan->status = 'di pending';
+            $pesanan->status_bayar = 'di bayar';
+            $pesanan->save();
+        }
+        
     }
 }

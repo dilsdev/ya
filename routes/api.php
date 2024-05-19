@@ -3,6 +3,7 @@
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Auth;
+use App\Http\Controllers\Checkout;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RekomendasiController;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -33,4 +34,4 @@ Route::post('/register', [Auth::class, 'register']);
 Route::post('/login', [Auth::class, 'login']);
 
 
-Route::get('succes', [PesananController::class, 'pesan']);
+Route::post('success', [Checkout::class, 'oke']);

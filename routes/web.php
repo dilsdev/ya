@@ -44,9 +44,8 @@ Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
     Route::get('user/siswa', App\Livewire\User\Siswas::class)->name('user.siswa');
     Route::get('user/unpaid', App\Livewire\User\Unpaid::class)->name('user.unpaid');
-    
 });
-Route::get('checkout/{id}/{token}',[Checkout::class, 'index'])->name('checkout');
+Route::get('checkout/{id}/{token}', [Checkout::class, 'index'])->name('checkout');
 Route::get('success', function () {
     return view('user.success');
 });
@@ -57,8 +56,8 @@ Route::middleware(['auth', 'user', 'web'])->group(function () {
     Route::get('web/menu/{type}', App\Livewire\Web\Menu::class)->name('web.menu');
     Route::get('web/myorder', App\Livewire\Web\Myorder::class)->name('web.myorder');
     Route::get('web/detail/{id}', App\Livewire\Web\Detail::class)->name('web.detail');
-Route::get('web/profile', App\Livewire\Web\Profile::class)->name('web.profile');
-Route::get('web/siswa', App\Livewire\Web\Siswas::class)->name('web.siswa');
-Route::get('web/unpaid', App\Livewire\Web\Unpaid::class)->name('web.unpaid');
-Route::get('user/keranjang/add/{id}', [App\Livewire\User\Keranjang::class, 'addkeranjang'])->name('user.addkeranjang');
+    Route::get('web/profile', App\Livewire\Web\Profile::class)->name('web.profile');
+    Route::get('web/siswa', App\Livewire\Web\Siswas::class)->name('web.siswa');
+    Route::get('web/unpaid', App\Livewire\Web\Unpaid::class)->name('web.unpaid');
+    Route::get('user/keranjang/add/{id}', [App\Livewire\User\Keranjang::class, 'addkeranjang'])->name('user.addkeranjang');
 });

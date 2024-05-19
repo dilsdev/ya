@@ -1,6 +1,6 @@
 <div>
     <div class="container-xl">
-        <h4>Pesanan</h4>
+        <h4>Daftar siswa</h4>
         <div class="card">
             <div class="table-responsive">
                 <table class="table table-vcenter card-table">

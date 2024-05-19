@@ -145,7 +145,9 @@ class Keranjang extends Component
                 'bayar' => 0,
                 'kembalian' => 0,
                 'total_harga' => 0,
+                'metode_pembayaran' => "cod",
                 'status' => "di pending",
+                'status_bayar' => "belum bayar",
             ]);
             foreach ($this->dataArray as $data) {
                 $data_keranjang = ModelsKeranjang::find($data);
@@ -191,7 +193,9 @@ class Keranjang extends Component
             'bayar' => 0,
             'kembalian' => 0,
             'total_harga' => 0,
-            'status' => "belum bayar",
+            'metode_pembayaran' => "bayar online",
+            'status' => "di pending",
+            'status_bayar' => "belum bayar",
         ]);
 
         $total_harga = 0;
