@@ -25,9 +25,9 @@ class Keranjang extends Component
     {
         $user = Auth::user();
         $data = Siswa::where('user_id', $user->id)->first();
-        if ($data->status == 'belum_diterima') {
+        if ($data && $data->status == 'belum_diterima') {
             $this->message = 'belum_diterima';
-        } elseif ($data->status == 'di_terima') {
+        } elseif ($data && $data->status == 'di_terima') {
             $this->message = 'di_terima';
         };
         // $keranjangs = Keranjang::where('user_id', $user->id);
