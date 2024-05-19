@@ -23,8 +23,10 @@ class Profile extends Component
     public function user(){
         $this->user = Auth::user();
         $data = Siswa::where('user_id', $this->user->id)->first();
-        if ($data->status == 'belum_diterima') {
+        if ($data && $data->status == 'belum_diterima') {
             $this->message = 'belum_diterima';
+        } elseif ($data && $data->status == 'di_terima') {
+            $this->message = 'di_terima';
         };
         // dd($this->user);
         $this->nama = $this->user->name;
