@@ -10,14 +10,14 @@
         </div>
 
         <!-- nomor_telepon -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="nomor_telepon" :value="__('Nomor Telepon')" />
             <x-text-input id="nomor_telepon" class="block w-full mt-1" type="text" name="nomor_telepon" :value="old('nomor_telepon')" required  />
             <x-input-error :messages="$errors->get('nomor_telepon')" class="mt-2" />
         </div>
 
         <!-- alamat -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="alamat" :value="__('Alamat')" />
             <x-text-input id="alamat" class="block w-full mt-1" type="text" name="alamat" :value="old('alamat')" required  />
             <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
