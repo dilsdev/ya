@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nomor_telepon', 20)->unique();
             $table->text('alamat');
+            $table->text('token')->nullable();
             $table->string('role')->default('user');
             $table->rememberToken();
             $table->timestamps();

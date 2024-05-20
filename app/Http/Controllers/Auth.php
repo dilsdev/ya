@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
+use Illuminate\Support\Str;
 class Auth extends Controller
 {
     public function register(Request $request)
@@ -54,14 +54,15 @@ class Auth extends Controller
             ]);
         }
 
-        $token = $user->createToken('UserLoginToken')->plainTextToken;
-
+        $token = Str::random(60);
+        $user->token = hash('sha256', $token);
+        $user->save();
         return response()->json([
             'status' => 'success',
             'message' => 'User logged in successfully',
             'data' => [
                 'user' => $user,
-                'token' => $token,
+                'token' => $user->token,
             ]
         ], 200);
     }

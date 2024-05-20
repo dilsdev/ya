@@ -11,7 +11,7 @@ use Livewire\Attributes\Validate;
 class KeranjangController extends Controller
 {
     public function keranjang($token){
-        $user = User::where('remember_token',$token)->first();
+        $user = User::where('token',$token)->first();
         $keranjangs = Keranjang::select('keranjangs.id', 'keranjangs.jumlah', 'users.name', 'menus.nama')
         ->join('users', 'users.id', '=', 'keranjangs.user_id')
         ->join('menus', 'menus.id', '=', 'keranjangs.menu_id') 
@@ -44,7 +44,7 @@ class KeranjangController extends Controller
     }
     public function kurangikeranjang($id, $token)
     {
-        $user = User::where('remember_token', $token)->first();
+        $user = User::where('token', $token)->first();
         $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
         if($data){
             $data->jumlah -= 1;
@@ -57,7 +57,7 @@ class KeranjangController extends Controller
     }
     public function tambahkeranjang($id, $token)
     {
-        $user = User::where('remember_token', $token)->first();
+        $user = User::where('token', $token)->first();
         $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
         if($data){
             $data->jumlah += 1;
@@ -70,7 +70,7 @@ class KeranjangController extends Controller
     }
     public function check($id, $token)
     {
-        $user = User::where('remember_token', $token)->first();
+        $user = User::where('token', $token)->first();
         $data = Keranjang::where(['id'=>$id, 'user_id'=>$user->id]);
         if($data){
             $data->checkbox = 'true';
@@ -82,7 +82,7 @@ class KeranjangController extends Controller
     }
     public function uncheck($id, $token)
     {
-        $user = User::where('remember_token', $token)->first();
+        $user = User::where('token', $token)->first();
         $data = Keranjang::where(['id'=>$id, 'user_id'=>$user->id]);
         if($data){
             $data->checkbox = 'false';
@@ -93,7 +93,7 @@ class KeranjangController extends Controller
         }
     }
     public function delete($id, $token){
-        $user = User::where('remember_token', $token)->first();
+        $user = User::where('token', $token)->first();
         $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
         if ($data) {
             $data->delete();
