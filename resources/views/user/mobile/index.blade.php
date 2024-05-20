@@ -28,11 +28,9 @@
         </div>
 
     </div>
-    @foreach ($rekomendasi as $rekomendasi2)
         <div class="border img-responsive img-responsive-3x1 rounded-3"
-            style="background-image: url({{ asset('/storage/rekomendasi/' . $rekomendasi2->image) }})">
+            style="background-image: url({{ asset('/storage/rekomendasi/' . $rekomendasi[0]->image) }})">
         </div>
-    @endforeach
     <div class="mt-2 row g-2 align-items-center">
         <div class="col">
             <h2 class="page-title">

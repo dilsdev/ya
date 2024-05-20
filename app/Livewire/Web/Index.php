@@ -40,7 +40,7 @@ class Index extends Component
         }
 
 
-        return view('user.index', ['makanans' => $makanans, 'minumans' => $minumans, 'rekomendasi1' => $rekomendasi1, 'rekomendasi2' => $rekomendasi2]);
+        return view('user.index', ['makanans' => $makanans, 'minumans' => $minumans, 'rekomendasi1' => $rekomendasi1, 'rekomendasi2' => $rekomendasi2, 'rekomendasi' =>$rekomendasi]);
     }
     public function addKeranjang($id)
     {
