@@ -24,8 +24,10 @@ class Checkout extends Controller
         }
     }
 
-    public function oke(Request $request){
-        if($request->transaction_status == 'settlement'){
+    public function oke(Request $request)
+    {
+        if($request->transaction_status == 'settlement')
+        {
             $pesanan = Pesanan::find($request->order_id);
             $pesanan->bayar = $request->gross_amount;
             $pesanan->metode_pembayaran = $request->payment_type;
