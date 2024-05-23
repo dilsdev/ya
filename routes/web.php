@@ -3,6 +3,8 @@
 use App\Http\Controllers\Checkout;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
+
 
 Route::get('/', function () {
     return redirect('user/index');
@@ -49,6 +51,14 @@ Route::get('checkout/{id}/{token}', [Checkout::class, 'index'])->name('checkout'
 Route::get('success', function () {
     return view('user.success');
 });
+Route::get('gagal', function () {
+    return view('user.gagal');
+});
+Route::get('expired', function () {
+    return view('user.expired');
+});
+Route::get('/payment-status', [PaymentController::class, 'handlePaymentStatus']);
+
 Route::middleware(['auth', 'user', 'web'])->group(function () {
     Route::get('web/index', App\Livewire\Web\Index::class)->name('web.index');
     Route::get('web/keranjang', App\Livewire\Web\Keranjang::class)->name('web.keranjang');
