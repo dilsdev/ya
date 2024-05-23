@@ -22,6 +22,7 @@
                       <th>No</th>
                       <th>Nama</th>
                       <th>Tanggal</th>
+                      <th>Status</th>
                       <th>Total harga</th>
                       <th>Bayar</th>
                       <th>Kembalian</th>
@@ -37,6 +38,7 @@
                         {{ $pending->name}}
                       </td>
                       <td class="text-secondary">{{ $pending->tanggal_pesan }}</td>
+                      <td class="text-secondary">{{ $pending->status }}</td>
                       <td class="text-secondary">
                         Rp.{{ number_format($pending->total_harga, 0, ',', '.') }}
                       </td>
@@ -64,6 +66,7 @@
                       <th>No</th>
                       <th>Nama</th>
                       <th>Tanggal</th>
+                      <th>Status</th>
                       <th>Total harga</th>
                       <th>Bayar</th>
                       <th>Kembalian</th>
@@ -79,6 +82,7 @@
                         {{ $proses->name}}
                       </td>
                       <td class="text-secondary">{{ $proses->tanggal_pesan }}</td>
+                      <td class="text-secondary">{{ $proses->status }}</td>
                       <td class="text-secondary">
                         Rp.{{ number_format($proses->total_harga, 0, ',', '.') }}
                       </td>
@@ -106,6 +110,7 @@
                       <th>No</th>
                       <th>Nama</th>
                       <th>Tanggal</th>
+                      <th>Status</th>
                       <th>Total harga</th>
                       <th>Bayar</th>
                       <th>Kembalian</th>
@@ -121,6 +126,7 @@
                         {{ $selesai->name}}
                       </td>
                       <td class="text-secondary">{{ $selesai->tanggal_pesan }}</td>
+                      <td class="text-secondary">{{ $selesai->status }}</td>
                       <td class="text-secondary">
                         Rp.{{ number_format($selesai->total_harga, 0, ',', '.') }}
                       </td>

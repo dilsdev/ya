@@ -11,7 +11,7 @@
                             <th class="w-1">Detail</th>
                         </tr>
                     </thead>
-                    <tbody wire:init="unpaid()">
+                    <tbody >
                         @foreach ($unpaids as $unpaid)
                             <tr>
                                 <td>{{ $unpaid->name }}</td>

@@ -145,7 +145,7 @@ class Keranjang extends Component
                 'kembalian' => 0,
                 'total_harga' => 0,
                 'metode_pembayaran' => "cod",
-                'status' => "di pending",
+                'status' => "belum bayar",
                 'status_bayar' => "belum bayar",
             ]);
             foreach ($this->dataArray as $data) {

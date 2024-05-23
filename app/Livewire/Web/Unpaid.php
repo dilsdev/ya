@@ -8,18 +8,14 @@ use Livewire\Component;
 
 class Unpaid extends Component
 {
-    public $unpaids = [];
     public function render()
-    {
-        return view('user.web.unpaid');
-    }
-    public function unpaid()
     {
         $user = Auth::user();
         $id_user = $user->id;
-        $this->unpaids = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.token', 'pesanans.id', 'pesanans.status')
-        ->join('users', 'users.id', '=', 'pesanans.user_id')
-        ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'belum bayar'])
-        ->get();
+        $unpaids = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.token', 'pesanans.id', 'pesanans.status')
+            ->join('users', 'users.id', '=', 'pesanans.user_id')
+            ->where(['pesanans.user_id' => $id_user, 'pesanans.status_bayar' => 'belum bayar', 'pesanans.metode_pembayaran' => 'bayar online', 'pesanans.status' => 'di pending', 'pesanans.bayar' => 0])
+            ->get();
+        return view('user.web.unpaid', ['unpaids' => $unpaids]);
     }
 }

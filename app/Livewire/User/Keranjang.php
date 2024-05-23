@@ -169,7 +169,7 @@ class Keranjang extends Component
             'kembalian' => 0,
             'total_harga' => 0,
             'metode_pembayaran' => "bayar online",
-            'status' => "di pending",
+            'status' => "belum bayar",
             'status_bayar' => "belum bayar",
         ]);
 
