@@ -15,47 +15,64 @@ class PesananController extends Controller
     public function pending($token)
     {
         $user = User::where('token', $token)->first();
-        $pendings = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
-            ->join('users', 'users.id', '=', 'pesanans.user_id')
-            ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di pending'])
-            ->get();
+        if ($user) {
+            $pendings = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
+                ->join('users', 'users.id', '=', 'pesanans.user_id')
+                ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di pending'])
+                ->get();
 
-        return response()->json($pendings);
+            return response()->json($pendings);
+        }else{
+            return response()->json(['message' => "Token tidak falid / tidak ada"]);
+        }
     }
     public function proses($token)
     {
         $user = User::where('token', $token)->first();
+        if($user){
         $proseses = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
             ->join('users', 'users.id', '=', 'pesanans.user_id')
             ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di proses'])
             ->get();
 
         return response()->json($proseses);
+        } else {
+            return response()->json(['message' => "Token tidak falid / tidak ada"]);
+        }
     }
     public function selesai($token)
     {
         $user = User::where('token', $token)->first();
+        if($user){
         $selesais = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
             ->join('users', 'users.id', '=', 'pesanans.user_id')
             ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'selesai'])
             ->get();
 
         return response()->json($selesais);
+        } else {
+            return response()->json(['message' => "Token tidak falid / tidak ada"]);
+        }
     }
 
     public function detail($id, $token)
     {
         $user = User::where('token', $token)->first();
+        if($user){
         $data = Item_pesanan::select('menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
         ->join('menus', 'menus.menu_id', '=', 'item_pesanans.menu_id')
         ->where('item_pesanans.pesanan_id', $id)
             ->get();
         // $data = ItemPesanan::where('id_pesanan', $id);
         return view('detail', compact('data'));
+        } else {
+            return response()->json(['message' => "Token tidak falid / tidak ada"]);
+        }
     }
 
     public function pesan($token){
         $user = User::where('token', $token)->first();
+        if($user){
         if (Siswa::where(['user_id' => $user->id, 'status' => 'di_terima'])) {
             $keranjangs = Keranjang::select('menus.image', 'users.name', 'menus.status', 'menus.harga', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
                 ->join('users', 'users.id', '=', 'keranjangs.user_id')
@@ -106,5 +123,8 @@ class PesananController extends Controller
             return response()->json([$pesanan, $item_pesanan]);
         }
         return response()->json('error', 'akun belum terverifikasi');
+        } else {
+            return response()->json(['message' => "Token tidak falid / tidak ada"]);
+        }
     }
 }

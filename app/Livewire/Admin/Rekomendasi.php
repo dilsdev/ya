@@ -29,7 +29,7 @@ class Rekomendasi extends Component
         ModelsRekomendasi::create([
             'nama_promosi' => $this->nama_promosi,
             'image' => $this->image->hashName(),
-            'url' => 'http://127.0.0.1:8000/storage/rekomendasi/' . $this->image->hashName(),
+            'url' => 'http://cafe6.dils.my.id/storage/rekomendasi/' . $this->image->hashName(),
         ]);
 
         return redirect()->route('admin.rekomendasi');
