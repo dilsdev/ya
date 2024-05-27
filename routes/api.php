@@ -26,6 +26,7 @@ Route::get('user/keranjang/check/{id}/{token}', [KeranjangController::class, 'ch
 Route::get('user/keranjang/uncheck/{id}/{token}', [KeranjangController::class, 'uncheck']);
 Route::get('user/keranjang/plusqty/{id}/{token}', [KeranjangController::class, 'tambahkeranjang']);
 Route::get('user/keranjang/minqty/{id}/{token}', [KeranjangController::class, 'kurangikeranjang']);
+Route::get('user/keranjang/add/{id}/{token}', [KeranjangController::class, 'addKeranjang']);
 Route::get('user/pesanan/detail/{id}/{token}', [PesananController::class, 'detail']);
 Route::get('user/keranjang/{id}/{token}', [KeranjangController::class, 'delete']);
 Route::get('user/pesanan/pesan/{token}', [PesananController::class, 'pesan']);

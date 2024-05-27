@@ -16,26 +16,32 @@ class PesananController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $pendings = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
+            $pendings = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status')
                 ->join('users', 'users.id', '=', 'pesanans.user_id')
                 ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di pending'])
                 ->get();
-
-            return response()->json($pendings);
-        }else{
+            if (isset($pendings[0])) {
+                return response()->json($pendings);
+            } else {
+                return response()->json(['message' => "pesanan pending tidak ada"]);
+            }
+        } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }
     }
     public function proses($token)
     {
         $user = User::where('token', $token)->first();
-        if($user){
-        $proseses = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
-            ->join('users', 'users.id', '=', 'pesanans.user_id')
-            ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di proses'])
-            ->get();
-
-        return response()->json($proseses);
+        if ($user) {
+            $proseses = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status')
+                ->join('users', 'users.id', '=', 'pesanans.user_id')
+                ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di proses'])
+                ->get();
+            if (isset($proseses[0])) {
+                return response()->json($proseses);
+            } else {
+                return response()->json(['message' => "pesanan proses tidak ada"]);
+            }
         } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }
@@ -43,13 +49,16 @@ class PesananController extends Controller
     public function selesai($token)
     {
         $user = User::where('token', $token)->first();
-        if($user){
-        $selesais = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status', 'pesanans.message')
-            ->join('users', 'users.id', '=', 'pesanans.user_id')
-            ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'selesai'])
-            ->get();
-
-        return response()->json($selesais);
+        if ($user) {
+            $selesais = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status')
+                ->join('users', 'users.id', '=', 'pesanans.user_id')
+                ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'selesai'])
+                ->get();
+            if (isset($selesais[0])) {
+                return response()->json($selesais);
+            } else {
+                return response()->json(['message' => "pesanan selesai tidak ada"]);
+            }
         } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }
@@ -58,71 +67,77 @@ class PesananController extends Controller
     public function detail($id, $token)
     {
         $user = User::where('token', $token)->first();
-        if($user){
-        $data = Item_pesanan::select('menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
-        ->join('menus', 'menus.menu_id', '=', 'item_pesanans.menu_id')
-        ->where('item_pesanans.pesanan_id', $id)
-            ->get();
-        // $data = ItemPesanan::where('id_pesanan', $id);
-        return view('detail', compact('data'));
+        if ($user) {
+            $data = Item_pesanan::select('menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
+                ->join('menus', 'menus.menu_id', '=', 'item_pesanans.menu_id')
+                ->where('item_pesanans.pesanan_id', $id)
+                ->get();
+            // $data = ItemPesanan::where('id_pesanan', $id);
+            return view('detail', compact('data'));
         } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }
     }
 
-    public function pesan($token){
+    public function pesan($token)
+    {
         $user = User::where('token', $token)->first();
-        if($user){
-        if (Siswa::where(['user_id' => $user->id, 'status' => 'di_terima'])) {
-            $keranjangs = Keranjang::select('menus.image', 'users.name', 'menus.status', 'menus.harga', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
-                ->join('users', 'users.id', '=', 'keranjangs.user_id')
-                ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
-                ->where('user_id', $user->id)
-                ->get();
-            $dataArray = [];
-            $i = 0;
-            $total_harga = 0;
-            foreach ($keranjangs as $isi) {
-                // dd($this->keranjangs, $isi);
-                if ($isi->checkbox == 'true' && $isi->status == 'ready') {
-                    // dd('oke');
-                    $dataArray[$i] = $isi->id;
-                    $i++;
+        if ($user) {
+            if (Siswa::where(['user_id' => $user->id, 'status' => 'di_terima'])) {
+                $keranjangs = Keranjang::select('menus.image', 'users.name', 'menus.status', 'menus.harga', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
+                    ->join('users', 'users.id', '=', 'keranjangs.user_id')
+                    ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
+                    ->where('user_id', $user->id)
+                    ->get();
+                $dataArray = [];
+                $i = 0;
+                $total_harga = 0;
+                foreach ($keranjangs as $isi) {
+                    // dd($this->keranjangs, $isi);
+                    if ($isi->checkbox == 'true' && $isi->status == 'ready') {
+                        // dd('oke');
+                        $dataArray[$i] = $isi->id;
+                        $i++;
+                    }
+                }
+                if (isset($dataArray[0])) {
+                    $pesanan = Pesanan::create([
+                        'user_id' => 0,
+                        'tanggal_pesan' => date('Y-m-d'),
+                        'jumlah_diskon' => 0,
+                        'bayar' => 0,
+                        'kembalian' => 0,
+                        'total_harga' => 0,
+                        'status' => "di pending",
+                        'status_bayar' => 'belum bayar'
+                    ]);
+                    foreach ($dataArray as $data) {
+                        $data_keranjang = Keranjang::find($data);
+                        $menu = Menu::find($data_keranjang->menu_id);
+                        // dd($menu);
+                        $subtotal = $menu->harga * $data_keranjang->jumlah;
+                        $item_pesanan = Item_pesanan::create([
+                            'pesanan_id' => $pesanan->id,
+                            'menu_id' => $data_keranjang->menu_id,
+                            'jumlah' => $data_keranjang->jumlah,
+                            'subtotal_harga' => $subtotal,
+                        ]);
+                        $total_harga = +$subtotal;
+                    }
+                    $pesanan->user_id = $data_keranjang->user_id;
+                    $pesanan->total_harga = $total_harga;
+                    $pesanan->save();
+                    foreach ($keranjangs as $isi) {
+                        if ($isi->checkbox == 'true') {
+                            $isi->delete();
+                        }
+                    }
+                    return response()->json([$pesanan, $item_pesanan]);
+                } else {
+                    return response()->json(['message' => 'keranjang kosong']);
                 }
             }
-            $pesanan = Pesanan::create([
-                'user_id' => 0,
-                'tanggal_pesan' => date('Y-m-d'),
-                'jumlah_diskon' => 0,
-                'bayar' => 0,
-                'kembalian' => 0,
-                'total_harga' => 0,
-                'status' => "di pending",
-            ]);
-            foreach ($dataArray as $data) {
-                $data_keranjang = Keranjang::find($data);
-                $menu = Menu::find($data_keranjang->menu_id);
-                // dd($menu);
-                $subtotal = $menu->harga * $data_keranjang->jumlah;
-                $item_pesanan = Item_pesanan::create([
-                    'pesanan_id' => $pesanan->id,
-                    'menu_id' => $data_keranjang->menu_id,
-                    'jumlah' => $data_keranjang->jumlah,
-                    'subtotal_harga' => $subtotal,
-                ]);
-                $total_harga = +$subtotal;
-            }
-            $pesanan->user_id = $data_keranjang->user_id;
-            $pesanan->total_harga = $total_harga;
-            $pesanan->save();
-            foreach ($keranjangs as $isi) {
-                if ($isi->checkbox == 'true') {
-                    $isi->delete();
-                }
-            }
-            return response()->json([$pesanan, $item_pesanan]);
-        }
-        return response()->json('error', 'akun belum terverifikasi');
+            return response()->json('error', 'akun belum terverifikasi');
         } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }

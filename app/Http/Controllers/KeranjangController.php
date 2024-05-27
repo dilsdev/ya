@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keranjang;
+use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class KeranjangController extends Controller
     {
         $user = User::where('token', $token)->first();
         if($user){
-        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
+        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id])->first();
         if($data){
             $data->jumlah -= 1;
             $data->save();
@@ -67,7 +68,7 @@ class KeranjangController extends Controller
     {
         $user = User::where('token', $token)->first();
         if($user){
-        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
+        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id])->first();
         if($data){
             $data->jumlah += 1;
             $data->save();
@@ -112,10 +113,37 @@ class KeranjangController extends Controller
             return response()->json(['message'=> "Token tidak falid / tidak ada"]);
         }
     }
+    public function addKeranjang($id, $token)
+    {
+        $user = User::where('token', $token)->first();
+        if ($user) {
+        if (Menu::find($id)) {
+            $krjg = keranjang::where([
+                'user_id' => $user->id,
+                'menu_id' => $id,
+            ])->first();
+            if ($krjg) {
+                return response()->json(['message' => "Menu di keranjang sudah ada"]);
+                } else {
+                    Keranjang::create([
+                        'user_id' => $user->id,
+                        'menu_id' => $id,
+                        'jumlah' => 1,
+                        'checkbox' => 'true'
+                    ]);
+                    return response()->json(200);
+                }
+            }else{
+                return response()->json(['message'=>"menu tidak ada"]);
+            }
+        } else {
+            return response()->json(['message' => "Token tidak falid / tidak ada"]);
+        }
+    }
     public function delete($id, $token){
         $user = User::where('token', $token)->first();
         if($user){
-        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id]);
+        $data = Keranjang::where(['id' => $id, 'user_id' => $user->id])->first();
         if ($data) {
             $data->delete();
             return response()->json(200);
