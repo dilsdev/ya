@@ -16,7 +16,7 @@ class PesananController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $pendings = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status')
+            $pendings = Pesanan::select('pesanans.id', 'users.name', 'pesanans.total_harga', 'pesanans.status')
                 ->join('users', 'users.id', '=', 'pesanans.user_id')
                 ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di pending'])
                 ->get();
@@ -33,7 +33,7 @@ class PesananController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $proseses = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status')
+            $proseses = Pesanan::select('pesanans.id', 'users.name', 'pesanans.total_harga', 'pesanans.status')
                 ->join('users', 'users.id', '=', 'pesanans.user_id')
                 ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di proses'])
                 ->get();
@@ -50,7 +50,7 @@ class PesananController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $selesais = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.status')
+            $selesais = Pesanan::select('pesanans.id', 'users.name', 'pesanans.total_harga', 'pesanans.status')
                 ->join('users', 'users.id', '=', 'pesanans.user_id')
                 ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'selesai'])
                 ->get();
@@ -68,12 +68,12 @@ class PesananController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $data = Item_pesanan::select('menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
-                ->join('menus', 'menus.menu_id', '=', 'item_pesanans.menu_id')
+            $data = Item_pesanan::select('item_pesanans.pesanan_id', 'menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
+                ->join('menus', 'menus.id', '=', 'item_pesanans.menu_id')
                 ->where('item_pesanans.pesanan_id', $id)
                 ->get();
             // $data = ItemPesanan::where('id_pesanan', $id);
-            return view('detail', compact('data'));
+            return response()->json($data);
         } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }

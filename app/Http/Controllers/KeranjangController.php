@@ -15,7 +15,7 @@ class KeranjangController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $keranjangs = Keranjang::select('keranjangs.id', 'keranjangs.jumlah', 'users.name', 'menus.nama', 'menus.image', 'menus.harga')
+            $keranjangs = Keranjang::select('keranjangs.id', 'keranjangs.jumlah', 'keranjangs.checkbox', 'users.name', 'menus.nama', 'menus.image', 'menus.harga')
                 ->join('users', 'users.id', '=', 'keranjangs.user_id')
                 ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
                 ->where('user_id', $user->id)
