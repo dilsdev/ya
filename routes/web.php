@@ -14,17 +14,12 @@ Route::get('/dashboard', function () {
     return redirect('user/index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 require __DIR__ . '/auth.php';
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('admin/index', App\Livewire\Admin\Index::class)->name('admin.index');
+    // Route::get('admin/index', App\Livewire\Admin\Index::class)->name('admin.index');
+    Route::get('admin/index', App\Livewire\Admin\Menu::class)->name('admin.index');
     Route::get('admin/menu', App\Livewire\Admin\Menu::class)->name('admin.menu');
     Route::get('admin/tambahmenu', App\Livewire\Admin\Tambahmenu::class)->name('admin.tambahmenu');
     Route::get('admin/menu/edit/{id}', App\Livewire\Admin\MenuEdit::class)->name('admin.menuedit');

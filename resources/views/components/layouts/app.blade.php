@@ -50,7 +50,7 @@
                 </h1>
                 <div class="collapse navbar-collapse" id="sidebar-menu">
                     <ul class="navbar-nav pt-lg-3">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a wire:navigate class="nav-link" href="{{ route('admin.index') }}">
                                 <span
                                     class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -63,7 +63,7 @@
                                     Home
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a wire:navigate class="nav-link" href="{{ route('admin.menu') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
