@@ -28,7 +28,7 @@
         </div>
 
     </div>
-        <div class="border img-responsive img-responsive-3x1 rounded-3"
+    <div class="border img-responsive img-responsive-3x1 rounded-3"
             style="background-image: url({{ asset('/storage/rekomendasi/' . $rekomendasi[0]->image) }})">
         </div>
     <div class="mt-2 row g-2 align-items-center">
@@ -43,6 +43,7 @@
 
         @foreach ($makanans as $makanan)
             <div class="m-2 card" style="min-width: 180px;">
+                <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
                     <img class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
                         style="width: 140px; height: 190px; object-fit: cover;">

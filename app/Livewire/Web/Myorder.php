@@ -49,6 +49,7 @@ class Myorder extends Component
             ->whereIn('pesanans.status', ['selesai', 'di tolak', 'di cancel', 'kadaluwarsa'])
         ->get();
 
+
         // return view->json($selesais);
     }
 }

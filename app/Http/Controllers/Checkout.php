@@ -39,7 +39,6 @@ class Checkout extends Controller
                 $pesanan->status_bayar = 'di bayar';
                 $pesanan->save();
                 break;
-            
             case 'deny':
                 //pembayaran ditolak
                 $pesanan = Pesanan::find($request->order_id);

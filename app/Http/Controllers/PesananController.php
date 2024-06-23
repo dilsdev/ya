@@ -16,27 +16,27 @@ class PesananController extends Controller
     {
         $user = User::where('token', $token)->first();
         if ($user) {
-            $pendings = Pesanan::select('pesanans.id', 'users.name', 'pesanans.total_harga', 'pesanans.status')
+            $pendings = Pesanan::select('pesanans.id','users.name', 'pesanans.total_harga', 'pesanans.status')
                 ->join('users', 'users.id', '=', 'pesanans.user_id')
                 ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di pending'])
                 ->get();
-            if (isset($pendings[0])) {
+            if(isset($pendings[0])){
                 return response()->json($pendings);
-            } else {
+            }else{
                 return response()->json(['message' => "pesanan pending tidak ada"]);
             }
-        } else {
+        }else{
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }
     }
     public function proses($token)
     {
         $user = User::where('token', $token)->first();
-        if ($user) {
-            $proseses = Pesanan::select('pesanans.id', 'users.name', 'pesanans.total_harga', 'pesanans.status')
-                ->join('users', 'users.id', '=', 'pesanans.user_id')
-                ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di proses'])
-                ->get();
+        if($user){
+        $proseses = Pesanan::select('pesanans.id','users.name', 'pesanans.total_harga', 'pesanans.status')
+            ->join('users', 'users.id', '=', 'pesanans.user_id')
+            ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'di proses'])
+            ->get();
             if (isset($proseses[0])) {
                 return response()->json($proseses);
             } else {
@@ -49,11 +49,11 @@ class PesananController extends Controller
     public function selesai($token)
     {
         $user = User::where('token', $token)->first();
-        if ($user) {
-            $selesais = Pesanan::select('pesanans.id', 'users.name', 'pesanans.total_harga', 'pesanans.status')
-                ->join('users', 'users.id', '=', 'pesanans.user_id')
-                ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'selesai'])
-                ->get();
+        if($user){
+        $selesais = Pesanan::select('pesanans.id','users.name', 'pesanans.total_harga', 'pesanans.status')
+            ->join('users', 'users.id', '=', 'pesanans.user_id')
+            ->where(['pesanans.user_id' => $user->id, 'pesanans.status' => 'selesai'])
+            ->get();
             if (isset($selesais[0])) {
                 return response()->json($selesais);
             } else {
@@ -67,27 +67,26 @@ class PesananController extends Controller
     public function detail($id, $token)
     {
         $user = User::where('token', $token)->first();
-        if ($user) {
-            $data = Item_pesanan::select('item_pesanans.pesanan_id', 'menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
-                ->join('menus', 'menus.id', '=', 'item_pesanans.menu_id')
-                ->where('item_pesanans.pesanan_id', $id)
-                ->get();
-            // $data = ItemPesanan::where('id_pesanan', $id);
-            return response()->json($data);
+        if($user){
+        $data = Item_pesanan::select('item_pesanans.pesanan_id','menus.nama', 'item_pesanans.jumlah', 'item_pesanans.subtotal_harga')
+        ->join('menus', 'menus.id', '=', 'item_pesanans.menu_id')
+        ->where('item_pesanans.pesanan_id', $id)
+            ->get();
+        // $data = ItemPesanan::where('id_pesanan', $id);
+        return response()->json($data);
         } else {
             return response()->json(['message' => "Token tidak falid / tidak ada"]);
         }
     }
 
-    public function pesan($token)
-    {
+    public function pesan($token){
         $user = User::where('token', $token)->first();
         if ($user) {
             if (Siswa::where(['user_id' => $user->id, 'status' => 'di_terima'])) {
                 $keranjangs = Keranjang::select('menus.image', 'users.name', 'menus.status', 'menus.harga', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
-                    ->join('users', 'users.id', '=', 'keranjangs.user_id')
-                    ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
-                    ->where('user_id', $user->id)
+                ->join('users', 'users.id', '=', 'keranjangs.user_id')
+                ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
+                ->where('user_id', $user->id)
                     ->get();
                 $dataArray = [];
                 $i = 0;
@@ -134,7 +133,7 @@ class PesananController extends Controller
                     }
                     return response()->json([$pesanan, $item_pesanan]);
                 } else {
-                    return response()->json(['message' => 'keranjang kosong']);
+                    return response()->json(['message'=> 'keranjang kosong']);
                 }
             }
             return response()->json('error', 'akun belum terverifikasi');

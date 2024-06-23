@@ -7,8 +7,9 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/js/**/*.vue', // Jika menggunakan Vue.js
+        './resources/js/**/*.js',  // Jika menggunakan JavaScript
     ],
-
     theme: {
         extend: {
             fontFamily: {
@@ -16,6 +17,5 @@ export default {
             },
         },
     },
-
     plugins: [forms],
 };

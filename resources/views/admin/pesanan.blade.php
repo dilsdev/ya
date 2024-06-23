@@ -16,7 +16,7 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody wire:poll.5s>
+                    <tbody wire:poll.1s>
                         @foreach ($pesanans as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td>

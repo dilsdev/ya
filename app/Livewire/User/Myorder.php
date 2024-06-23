@@ -40,7 +40,7 @@ class Myorder extends Component
         // return view->json($proseses);
     }
     public function selesai()
-    {
+   {
         $user = Auth::user();
         $id_user = $user->id;
         $this->selesais = Pesanan::select('users.name', 'pesanans.total_harga', 'pesanans.id', 'pesanans.status')

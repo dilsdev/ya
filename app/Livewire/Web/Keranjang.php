@@ -145,7 +145,7 @@ class Keranjang extends Component
                 'kembalian' => 0,
                 'total_harga' => 0,
                 'metode_pembayaran' => "cod",
-                'status' => "belum bayar",
+                'status' => "di pending",
                 'status_bayar' => "belum bayar",
             ]);
             foreach ($this->dataArray as $data) {
@@ -170,7 +170,7 @@ class Keranjang extends Component
                     $isi->delete();
                 }
             } 
-            return view('user.web.myorder');
+            return redirect()->route('web.keranjang');
         } else {
             Alert::error('Warning', 'Keranjang kosong');
             return redirect()->route('web.keranjang');
@@ -193,7 +193,7 @@ class Keranjang extends Component
             'kembalian' => 0,
             'total_harga' => 0,
             'metode_pembayaran' => "bayar online",
-            'status' => "di pending",
+            'status' => "belum bayar",
             'status_bayar' => "belum bayar",
         ]);
 
