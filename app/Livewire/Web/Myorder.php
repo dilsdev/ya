@@ -23,6 +23,7 @@ class Myorder extends Component
         $this->pendings = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id','pesanans.tanggal_pesan','pesanans.bayar', 'pesanans.kembalian', 'pesanans.status')
         ->join('users', 'users.id', '=', 'pesanans.user_id')
         ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'di pending'])
+        ->orderBy('pesanans.created_at', 'desc')
         ->get();
         // return $this->pendings;
 
@@ -35,6 +36,7 @@ class Myorder extends Component
         $this->proseses = Pesanan::select('users.name', 'pesanans.total_harga','pesanans.id','pesanans.tanggal_pesan','pesanans.bayar', 'pesanans.kembalian', 'pesanans.status')
         ->join('users', 'users.id', '=', 'pesanans.user_id')
         ->where(['pesanans.user_id' => $id_user, 'pesanans.status' => 'di proses'])
+        ->orderBy('pesanans.created_at', 'desc')
         ->get();
 
         // return view->json($proseses);
@@ -47,9 +49,8 @@ class Myorder extends Component
         ->join('users', 'users.id', '=', 'pesanans.user_id')
             ->where('pesanans.user_id', $id_user)
             ->whereIn('pesanans.status', ['selesai', 'di tolak', 'di cancel', 'kadaluwarsa'])
+            ->orderBy('pesanans.created_at', 'desc')
         ->get();
-
-
         // return view->json($selesais);
     }
 }

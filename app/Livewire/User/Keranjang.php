@@ -36,6 +36,7 @@ class Keranjang extends Component
             ->join('users', 'users.id', '=', 'keranjangs.user_id')
             ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
             ->where('user_id', $user->id)
+            ->orderBy('keranjangs.created_at', 'desc')
             ->get();
         $this->total();
         return view('user.mobile.keranjang');

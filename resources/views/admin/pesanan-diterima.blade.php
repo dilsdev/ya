@@ -25,8 +25,11 @@
                                     Rp.{{ number_format($item->total_harga, 0, ',', '.') }}
                                 </td>
                                 <td>
-                                        <button class="btn btn-warning" wire:click='selesai({{ $item->id }})'>selesai</button>
+                                    <a class="btn btn-warning" href=" {{ route('admin.detail', [$item->id, 'admin.pesanan']) }}">Detail</a>
                                 </td>
+                                {{-- <td>
+                                        <button class="btn btn-warning" wire:click='selesai({{ $item->id }})'>selesai</button>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

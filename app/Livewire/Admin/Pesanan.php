@@ -11,19 +11,10 @@ class Pesanan extends Component
     {
         $pesanans = ModelsPesanan::select('users.name', 'pesanans.total_harga', 'pesanans.id', 'pesanans.tanggal_pesan',  'pesanans.status', 'pesanans.status_bayar' , 'pesanans.metode_pembayaran')
             ->join('users', 'users.id', '=', 'pesanans.user_id')
-            ->where('status','di pending')->get();
+            ->where('status','di pending')
+            ->orderBy('pesanans.created_at', 'desc')
+            ->get();
         return view('admin.pesanan', ['pesanans' => $pesanans]);
     }
-     public function terima($id){
-        $pesanan = \App\Models\Pesanan::find($id);
-        $pesanan->status = 'di proses';
-        $pesanan->save();
-        
-         }
-     public function tolak($id){
-        $pesanan = \App\Models\Pesanan::find($id);
-        $pesanan->status = 'di tolak';
-        $pesanan->save();
-        // return redirect()->route('admin.pesanan');
-         }
+     
 }

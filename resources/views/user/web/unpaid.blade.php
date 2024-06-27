@@ -5,6 +5,7 @@
                 <table class="table table-vcenter card-table">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Total harga</th>
                             <th>Status</th>
@@ -12,8 +13,9 @@
                         </tr>
                     </thead>
                     <tbody >
-                        @foreach ($unpaids as $unpaid)
+                        @foreach ($unpaids as $key => $unpaid)
                             <tr>
+                                <td>{{ $key+1 }}</td>
                                 <td>{{ $unpaid->name }}</td>
                                 <td>
                                     Rp{{ number_format($unpaid->total_harga, 0, ',', '.') }}

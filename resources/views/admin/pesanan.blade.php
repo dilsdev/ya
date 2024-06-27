@@ -9,14 +9,14 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Tanggal</th>
-                            <th>Total harga</th>
-                            <th>Status bayar</th>
-                            <th>Metode pembayaran</th>
+                            <th>Totalw  </th>
+                            <th>Dibayar</th>
+                            <th>Metode</th>
                             <th>Detail</th>
-                            <th>Aksi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
-                    <tbody wire:poll.1s>
+                    <tbody wire:poll.3s>
                         @foreach ($pesanans as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
@@ -28,20 +28,26 @@
                                     Rp.{{ number_format($item->total_harga, 0, ',', '.') }}
                                 </td>
                                 <td>
-                                    {{ $item->status_bayar }}
+                                    @if ($item->status_bayar == "di bayar")
+                                        dibayar
+                                    @elseif ($item->status_bayar == "belum bayar")
+                                        belum
+                                    @else
+                                    error
+                                    @endif
                                 </td>
                                 <td>
                                     {{ $item->metode_pembayaran }}
                                 </td>
                                 <td>
-                                    <a href=" {{ route('admin.detail', [$item->id, 'admin.pesanan']) }}">Detail</a>
+                                    <a class="btn btn-warning" href=" {{ route('admin.detail', [$item->id, 'admin.pesanan']) }}">Detail</a>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <button class="btn btn-warning"
                                         wire:click='terima({{ $item->id }})'>terima</button>
                                     <button class="btn btn-danger"
                                         wire:click='tolak({{ $item->id }})'>tolak</button>
-                                </td>
+                                </td> --}}
 
                             </tr>
                         @endforeach
