@@ -207,21 +207,38 @@
                     </div>
                 </div>
                 <div class="m-2 col">
-                    <div class="card">
-                        @if ($metode_pembayaran == 'cod')
-                            <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan'
-                                class="btn btn-primary">Bayar langsung</button>
-                        @elseif ($metode_pembayaran == 'online')
-                            <button wire:click='pesanmidtrans'
-                                class="btn btn-primary">Bayar online</button>
-                        @else
-                            <button class="btn btn-primary disabled" disabled>Cekout</button>
-                        @endif
-                    </div>
+                    <input type="text" wire:model.live='pesan' class="form-control" placeholder="Pesan untuk admin (Opsional)">                
+            </div>
+            <div class="w-full">
+                <div class="card">
+                    @if (isset($this->dataArray[0]))                        
+                    @if ($metode_pembayaran == 'cod')
+                        {{-- <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan' wire:loading.attr="disabled"
+                            class="btn btn-primary">Bayar langsung</button> --}}
+                            <form style="width: 100%" action="{{ route('pesan') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
+                            </form>
+                    @elseif ($metode_pembayaran == 'online')
+                        {{-- <button wire:click='pesanmidtrans' wire:loading.attr="disabled"
+                            class="btn btn-primary">Bayar online</button> --}}
+                            <form style="width: 100%" action="{{ route('pesanmitrans') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
+                            </form>
+                    @else
+                        <button class="btn btn-primary disabled" disabled>Cekout</button>
+                    @endif
+                    @else
+                    <button class="btn btn-primary disabled" disabled>Keranjang kosong</button>
+
+                    @endif
+
                 </div>
             </div>
         </div>
     </div>
-    <div id="result-json"></div>
 
 </div>

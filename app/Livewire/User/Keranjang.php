@@ -21,6 +21,7 @@ class Keranjang extends Component
     public $metode_pembayaran = '';
     public $dataArray = [];
     public $message;
+    public $pesan = '';
     public function render()
     {
         $user = Auth::user();
@@ -56,8 +57,7 @@ class Keranjang extends Component
     public function hapuskeranjang($id)
     {
         ModelsKeranjang::destroy($id);
-        // $data->delete();
-
+        return redirect('user/keranjang');
     }
     public function kurangikeranjang($id)
     {
@@ -85,11 +85,6 @@ class Keranjang extends Component
         $data = ModelsKeranjang::find($id);
         $data->checkbox = 'false';
         $data->save();
-        // $this->checkbox = 'false';
-        //     if($this->rendercheckbox()){
-        //         dd('oke');
-        //     }
-        //     $this->rendercheckbox();
     }
 
     public function total()
@@ -107,128 +102,133 @@ class Keranjang extends Component
             $this->total = $oke;
         }
     }
-    public function pesan()
-    {
-        if (Siswa::where(['user_id' => Auth::user()->id, 'status' => 'di_terima'])->exists()) {
-            if (isset($this->dataArray[0])) {
-                $i = 0;
-                $total_harga = 0;
-                $pesanan = Pesanan::create([
-                    'user_id' => 0,
-                    'tanggal_pesan' => date('Y-m-d'),
-                    'jumlah_diskon' => 0,
-                    'bayar' => 0,
-                    'kembalian' => 0,
-                    'total_harga' => 0,
-                    'metode_pembayaran' => "cod",
-                    'status' => "di pending",
-                    'status_bayar' => "belum bayar",
-                ]);
-                foreach ($this->dataArray as $data) {
-                    $data_keranjang = ModelsKeranjang::find($data);
-                    $menu = Menu::find($data_keranjang->menu_id);
-                    // dd($menu);
-                    $subtotal = $menu->harga * $data_keranjang->jumlah;
-                    $item_pesanan = Item_pesanan::create([
-                        'pesanan_id' => $pesanan->id,
-                        'menu_id' => $data_keranjang->menu_id,
-                        'jumlah' => $data_keranjang->jumlah,
-                        'subtotal_harga' => $subtotal,
-                    ]);
-                    $total_harga = +$subtotal;
-                    $i++;
-                }
-                $pesanan->user_id = $data_keranjang->user_id;
-                $pesanan->total_harga = $total_harga;
-                $pesanan->save();
-                foreach ($this->keranjangs as $isi) {
-                    if ($isi->checkbox == 'true') {
-                        $isi->delete();
-                    }
-                }
-                return view('user.mobile.myorder');
-            } else {
-                Alert::error('Warning', 'Keranjang kosong');
-                return redirect()->route('web.keranjang');
-            }
-        }
-        return redirect()->route('web.keranjang');
-    }
-    public function pesanmidtrans()
-    {
-        if (empty($this->dataArray)) {
-            Alert::error('Warning', 'Keranjang kosong');
-            return redirect()->route('web.keranjang');
-        }
+    // public function pesan()
+    // {
+    //     if    (Siswa::where(['user_id' => Auth::user()->id, 'status' => 'di_terima'])->exists()) {
+    //         if (isset($this->dataArray[0])) {
+    //             $i = 0;
+    //             $total_harga = 0;
+    //             $pesanan = Pesanan::create([
+    //                 'user_id' => 0,
+    //                 'tanggal_pesan' => date('Y-m-d'),
+    //                 'jumlah_diskon' => 0,
+    //                 'bayar' => 0,
+    //                 'kembalian' => 0,
+    //                 'total_harga' => 0,
+    //                 'metode_pembayaran' => "cod",
+    //                 'status' => "di pending",
+    //                 'status_bayar' => "belum bayar",
+    //             ]);
+    //             foreach ($this->dataArray as $data) {
+    //                 $data_keranjang = ModelsKeranjang::find($data);
+    //                 $menu = Menu::find($data_keranjang->menu_id);
+    //                 // dd($menu);
+    //                 $subtotal = $menu->harga * $data_keranjang->jumlah;
+    //                 $item_pesanan = Item_pesanan::create([
+    //                     'pesanan_id' => $pesanan->id,
+    //                     'menu_id' => $data_keranjang->menu_id,
+    //                     'jumlah' => $data_keranjang->jumlah,
+    //                     'subtotal_harga' => $subtotal,
+    //                 ]);
+    //                 $total_harga = +$subtotal;
+    //                 $i++;
+    //             }
+    //             $pesanan->user_id = $data_keranjang->user_id;
+    //             $pesanan->total_harga = $total_harga;
+    //             $pesanan->save();
+    //             foreach ($this->keranjangs as $isi) {
+    //                 if ($isi->checkbox == 'true') {
+    //                     $isi->delete();
+    //                 }
+    //             }
+    //             return view('user.mobile.myorder');
+    //         } else {
+    //             Alert::error('Warning', 'Keranjang kosong');
+    //             return redirect()->route('web.keranjang');
+    //         }
+    //     }
+    //     return redirect()->route('web.keranjang');
+    // }
+    // public function pesanmidtrans()
+    // {
+    //     if (empty($this->dataArray)) {
+    //         Alert::error('Warning', 'Keranjang kosong');
+    //         return redirect()->route('web.keranjang');
+    //     }
 
-        $pesanan = Pesanan::create([
-            'user_id' => 0,
-            'tanggal_pesan' => date('Y-m-d'),
-            'jumlah_diskon' => 0,
-            'bayar' => 0,
-            'kembalian' => 0,
-            'total_harga' => 0,
-            'metode_pembayaran' => "bayar online",
-            'status' => "belum bayar",
-            'status_bayar' => "belum bayar",
-        ]);
+    //     $pesanan = Pesanan::create([
+    //         'user_id' => 0,
+    //         'tanggal_pesan' => date('Y-m-d'),
+    //         'jumlah_diskon' => 0,
+    //         'bayar' => 0,
+    //         'kembalian' => 0,
+    //         'total_harga' => 0,
+    //         'metode_pembayaran' => "bayar online",
+    //         'status' => "belum bayar",
+    //         'status_bayar' => "belum bayar",
+    //     ]);
 
-        $total_harga = 0;
-        $item_details = [];
+    //     $total_harga = 0;
+    //     $item_details = [];
 
-        foreach ($this->dataArray as $data) {
-            $data_keranjang = ModelsKeranjang::find($data);
-            $menu = Menu::find($data_keranjang->menu_id);
-            $subtotal = $menu->harga * $data_keranjang->jumlah;
+    //     foreach ($this->dataArray as $data) {
+    //         $data_keranjang = ModelsKeranjang::find($data);
+    //         $menu = Menu::find($data_keranjang->menu_id);
+    //         $subtotal = $menu->harga * $data_keranjang->jumlah;
 
-            $item_details[] = [
-                'id' => $pesanan->id,
-                'price' => $menu->harga,
-                'quantity' => $data_keranjang->jumlah,
-                'name' => $menu->nama
-            ];
+    //         $item_details[] = [
+    //             'id' => $pesanan->id,
+    //             'price' => $menu->harga,
+    //             'quantity' => $data_keranjang->jumlah,
+    //             'name' => $menu->nama
+    //         ];
 
-            Item_pesanan::create([
-                'pesanan_id' => $pesanan->id,
-                'menu_id' => $data_keranjang->menu_id,
-                'jumlah' => $data_keranjang->jumlah,
-                'subtotal_harga' => $subtotal,
-            ]);
+    //         Item_pesanan::create([
+    //             'pesanan_id' => $pesanan->id,
+    //             'menu_id' => $data_keranjang->menu_id,
+    //             'jumlah' => $data_keranjang->jumlah,
+    //             'subtotal_harga' => $subtotal,
+    //         ]);
 
-            $total_harga += $subtotal;
-        }
+    //         $total_harga += $subtotal;
+    //     }
 
-        $pesanan->user_id = Auth::user()->id;
-        $pesanan->total_harga = $total_harga;
-        $pesanan->save();
+    //     $pesanan->user_id = Auth::user()->id;
+    //     $pesanan->total_harga = $total_harga;
+    //     $pesanan->save();
 
-        foreach ($this->keranjangs as $isi) {
-            if ($isi->checkbox == 'true') {
-                $isi->delete();
-            }
-        }
+    //     // foreach ($this->keranjangs as $isi) {
+    //     //     if ($isi->checkbox == 'true') {
+    //     //         $isi->delete();
+    //     //     }
+    //     // }
 
-        // Set Midtrans configurations
-        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        \Midtrans\Config::$isProduction = false;
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
+    //     // Set Midtrans configurations
+    //     \Midtrans\Config::$serverKey = env('SB-Mid-server-dYkQ5fMBfhMDOcZWv44JlgKT');
+    //     \Midtrans\Config::$isProduction = false;
+    //     \Midtrans\Config::$isSanitized = true;
+    //     \Midtrans\Config::$is3ds = true;
 
-        $params = [
-            'transaction_details' => [
-                'order_id' => $pesanan->id,
-                'gross_amount' => $total_harga,
-            ],
-            'item_details' => $item_details,
-        ];
+    //     $params = [
+    //         'transaction_details' => [
+    //             'order_id' => $pesanan->id,
+    //             'gross_amount' => $total_harga,
+    //         ],
+    //         'item_details' => $item_details,
+    //     ];
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $pesanan->token = $snapToken;
-        $this->token = $snapToken;
-        $pesanan->save();
+    //     $snapToken = \Midtrans\Snap::getSnapToken($params);
+    //     $pesanan->token = $snapToken;
+    //     $this->token = $snapToken;
+    //     $pesanan->save();
 
-        $this->total();
-        return redirect("checkout/$pesanan->id/$snapToken");
-    }
+    //     $this->total();
+    //     foreach ($this->keranjangs as $isi) {
+    //         if ($isi->checkbox == 'true') {
+    //             $isi->delete();
+    //         }
+    //     }
+    //     return redirect("checkout/$pesanan->id/$snapToken");
+    // }
 
 }

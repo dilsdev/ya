@@ -128,7 +128,7 @@
                             </div>
                         </div>
                         <div class="col-1">
-                            <svg wire:click='hapuskeranjang({{ $keranjang->id }})' xmlns="http://www.w3.org/2000/svg"
+                            <svg  wire:click='hapuskeranjang({{ $keranjang->id }})' xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
@@ -168,17 +168,33 @@
                             <option value="online">Bayar online</option>
                         </select>
             </div>
+            <div class="m-2"
+            >
+            <textarea class="form-control" wire:model.live='pesan' name="example-textarea-input" rows="6" placeholder="Pesan untuk admin"></textarea>            </div>
             <div class="m-2">
+                
                 <div class="card">
+                    @if (isset($this->dataArray[0]))   
                    @if ($metode_pembayaran == 'cod')
-                            <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan'
-                                class="btn btn-primary">Bayar langsung</button>
+                   <form style="width: 100%" action="{{ route('pesan') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="pesan" value="{{ $pesan }}">
+                    <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
+                </form>
                         @elseif ($metode_pembayaran == 'online')
-                            <button wire:click='pesanmidtrans'
-                                class="btn btn-primary">Bayar online</button>
+                            {{-- <button wire:click='pesanmidtrans' wire:loading.attr="disabled"
+                                class="btn btn-primary">Bayar online</button> --}}
+                                <form action="{{ route('pesanmitrans') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                    <button type="submit" class="btn btn-primary">Bayar online</button>
+                                </form>
                         @else
                             <button class="btn btn-primary disabled" disabled>Cekout</button>
                         @endif
+                        @else                        
+                        <button class="btn btn-primary disabled" disabled>Keranjang kosong</button>
+                    @endif
                 </div>
             </div>
         </div>

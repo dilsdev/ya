@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('bayar');
             $table->integer('kembalian');
             $table->string('status');
+            $table->text('message')->nullable();
             $table->string('status_bayar');
             $table->timestamps();
         });

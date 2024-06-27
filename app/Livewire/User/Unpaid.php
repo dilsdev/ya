@@ -17,7 +17,7 @@ class Unpaid extends Component
             ->where(['pesanans.user_id' => $id_user,
              'pesanans.status_bayar' => 'belum bayar',
              'pesanans.metode_pembayaran' => 'bayar online',
-             'pesanans.status' => 'di pending',
+             'pesanans.status' => 'belum bayar',
              'pesanans.bayar' => 0])
             ->get();
         return view('user.mobile.unpaid', ['unpaids' => $unpaids]);

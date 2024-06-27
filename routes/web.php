@@ -49,6 +49,8 @@ Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/unpaid', App\Livewire\User\Unpaid::class)->name('user.unpaid');
 });
 Route::get('checkout/{id}/{token}', [Checkout::class, 'index'])->name('checkout');
+Route::post('pesanmitrans', [Checkout::class, 'pesanmitrans'])->name('pesanmitrans');
+Route::post('pesan', [Checkout::class, 'pesan'])->name('pesan');
 Route::get('success', function () {
     return view('user.success');
 });
