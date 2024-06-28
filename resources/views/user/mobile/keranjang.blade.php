@@ -179,7 +179,7 @@
                    <form style="width: 100%" action="{{ route('pesan') }}" method="post">
                     @csrf
                     <input type="hidden" name="pesan" value="{{ $pesan }}">
-                    <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
+                    <button type="submit mr-auto" class="btn btn-primary w-full">Bayar cod</button>
                 </form>
                         @elseif ($metode_pembayaran == 'online')
                             {{-- <button wire:click='pesanmidtrans' wire:loading.attr="disabled"

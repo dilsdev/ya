@@ -218,16 +218,36 @@
                             <form style="width: 100%" action="{{ route('pesan') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="pesan" value="{{ $pesan }}">
-                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
+                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar cod</button>
                             </form>
                     @elseif ($metode_pembayaran == 'online')
-                        {{-- <button wire:click='pesanmidtrans' wire:loading.attr="disabled"
-                            class="btn btn-primary">Bayar online</button> --}}
+
+                        @if($message != 'di_terima')
+                        <label class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" wire:model.live='siswa' checked="true">
+                            <span class="form-check-label">Apakah anda siswa SMKN 6 Jember?</span>
+                          </label>
+                            @if ($siswa == 1)
                             <form style="width: 100%" action="{{ route('pesanmitrans') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online (sebagai siswa)</button>
+                            </form>
+                            @else
+                            <form style="width: 100%" action="{{ route('detailpelanggan') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="pesan" value="{{ $pesan }}">
                                 <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
                             </form>
+                            @endif
+                        @else
+                        <form style="width: 100%" action="{{ route('pesanmitrans') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="pesan" value="{{ $pesan }}">
+                            <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
+                        </form>
+                        @endif
+                            
                     @else
                         <button class="btn btn-primary disabled" disabled>Cekout</button>
                     @endif
@@ -235,10 +255,8 @@
                     <button class="btn btn-primary disabled" disabled>Keranjang kosong</button>
 
                     @endif
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>

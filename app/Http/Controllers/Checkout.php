@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item_pesanan;
 use App\Models\Keranjang;
 use App\Models\Menu;
+use App\Models\Pengiriman;
 use App\Models\Pesanan;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -26,6 +27,114 @@ class Checkout extends Controller
             return back();
         }
     }
+
+    public function detailpelanggan(Request $request){
+        $pesan = $request->pesan ?? "";
+        $user = Auth::user();
+        $data = Keranjang::select('menus.image', 'users.name','keranjangs.menu_id', 'menus.harga', 'menus.deskripsi', 'menus.status', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
+            ->join('users', 'users.id', '=', 'keranjangs.user_id')
+            ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
+            ->where(['user_id'=>$user->id, 'checkbox'=>'true'])
+            ->get();
+            return view('user.detail-pelanggan', ['data' => $data, 'id' => $user->id, 'pesan' => $pesan]);
+        }
+        public function checkoutpelanggan(Request $request)
+        {
+            $request->validate([
+                'pesan' => 'required|string',
+                'phone_number' => 'required|string',
+                'alamat' => 'required|string',
+                'latitude' => 'required|string',
+                'longitude' => 'required|string',
+            ]);
+            // dd(
+            //     $request->pesan,
+            //     $request->phone_number,
+            //     $request->alamat,
+            //     $request->latitude,
+            //     $request->longitude,
+            // );
+    
+            $user = Auth::user();
+            $keranjangs = Keranjang::select('menus.image', 'users.name','keranjangs.menu_id', 'menus.harga', 'menus.deskripsi', 'menus.status', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
+            ->join('users', 'users.id', '=', 'keranjangs.user_id')
+            ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
+            ->where(['user_id'=>$user->id, 'checkbox'=>'true'])
+            ->get();
+    
+            $pesanan = Pesanan::create([
+                'user_id' => $user->id,
+                'tanggal_pesan' => date('Y-m-d'),
+                'jumlah_diskon' => 0,
+                'bayar' => 0,
+                'kembalian' => 0,
+                'total_harga' => 0,
+                'metode_pembayaran' => "bayar online",
+                'status' => "belum bayar",
+                'status_bayar' => "belum bayar",
+                'message' => $request->pesan
+            ]);
+    
+            $total_harga = 0;
+            $item_details = [];
+            foreach ($keranjangs as $data) {
+                $data_keranjang = Keranjang::find($data->id);
+                $menu = Menu::find($data_keranjang->menu_id);
+                $subtotal = $menu->harga * $data_keranjang->jumlah;
+    
+                $item_details[] = [
+                    'id' => $pesanan->id,
+                    'price' => $menu->harga,
+                    'quantity' => $data_keranjang->jumlah,
+                    'name' => $menu->nama
+                ];
+    
+                Item_pesanan::create([
+                    'pesanan_id' => $pesanan->id,
+                    'menu_id' => $data_keranjang->menu_id,
+                    'jumlah' => $data_keranjang->jumlah,
+                    'subtotal_harga' => $subtotal,
+                ]);
+    
+                $total_harga += $subtotal;
+            }
+    
+            $pesanan->user_id = Auth::user()->id;
+            $pesanan->total_harga = $total_harga;
+            $pesanan->save();
+            
+            
+            \Midtrans\Config::$serverKey = 'SB-Mid-server-dYkQ5fMBfhMDOcZWv44JlgKT';
+            \Midtrans\Config::$isProduction = false;
+            \Midtrans\Config::$isSanitized = true;
+            \Midtrans\Config::$is3ds = true;
+            
+            $params = [
+                'transaction_details' => [
+                    'order_id' => $pesanan->id,
+                    'gross_amount' => $pesanan->total_harga,
+                ],
+                'item_details' => $item_details,
+            ];
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $pesanan->update(['token' => $snapToken]);
+            
+            foreach ($keranjangs as $isi) {
+                if ($isi->checkbox == 'true') {
+                    $isi->delete();
+                }
+            }
+    
+            Pengiriman::create([
+                'id_user' => $pesanan->user_id,
+                'token' => $snapToken,
+                'phone_number' => $request->phone_number,
+                'alamat' => $request->alamat,
+                'status' => "belum dikirim",
+                'maps' => "https://www.google.com/maps?q={$request->latitude},{$request->longitude}",
+            ]);
+            return redirect("checkout/{$pesanan->id}/{$snapToken}");
+        }
 
     public function oke(Request $request)
     {

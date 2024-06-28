@@ -14,15 +14,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 class Keranjang extends Component
 {
     public int $total = 0;
-    // public $checkbox = 'false';
-    // public $htmlcheckbox = '';
     public $keranjangs;
     public $token;
     public $metode_pembayaran = '';
     public $dataArray = [];
     public $message;
+    public $siswa;
 
-    public $pesan='';
+    public $pesan='-';
     public function render()
     {
         $user = Auth::user();
@@ -100,6 +99,7 @@ class Keranjang extends Component
             $this->total = $oke;
         }
     }
+
     // public function pesan()
     // {
     //     if (Siswa::where(['user_id' => Auth::user()->id, 'status' => 'di_terima'])->exists()) {
