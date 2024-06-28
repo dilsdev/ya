@@ -13,16 +13,16 @@
     </div>
     <div class="mb-2 row">
         <div class="m-2 col-2">
-            <a wire:navigate href="{{ route('user.menu', 'all') }}" class="col-auto"><span class="shadow-none avatar"
+            <a wire:navigate href="{{ route('web.menu', 'all') }}" class="col-auto"><span class="shadow-none avatar"
                     style="background-image: url({{ asset('./asset/food.png') }})"></span></a>
         </div>
         <div class="m-2 col-2">
-            <a wire:navigate href="{{ route('user.menu', 'makanan') }}" class="col-auto"><span
+            <a wire:navigate href="{{ route('web.menu', 'makanan') }}" class="col-auto"><span
                     class="shadow-none avatar"
                     style="background-image: url({{ asset('./asset/makanan.png') }})"></span></a>
         </div>
         <div class="m-2 col-2">
-            <a wire:navigate href="{{ route('user.menu', 'minuman') }}" class="col-auto"><span
+            <a wire:navigate href="{{ route('web.menu', 'minuman') }}" class="col-auto"><span
                     class="shadow-none avatar"
                     style="background-image: url({{ asset('./asset/minuman.png') }})"></span></a>
         </div>
