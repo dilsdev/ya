@@ -5,9 +5,10 @@
 
 
     <div class="container-xl">
-        @if($message != 'di_terima')
-        <div class="alert alert-success" role="alert">Akun anda belum verifikasi, kami tidak bisa menerima pesanan cod. untuk menghindari order palsu, terimakasih...</div>
-      @endif
+        @if ($message != 'di_terima')
+            <div class="alert alert-success" role="alert">Akun anda belum verifikasi, kami tidak bisa menerima pesanan
+                cod. untuk menghindari order palsu, terimakasih...</div>
+        @endif
         <h4>
             Keranjang
         </h4>
@@ -199,64 +200,67 @@
                         <select class="form-select form-select-xl" name="ok" id="ok"
                             wire:model.live="metode_pembayaran">
                             <option selected>Pilih metode pembayaran</option>
-                            <option value="cod" @if ($message != 'di_terima')
-                                disabled
-                            @endif>Bayar langsung</option>
+                            <option value="cod" @if ($message != 'di_terima') disabled @endif>Bayar langsung
+                            </option>
                             <option value="online">Bayar online</option>
                         </select>
                     </div>
                 </div>
                 <div class="m-2 col">
-                    <input type="text" wire:model.live='pesan' class="form-control" placeholder="Pesan untuk admin (Opsional)">                
-            </div>
-            <div class="w-full">
-                <div class="card">
-                    @if (isset($this->dataArray[0]))                        
-                    @if ($metode_pembayaran == 'cod')
-                        {{-- <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan' wire:loading.attr="disabled"
+                    <input type="text" wire:model.live='pesan' class="form-control"
+                        placeholder="Pesan untuk admin (Opsional)">
+                </div>
+                <div class="w-full">
+                    <div class="card">
+                        @if (isset($this->dataArray[0]))
+                            @if ($metode_pembayaran == 'cod')
+                                {{-- <button wire:confirm="Anda yakin ingin membeli makanan / minuman ini?" wire:click='pesan' wire:loading.attr="disabled"
                             class="btn btn-primary">Bayar langsung</button> --}}
-                            <form style="width: 100%" action="{{ route('pesan') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="pesan" value="{{ $pesan }}">
-                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar cod</button>
-                            </form>
-                    @elseif ($metode_pembayaran == 'online')
-
-                        @if($message != 'di_terima')
-                        <label class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" wire:model.live='siswa' checked="true">
-                            <span class="form-check-label">Apakah anda siswa SMKN 6 Jember?</span>
-                          </label>
-                            @if ($siswa == 1)
-                            <form style="width: 100%" action="{{ route('pesanmitrans') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="pesan" value="{{ $pesan }}">
-                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online (sebagai siswa)</button>
-                            </form>
+                                <form style="width: 100%" action="{{ route('pesan') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                    <button type="submit mr-auto" class="btn btn-primary w-full">Bayar cod</button>
+                                </form>
+                            @elseif ($metode_pembayaran == 'online')
+                                @if ($message != 'di_terima')
+                                    <label class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" wire:model.live='siswa'
+                                            checked="true">
+                                        <span class="form-check-label">Apakah anda siswa SMKN 6 Jember?</span>
+                                    </label>
+                                    @if ($siswa == 1)
+                                        <form style="width: 100%" action="{{ route('pesanmitrans') }}"
+                                            method="post">
+                                            @csrf
+                                            <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                            <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online
+                                                (sebagai siswa)</button>
+                                        </form>
+                                    @else
+                                        <form style="width: 100%" action="{{ route('detailpelanggan') }}"
+                                            method="get">
+                                            @csrf
+                                            <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                            <button type="submit mr-auto" class="btn btn-primary w-full">Bayar
+                                                online</button>
+                                        </form>
+                                    @endif
+                                @else
+                                    <form style="width: 100%" action="{{ route('pesanmitrans') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="pesan" value="{{ $pesan }}">
+                                        <button type="submit mr-auto" class="btn btn-primary w-full">Bayar
+                                            online</button>
+                                    </form>
+                                @endif
                             @else
-                            <form style="width: 100%" action="{{ route('detailpelanggan') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="pesan" value="{{ $pesan }}">
-                                <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
-                            </form>
+                                <button class="btn btn-primary disabled" disabled>Cekout</button>
                             @endif
                         @else
-                        <form style="width: 100%" action="{{ route('pesanmitrans') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="pesan" value="{{ $pesan }}">
-                            <button type="submit mr-auto" class="btn btn-primary w-full">Bayar online</button>
-                        </form>
+                            <button class="btn btn-primary disabled" disabled>Keranjang kosong</button>
                         @endif
-                            
-                    @else
-                        <button class="btn btn-primary disabled" disabled>Cekout</button>
-                    @endif
-                    @else
-                    <button class="btn btn-primary disabled" disabled>Keranjang kosong</button>
-
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

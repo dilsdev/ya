@@ -36,7 +36,11 @@ class Checkout extends Controller
             ->join('menus', 'menus.id', '=', 'keranjangs.menu_id')
             ->where(['user_id'=>$user->id, 'checkbox'=>'true'])
             ->get();
+        if($data->isNotEmpty()){
             return view('user.detail-pelanggan', ['data' => $data, 'id' => $user->id, 'pesan' => $pesan]);
+        }else{
+            return redirect()->back();
+        }
         }
         public function checkoutpelanggan(Request $request)
         {

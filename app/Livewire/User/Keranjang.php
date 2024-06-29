@@ -21,6 +21,7 @@ class Keranjang extends Component
     public $metode_pembayaran = '';
     public $dataArray = [];
     public $message;
+    public $siswa;
     public $pesan = '';
     public function render()
     {
