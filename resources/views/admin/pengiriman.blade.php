@@ -56,4 +56,6 @@
             </div>
         </div>
     </div>
+    {{ $sudahdikirim }}
+    {{ $belumdikirim }}
 </div>

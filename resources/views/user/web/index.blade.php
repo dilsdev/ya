@@ -37,7 +37,7 @@
                     @endphp
                     @foreach ($rekomendasi1 as $r1)
                         <div class="carousel-item @if ($i == 0) active @endif">
-                            <img src="{{ asset('/storage/rekomendasi/' . $r1->image) }}" class="d-block w-100"
+                            <img loading="lazy" src="{{ asset('/storage/rekomendasi/' . $r1->image) }}" class="d-block w-100"
                                 style="height: 170px; object-fit:cover;" alt="...">
                         </div>
                         @php
@@ -66,7 +66,7 @@
                     @endphp
                     @foreach ($rekomendasi2 as $r2)
                         <div class="carousel-item @if ($j == 0) active @endif">
-                            <img src="{{ asset('/storage/rekomendasi/' . $r2->image) }}" class="d-block w-100"
+                            <img loading="lazy" src="{{ asset('/storage/rekomendasi/' . $r2->image) }}" class="d-block w-100"
                                 style="height: 170px; object-fit:cover;" alt="...">
                         </div>
                         @php
@@ -102,7 +102,7 @@
             <div class="card m-2" style="min-width: 180px;">
                 <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
-                    <img class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
+                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
                         style="width: 140px; height: 190px; object-fit: cover;">
                     <h4 class="card-text">{{ $makanan->nama }}</h4>
                     <p class="card-text">Rp. {{ $makanan->harga }}</p>
@@ -133,7 +133,7 @@
             <div class="card m-2" style="min-width: 180px;">
                 <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
-                    <img class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}" alt=""
+                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}" alt=""
                         style="width: 140px; height: 190px; object-fit: cover;">
                     <h4 class="card-text">{{ $minuman->nama }}</h4>
                     <p class="card-text">Rp. {{ $minuman->harga }}</p>

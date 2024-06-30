@@ -45,7 +45,7 @@
             <div class="m-2 card" style="min-width: 180px;">
                 <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
-                    <img class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
+                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
                         style="width: 140px; height: 190px; object-fit: cover;">
                     <h4 class="card-text">{{ $makanan->nama }}</h4>
                     <p class="card-text">Rp. {{ $makanan->harga }}</p>
@@ -75,7 +75,7 @@
             <div class="m-2 card" style="min-width: 180px;">
                 <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
-                    <img class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}" alt=""
+                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}" alt=""
                         style="width: 140px; height: 190px; object-fit: cover;">
                     <h4 class="card-text">{{ $minuman->nama }}</h4>
                     <p class="card-text">Rp. {{ $minuman->harga }}</p>

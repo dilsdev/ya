@@ -9,7 +9,7 @@
     <meta name="description" content="Aplikasi pembelian makanan atau minuman online dari Cafe SMKN 6 JEMBER">
     <title>Cafe SMKN 6 JEMBER.</title>
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
-    <script rel="preload" src="https://cafe6.dils.my.id/livewire/livewire.js?id=770f7738"></script>
+    {{-- <script rel="preload" src="https://cafe6.dils.my.id/livewire/livewire.js?id=770f7738"></script> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css"> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css"> --}}
@@ -40,7 +40,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h1 class=" navbar-brand navbar-brand-autodark">
-                    <img src="{{ asset('asset/logo.png') }}" width="50" alt="Tabler" class="">
+                    <img loading="lazy" src="{{ asset('asset/logo.png') }}" width="50" alt="Tabler" class="">
                 </h1>
                 <div class="collapse navbar-collapse" id="sidebar-menu">
                     <ul class="navbar-nav pt-lg-3">
@@ -204,7 +204,7 @@
                         <span class="navbar-toggler-icon" style="color: white"></span>
                     </button>
                     <h1 class=" navbar-brand navbar-brand-autodark">
-                        <img src="{{ asset('asset/logo.png') }}" width="40" alt="Tabler" class="">
+                        <img loading="lazy" src="{{ asset('asset/logo.png') }}" width="40" alt="Tabler" class="">
                     </h1>
                     <div class="flex-row navbar-nav d-lg-none">
                         <div class="nav-item dropdown">
@@ -322,7 +322,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <h1 class=" navbar-brand navbar-brand-autodark">
-                        <img src="{{ asset('asset/logo.png') }}" width="50" alt="Tabler" class="">
+                        <img loading="lazy" src="{{ asset('asset/logo.png') }}" width="50" alt="Tabler" class="">
                     </h1>
 
                     <div class="collapse navbar-collapse" id="sidebar-menu">

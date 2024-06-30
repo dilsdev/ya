@@ -36,6 +36,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/pembayaran', App\Livewire\Admin\Pembayaran::class)->name('admin.pembayaran');
     Route::get('admin/siswa', App\Livewire\Admin\Siswas::class)->name('admin.siswa');
     Route::get('admin/detail/{id}/{url}', App\Livewire\Admin\Detail::class)->name('admin.detail');
+    Route::get('admin/pengiriman', App\Livewire\Admin\Pengiriman::class)->name('admin.pengiriman');
 });
 Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/index', App\Livewire\User\Index::class)->name('user.index');
