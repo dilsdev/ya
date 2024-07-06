@@ -17,13 +17,11 @@
                     style="background-image: url({{ asset('./asset/food.png') }})"></span></a>
         </div>
         <div class="m-2 col-2">
-            <a wire:navigate href="{{ route('web.menu', 'makanan') }}" class="col-auto"><span
-                    class="shadow-none avatar"
+            <a wire:navigate href="{{ route('web.menu', 'makanan') }}" class="col-auto"><span class="shadow-none avatar"
                     style="background-image: url({{ asset('./asset/makanan.png') }})"></span></a>
         </div>
         <div class="m-2 col-2">
-            <a wire:navigate href="{{ route('web.menu', 'minuman') }}" class="col-auto"><span
-                    class="shadow-none avatar"
+            <a wire:navigate href="{{ route('web.menu', 'minuman') }}" class="col-auto"><span class="shadow-none avatar"
                     style="background-image: url({{ asset('./asset/minuman.png') }})"></span></a>
         </div>
 
@@ -37,8 +35,8 @@
                     @endphp
                     @foreach ($rekomendasi1 as $r1)
                         <div class="carousel-item @if ($i == 0) active @endif">
-                            <img loading="lazy" src="{{ asset('/storage/rekomendasi/' . $r1->image) }}" class="d-block w-100"
-                                style="height: 170px; object-fit:cover;" alt="...">
+                            <img loading="lazy" src="{{ asset('/storage/rekomendasi/' . $r1->image) }}"
+                                class="d-block w-100" style="height: 170px; object-fit:cover;" alt="...">
                         </div>
                         @php
                             $i++;
@@ -66,8 +64,8 @@
                     @endphp
                     @foreach ($rekomendasi2 as $r2)
                         <div class="carousel-item @if ($j == 0) active @endif">
-                            <img loading="lazy" src="{{ asset('/storage/rekomendasi/' . $r2->image) }}" class="d-block w-100"
-                                style="height: 170px; object-fit:cover;" alt="...">
+                            <img loading="lazy" src="{{ asset('/storage/rekomendasi/' . $r2->image) }}"
+                                class="d-block w-100" style="height: 170px; object-fit:cover;" alt="...">
                         </div>
                         @php
                             $j++;
@@ -102,8 +100,8 @@
             <div class="card m-2" style="min-width: 180px;">
                 <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
-                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}" alt=""
-                        style="width: 140px; height: 190px; object-fit: cover;">
+                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $makanan->image) }}"
+                        alt="" style="width: 140px; height: 190px; object-fit: cover;">
                     <h4 class="card-text">{{ $makanan->nama }}</h4>
                     <p class="card-text">Rp. {{ $makanan->harga }}</p>
                 </div>
@@ -133,8 +131,8 @@
             <div class="card m-2" style="min-width: 180px;">
                 <!-- Tambahkan kelas 'mr-2' untuk memberi jarak antar kartu -->
                 <div class="card-body">
-                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}" alt=""
-                        style="width: 140px; height: 190px; object-fit: cover;">
+                    <img loading="lazy" class="mb-2" src="{{ asset('/storage/menu/' . $minuman->image) }}"
+                        alt="" style="width: 140px; height: 190px; object-fit: cover;">
                     <h4 class="card-text">{{ $minuman->nama }}</h4>
                     <p class="card-text">Rp. {{ $minuman->harga }}</p>
                 </div>

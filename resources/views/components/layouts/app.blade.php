@@ -47,7 +47,7 @@
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.index') }}">
                                 <span
-                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                    class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                         width="24px" fill="#e8eaed">
                                         <path
@@ -102,7 +102,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.pesananselesai') }}">
                                 <span
-                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                    class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                         width="24px" fill="#e8eaed">
                                         <path
@@ -145,7 +145,7 @@
                         <li class="nav-item">
                             <div class="nav-link">
                                 <span
-                                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                    class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                         width="24px" fill="#EFEFEF">
                                         <path
@@ -238,7 +238,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.index') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -253,7 +253,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.menuall') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -281,7 +281,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.myorder') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -296,7 +296,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.unpaid') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -330,7 +330,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.index') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -344,7 +344,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.menuall') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -359,7 +359,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.keranjang') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -374,7 +374,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.myorder') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -389,7 +389,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.unpaid') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -404,7 +404,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.profile') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -419,7 +419,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('web.siswa') }}">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path
@@ -434,7 +434,7 @@
                             <li class="nav-item">
                                 <div class="nav-link">
                                     <span
-                                        class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                                             viewBox="0 -960 960 960" width="24px" fill="#999999">
                                             <path

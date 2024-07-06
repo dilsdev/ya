@@ -8,10 +8,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Tanggal</th>
                             <th>Total</th>
-                            <th>Dibayar</th>
-                            <th>Metode</th>
+                            <th>Dibayar / Metode</th>
                             <th>Detail</th>
                             {{-- <th>Aksi</th> --}}
                         </tr>
@@ -23,21 +21,17 @@
                                 <td class="text-secondary">
                                     {{ $item->name }}
                                 </td>
-                                <td class="text-secondary">{{ $item->tanggal_pesan }}</td>
                                 <td class="text-secondary">
                                     Rp.{{ number_format($item->total_harga, 0, ',', '.') }}
                                 </td>
-                                <td>
+                                <td     >
                                     @if ($item->status_bayar == "di bayar")
-                                        dibayar
+                                        dibayar / {{ $item->metode_pembayaran }}
                                     @elseif ($item->status_bayar == "belum bayar")
-                                        belum
+                                        belum / {{ $item->metode_pembayaran }}
                                     @else
-                                    error
+                                    error / {{ $item->metode_pembayaran }}
                                     @endif
-                                </td>
-                                <td>
-                                    {{ $item->metode_pembayaran }}
                                 </td>
                                 <td>
                                     <a class="btn btn-warning" href=" {{ route('admin.detail', [$item->id, 'admin.pesanan']) }}">Detail</a>

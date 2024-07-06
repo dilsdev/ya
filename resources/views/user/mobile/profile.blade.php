@@ -8,15 +8,6 @@
               <div class="card-body" wire:init='user'>
                 <h2 class="mb-4">Profil</h2>
                 <form class="row align-items-center">
-                  <div class="col-auto"><span class="avatar avatar-xl" style="background-image: url(./static/avatars/000m.jpg)"></span>
-                  </div>
-                  <div class="col-auto"><a href="#" class="btn">
-                      Change avatar
-                    </a></div>
-                  <div class="col-auto"><a href="#" class="btn btn-ghost-danger">
-                      Delete avatar
-                    </a></div>
-                <h3 class="card-title mt-4">Data pribadi</h3>
                 <div class="row g-3">
                   <div class="col-md">
                     <div class="form-label">Nama</div>

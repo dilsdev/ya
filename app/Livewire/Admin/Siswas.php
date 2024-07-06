@@ -9,12 +9,8 @@ class Siswas extends Component
 {
     public function render()
     {
-        $siswas = Siswa::where(['status' => 'belum_diterima'])->get();
+        $siswas = Siswa::select('id','nama_lengkap','nisn')->where(['status' => 'belum_diterima'])->get();
         return view('admin.siswas', ['siswas'=>$siswas]);
     }
-    public function terima($id){
-        $data = Siswa::find($id);
-        $data->status = 'di_terima';
-        $data->save();  
-    }
+   
 }

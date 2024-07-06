@@ -27,40 +27,12 @@ class Rekomendasi extends Component
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $this->image->getRealPath();
-        $imageName = $this->image->hashName();
-
-        $img = imagecreatefromstring(file_get_contents($imagePath));
-        if ($img === false) {
-            session()->flash('message', 'Gagal memproses gambar.');
-            return;
-        }
-
-        $width = imagesx($img);
-        $height = imagesy($img);
-
-        $newWidth = 816;
-        $newHeight = 274;
-
-        if ($width > $height) {
-            $newHeight = intval($height * $newWidth / $width);
-        } else {
-            $newWidth = intval($width * $newHeight / $height);
-        }
-
-        $newImg = imagecreatetruecolor($newWidth, $newHeight);
-        imagecopyresampled($newImg, $img, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-        $savePath = storage_path('app/public/rekomendasi/' . $imageName);
-        imagejpeg($newImg, $savePath, 60);
-
-        imagedestroy($img);
-        imagedestroy($newImg);
+        $this->image->storeAs('public/rekomendasi', $this->image->hashName());
 
         ModelsRekomendasi::create([
             'nama_promosi' => $this->nama_promosi,
-            'image' => $imageName,
-            'url' => 'http://cafe6.dils.my.id/storage/rekomendasi/' . $imageName,
+            'image' => $this->image->hashName(),
+            'url' => 'http://cafe6.dils.my.id/storage/rekomendasi/' . $this->image->hashName(),
         ]);
 
         return redirect()->route('admin.rekomendasi');

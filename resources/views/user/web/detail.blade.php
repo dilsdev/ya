@@ -28,7 +28,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                <a href="{{ route('user.myorder') }}" class="btn btn-warning">kembali</a>
+                <a href="{{ route('web.myorder') }}" class="btn btn-warning">kembali</a>
             </div>
         </div>
     </div>

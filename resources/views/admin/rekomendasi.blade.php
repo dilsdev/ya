@@ -1,7 +1,7 @@
 <div>
     <div class="container-xl">
     <form class="row" wire:submit="store" enctype="multipart/form-data">
-        <div class="col-5">
+        <div class="col-12">
             <label for="nama_promosi" class="form-label">Nama</label>
             <input
                 type="text"
@@ -14,7 +14,7 @@
             />
             <small id="helpId" class="form-text text-muted">Masukkan mana promosi</small>
         </div>
-        <div class="col-5">
+        <div class="col-12">
             <label for="image" class="form-label">Choose file</label>
             <input
                 type="file"
@@ -27,7 +27,7 @@
             />
             <div id="fileHelpId" class="form-text">Masukkan foto promosi</div>
         </div>
-        <div class="col-1 d-flex justify-content-center align-items-center">
+        <div>
             <button  class="btn btn-primary mt-1" type="submit">Submit</button>
         </div>
     </form>

@@ -9,9 +9,9 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Nisn</th>
-                            <th>Kelas</th>
+                            {{-- <th>Kelas</th>
                             <th>Jurusan</th>
-                            <th>Foto kertu </th>
+                            <th>Foto kertu </th> --}}
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -23,7 +23,7 @@
                                     {{ $item->nama_lengkap }}
                                 </td>
                                 <td>{{ $item->nisn }}</td>
-                                <td>
+                                {{-- <td>
                                     {{ $item->kelas }}
                                 </td>
                                 <td>
@@ -33,10 +33,9 @@
                                     <a data-fslightbox="gallery" target="_blank" href="{{ asset('storage/kartu_peserta/' . $item->image_kp) }}">
                                         <div class="img-responsive" style="background-image: url('{{ asset('storage/kartu_peserta/' . $item->image_kp) }}')"></div>
                                     </a>
-                                </td>
+                                </td> --}}
                                 <td>
-                                    <button class="btn btn-warning"
-                                        wire:click='terima({{ $item->id }})'>Setuju</button>
+                                    <a href="/admin/detailsiswa/{{ $item->id }}" class="btn btn-warning">Detail</a>
                                 </td>
 
                             </tr>

@@ -1,6 +1,6 @@
 <div>
     <div class="container-xl">
-        <h4>Pesanan sudah bayar</h4>
+        <h4>Pesanan diterima</h4>
         <div class="card">
             <div class="table-responsive">
                 <table class="table table-vcenter card-table">
@@ -13,7 +13,7 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody wire:poll>
+                    <tbody wire:poll.5s>
                         @foreach ($data as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
@@ -25,7 +25,7 @@
                                     Rp.{{ number_format($item->total_harga, 0, ',', '.') }}
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning" href=" {{ route('admin.detail', [$item->id, 'admin.pesanan']) }}">Detail</a>
+                                    <a class="btn btn-warning" href=" {{ route('admin.detail', [$item->id, 'admin.pesananditerima']) }}">Detail</a>
                                 </td>
                                 {{-- <td>
                                         <button class="btn btn-warning" wire:click='selesai({{ $item->id }})'>selesai</button>

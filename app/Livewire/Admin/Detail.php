@@ -25,9 +25,10 @@ class Detail extends Component
                 ->join('menus', 'menus.id', '=', 'item_pesanans.menu_id')
                 ->where('pesanan_id', $this->id)
                 ->get();
-            $oke = \App\Models\Pesanan::find($this->id);
-            $this->status = $oke->status;
-            return view('admin.detail', ['data' => $data]);
+            $pesanan = \App\Models\Pesanan::find($this->id);
+            $pembeli = \App\Models\User::find($pesanan->user_id);
+            $this->status = $pesanan->status;
+            return view('admin.detail', ['data' => $data, 'pesanan'=>$pesanan, 'pembeli'=>$pembeli]);
     }
     public function pindah(){
         return redirect()->route($this->url);

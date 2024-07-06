@@ -39,7 +39,7 @@ class MenuEdit extends Component
 
         if ($this->image) {
 
-            $this->image->storeAs('public/posts', $this->image->hashName());
+            $this->image->storeAs('public/menu', $this->image->hashName());
 
             $menu->update([
                 'nama' => $this->nama,

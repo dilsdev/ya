@@ -2,8 +2,8 @@
     {{-- In work, do what you enjoy. --}}
     <div class="container">
         <div class="card">
-            <div class="card-header">
-                <h3>detail</h3>
+            <div class="card-header ">
+                <h4> <b style="font-size: 1rem; font-weight: 700;">Detail pesanan : {{ $pesanan->id }}</b><br> Nama pembeli : {{ $pembeli->name }}</h4>
             </div>
             <div class="card-body">
                 <table div class="table">
@@ -28,6 +28,14 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="card">
+                    <div class="card-body">
+                        <p cols="30" rows="10"><b>Pesan</b> : {{ $pesanan->message }}</p>
+                        <h4 class="card-title">Status pesanan : {{ $pesanan->status }}</h4>
+                        <h4 class="card-title">Status bayar : {{ $pesanan->status_bayar }}</h4>
+                    </div>
+                </div>
+                
             </div>
             <div class="card-footer d-flex" style="justify-content: space-between">
                 <button wire:click='pindah' class="btn btn-warning">kembali</button>
