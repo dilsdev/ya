@@ -9,8 +9,11 @@
     <meta name="description" content="Aplikasi pembelian makanan atau minuman online dari Cafe SMKN 6 JEMBER">
     <title>Cafe SMKN 6 JEMBER.</title>
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/gh/dilsdev/ya@main/public/dist/js/tabler.min.js"></script> --}}
     {{-- <script rel="preload" src="https://cafe6.dils.my.id/livewire/livewire.js?id=770f7738"></script> --}}
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dilsdev/ya@main/public/dist/css/tabler.min.css"> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css"> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-payments.min.css"> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css"> --}}
