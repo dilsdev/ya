@@ -1,0 +1,1 @@
+System.register(["./axios-legacy-Ces6yK67.js","./alpinejs-legacy-DSMOpcZj.js"],(function(e,t){"use strict";var s,i;return{setters:[e=>{s=e.a},e=>{i=e.m}],execute:function(){window.axios=s,window.axios.defaults.headers.common["X-Requested-With"]="XMLHttpRequest",window.Alpine=i,i.start()}}}));

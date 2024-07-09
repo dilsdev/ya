@@ -1,0 +1,55 @@
+{
+  "_alpinejs-B2Y9VuUa.js": {
+    "file": "assets/alpinejs-B2Y9VuUa.js",
+    "name": "alpinejs"
+  },
+  "_alpinejs-legacy-DSMOpcZj.js": {
+    "file": "assets/alpinejs-legacy-DSMOpcZj.js",
+    "name": "alpinejs"
+  },
+  "_axios-DN9wIMCN.js": {
+    "file": "assets/axios-DN9wIMCN.js",
+    "name": "axios"
+  },
+  "_axios-legacy-Ces6yK67.js": {
+    "file": "assets/axios-legacy-Ces6yK67.js",
+    "name": "axios"
+  },
+  "resources/css/app-legacy.css": {
+    "file": "assets/app-legacy-BJ4ROyBL.js",
+    "name": "app",
+    "src": "resources/css/app-legacy.css",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-d-M_MaX7.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app-legacy.js": {
+    "file": "assets/app-legacy-DmuVcfwV.js",
+    "name": "app",
+    "src": "resources/js/app-legacy.js",
+    "isEntry": true,
+    "imports": [
+      "_axios-legacy-Ces6yK67.js",
+      "_alpinejs-legacy-DSMOpcZj.js"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-9jYKbaor.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_axios-DN9wIMCN.js",
+      "_alpinejs-B2Y9VuUa.js"
+    ]
+  },
+  "vite/legacy-polyfills-legacy": {
+    "file": "assets/polyfills-legacy-BRV7Glw-.js",
+    "name": "polyfills",
+    "src": "vite/legacy-polyfills-legacy",
+    "isEntry": true
+  }
+}

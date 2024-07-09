@@ -1,0 +1,1 @@
+import{a as o}from"./axios-DN9wIMCN.js";import{m as t}from"./alpinejs-B2Y9VuUa.js";function e(){import.meta.url,import("_").catch(()=>1),async function*(){}().next()}window.axios=o;window.axios.defaults.headers.common["X-Requested-With"]="XMLHttpRequest";window.Alpine=t;t.start();export{e as __vite_legacy_guard};
