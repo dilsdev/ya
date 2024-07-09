@@ -1,7 +1,7 @@
 <div>
     <div class="container-xl">
         <a href="{{ route('admin.tambahmenu') }}" class="btn btn-warning mb-3">
-            Tambah menu makanan
+            Tambah menu
         </a>
 
         <div class="card">
