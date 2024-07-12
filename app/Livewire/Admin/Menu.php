@@ -12,7 +12,7 @@ class Menu extends Component
     use LivewireWithFileUploads;
     public function render()
     {
-        $menus = ModelMenu::all();
+        $menus = ModelMenu::orderBy('menus.created_at', 'desc')->get();
         return view('admin.menu', ['menus' => $menus]);
     }
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_user');
             $table->integer('id_pengirim')->nullable();
+            $table->integer('id_pesanan');
             $table->string('phone_number');
             $table->text('alamat');
             $table->string('status');

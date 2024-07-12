@@ -131,10 +131,11 @@ class Checkout extends Controller
     
             Pengiriman::create([
                 'id_user' => $pesanan->user_id,
+                'id_pesanan' => $pesanan->id,
                 'token' => $snapToken,
                 'phone_number' => $request->phone_number,
                 'alamat' => $request->alamat,
-                'status' => "belum dikirim",
+                'status' => "belum dibayar",
                 'maps' => "https://www.google.com/maps?q={$request->latitude},{$request->longitude}",
             ]);
             return redirect("checkout/{$pesanan->id}/{$snapToken}");
@@ -150,6 +151,12 @@ class Checkout extends Controller
                 $pesanan = Pesanan::find($request->order_id);
                 $pesanan->bayar = $request->gross_amount;
                 $pesanan->metode_pembayaran = $request->payment_type;
+                $pengiriman = Pengiriman::where('id_pesanan', $request->order_id)->get();
+                if ($pengiriman->isNotEmpty()) {
+                    $pengiriman->status = "sudah dibayar";
+                } else {
+                    // 
+                }
                 $pesanan->status = 'di pending';
                 $pesanan->status_bayar = 'di bayar';
                 $pesanan->save();

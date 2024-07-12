@@ -25,15 +25,30 @@ class Menu extends Component
         $this->type();
         return view('user.web.menu');
     }
+    public $search = '';
+    public $results = [];
+    public function updatedSearch()
+    {
+        if (strlen($this->search) >= 1) {
+            $this->results = ModelsMenu::where('nama', 'like', '%' . $this->search . '%')
+                                 ->orWhere('deskripsi', 'like', '%' . $this->search . '%')
+                                 ->orWhere('status', 'like', '%' . $this->search . '%')
+                                 ->orWhere('jenis', 'like', '%' . $this->search . '%')
+                                 ->get();
+        } else {
+            $this->results = [];
+        }
+    }
+
 
     public function type()
     {
         if ($this->type == 'all') {
-            $this->menus = ModelsMenu::where(['status' => 'ready'])->get();
-            $this->menusnot = ModelsMenu::where(['status' => 'notready'])->get();
+            $this->menus = ModelsMenu::where(['status' => 'ready'])->orderBy('menus.created_at', 'desc')->get();
+            $this->menusnot = ModelsMenu::where(['status' => 'notready'])->orderBy('menus.created_at', 'desc')->get();
         } else {
-            $this->menus = ModelsMenu::where(['jenis' => $this->type, 'status' => 'ready'])->get();
-            $this->menusnot = ModelsMenu::where(['jenis' => $this->type, 'status' => 'notready'])->get();
+            $this->menus = ModelsMenu::where(['jenis' => $this->type, 'status' => 'ready'])->orderBy('menus.created_at', 'desc')->get();
+            $this->menusnot = ModelsMenu::where(['jenis' => $this->type, 'status' => 'notready'])->orderBy('menus.created_at', 'desc')->get();
         }
     }
     public function addKeranjang($id)

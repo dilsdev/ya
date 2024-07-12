@@ -15,10 +15,24 @@ class Menuall extends Component
     public function render()
     {
         if ($this->menus === null && $this->menusnot === null) {
-            $this->menus = ModelsMenu::where(['status' => 'ready'])->get();
-            $this->menusnot = ModelsMenu::where(['status' => 'notready'])->get();
+            $this->menus = ModelsMenu::where(['status' => 'ready'])->orderBy('menus.created_at', 'desc')->get();
+            $this->menusnot = ModelsMenu::where(['status' => 'notready'])->orderBy('menus.created_at', 'desc')->get();
         }
         return view('user.mobile.menu');
+    }
+    public $search = '';
+    public $results = [];
+    public function updatedSearch()
+    {
+        if (strlen($this->search) >= 1) {
+            $this->results = ModelsMenu::where('nama', 'like', '%' . $this->search . '%')
+                                 ->orWhere('deskripsi', 'like', '%' . $this->search . '%')
+                                 ->orWhere('status', 'like', '%' . $this->search . '%')
+                                 ->orWhere('jenis', 'like', '%' . $this->search . '%')
+                                 ->get();
+        } else {
+            $this->results = [];
+        }
     }
     public function addKeranjang($id)
     {

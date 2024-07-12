@@ -19,6 +19,7 @@ class Unpaid extends Component
              'pesanans.metode_pembayaran' => 'bayar online',
              'pesanans.status' => 'belum bayar',
              'pesanans.bayar' => 0])
+             ->orderBy('pesanans.created_at', 'desc')
             ->get();
         return view('user.mobile.unpaid', ['unpaids' => $unpaids]);
     }

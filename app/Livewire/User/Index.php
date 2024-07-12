@@ -11,6 +11,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class Index extends Component
 {
+    public $search = '';
+    public $results = [];
     public function render()
     {
         $makanans = Menu::where(['jenis'=>'makanan', 'status'=>'ready'])
@@ -23,7 +25,19 @@ class Index extends Component
             ->get();
         $rekomendasi = Rekomendasi::all()->take(1);
 
-        return view('user.index', ['makanans'=>$makanans, 'minumans'=>$minumans, 'rekomendasi'=> $rekomendasi]);
+        return view('user.mobile.index', ['makanans'=>$makanans, 'minumans'=>$minumans, 'rekomendasi'=> $rekomendasi]);
+    }
+    public function updatedSearch()
+    {
+        if (strlen($this->search) >= 1) {
+            $this->results = Menu::where('nama', 'like', '%' . $this->search . '%')
+                                 ->orWhere('deskripsi', 'like', '%' . $this->search . '%')
+                                 ->orWhere('status', 'like', '%' . $this->search . '%')
+                                 ->orWhere('jenis', 'like', '%' . $this->search . '%')
+                                 ->get();
+        } else {
+            $this->results = [];
+        }
     }
     public function addKeranjang($id)
     {
