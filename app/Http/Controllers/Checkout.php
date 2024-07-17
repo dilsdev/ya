@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\Pengiriman;
 use App\Models\Pesanan;
 use App\Models\Siswa;
+use App\Rules\PhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,18 +47,21 @@ class Checkout extends Controller
         {
             $request->validate([
                 'pesan' => 'required|string',
-                'phone_number' => 'required|string',
+                'phone_number' => ['required', new PhoneNumber],
                 'alamat' => 'required|string',
                 'latitude' => 'required|string',
                 'longitude' => 'required|string',
+            ], [
+                'pesan.required' => 'Pesan wajib diisi.',
+                'pesan.string' => 'Pesan harus berupa teks.',
+                'phone_number.required' => 'Nomor telepon wajib diisi.',
+                'alamat.required' => 'Alamat wajib diisi.',
+                'alamat.string' => 'Alamat harus berupa teks.',
+                'latitude.required' => 'Latitude wajib diisi.',
+                'latitude.string' => 'Latitude harus berupa teks.',
+                'longitude.required' => 'Longitude wajib diisi.',
+                'longitude.string' => 'Longitude harus berupa teks.',
             ]);
-            // dd(
-            //     $request->pesan,
-            //     $request->phone_number,
-            //     $request->alamat,
-            //     $request->latitude,
-            //     $request->longitude,
-            // );
     
             $user = Auth::user();
             $keranjangs = Keranjang::select('menus.image', 'users.name','keranjangs.menu_id', 'menus.harga', 'menus.deskripsi', 'menus.status', 'menus.nama', 'keranjangs.id', 'keranjangs.checkbox', 'keranjangs.jumlah')
@@ -108,7 +112,7 @@ class Checkout extends Controller
             $pesanan->save();
             
             
-            \Midtrans\Config::$serverKey = 'SB-Mid-server-dYkQ5fMBfhMDOcZWv44JlgKT';
+            \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
             \Midtrans\Config::$isProduction = false;
             \Midtrans\Config::$isSanitized = true;
             \Midtrans\Config::$is3ds = true;
@@ -256,7 +260,7 @@ class Checkout extends Controller
 
         
         // Set Midtrans configurations
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-dYkQ5fMBfhMDOcZWv44JlgKT';
+        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         \Midtrans\Config::$isProduction = false;
         \Midtrans\Config::$isSanitized = true;
         \Midtrans\Config::$is3ds = true;

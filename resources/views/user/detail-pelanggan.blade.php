@@ -44,7 +44,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <form action="checkoutpelanggan" method="post">
+                    <form action="{{ route('checkoutpelanggan') }}" method="post">
                         @csrf
                         <input type="hidden" name="pesan" value="{{ $pesan }}">
                         <input type="hidden" id="latitude" name="latitude">
@@ -52,23 +52,41 @@
                         <div class="mb-3">
                             <label for="phone_number" class="form-label">No wa (aktif)</label>
                             <input
-                                type="number"
-                                class="form-control"
+                                type="text"
+                                class="form-control @error('phone_number') is-invalid @enderror"
                                 name="phone_number"
                                 id="phone_number"
-                                placeholder="08xxxxxxxx"
+                                placeholder="+62xxxxxxxxxx"
+                                value="{{ old('phone_number') }}"
                                 required
                             />
+                            @error('phone_number')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat lengkap</label>
-                            <textarea class="form-control" name="alamat" id="alamat" required rows="3"></textarea>
+                            <textarea
+                                class="form-control @error('alamat') is-invalid @enderror"
+                                name="alamat"
+                                id="alamat"
+                                required
+                                rows="3"
+                            >{{ old('alamat') }}</textarea>
+                            @error('alamat')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="card-footer">
                             <a href="{{ route('user.unpaid') }}" class="btn btn-warning">kembali</a>
                             <button type="submit" class="btn btn-primary">Bayar</button>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

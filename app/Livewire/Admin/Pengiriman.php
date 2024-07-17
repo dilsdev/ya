@@ -8,7 +8,7 @@ class Pengiriman extends Component
 {
     public function render()
     {
-    $belumdikirim = \App\Models\Pengiriman::select('penerima.name as penerima_name', 'pengirimans.phone_number', 'pengirimans.alamat', 'pengirim.name as pengirim_name', 'pengirimans.maps', 'pengirimans.status', 'pengirimans.id')
+    $belumdikirim = \App\Models\Pengiriman::select('penerima.name as penerima_name', 'pengirimans.phone_number', 'pengirimans.alamat', 'pengirim.name as pengirim_name', 'pengirimans.maps', 'pengirimans.status', 'pengirimans.id', 'pengirimans.id_pesanan')
     ->join('users as penerima', 'penerima.id', '=', 'pengirimans.id_user')
     ->join('users as pengirim', 'pengirim.id', '=', 'pengirimans.id_pengirim')
     ->where('pengirimans.status', 'belum dikirim')
