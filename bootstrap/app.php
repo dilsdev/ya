@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'user' => \App\Http\Middleware\User::class,
             'mobile' => \App\Http\Middleware\Mobile::class,
             'web' => \App\Http\Middleware\Web::class,
+            'kurir' => \App\Http\Middleware\Kurir::class,
         ]);
 
         // Definisikan grup middleware untuk api

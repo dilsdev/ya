@@ -39,6 +39,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/detailsiswa/{id}', App\Livewire\Admin\DetailSiswa::class)->name('admin.detailsiswa');
     Route::get('admin/pengiriman', App\Livewire\Admin\Pengiriman::class)->name('admin.pengiriman');
     Route::get('admin/detailpengiriman/{id}', App\Livewire\Admin\DetailPengiriman::class)->name('admin.detailpengiriman');
+    Route::get('admin/users', App\Livewire\Admin\Users::class)->name('admin.users');
+    Route::get('admin/admins', App\Livewire\Admin\Admin::class)->name('admin.admins');
+    Route::get('admin/kurirs', App\Livewire\Admin\Kurirs::class)->name('admin.kurirs');
+});
+Route::middleware(['auth', 'kurir'])->group(function () {
+    // Route::get('kurir/index', App\Livewire\Kurir\Index::class)->name('kurir.index');
+    Route::get('kurir/index', App\Livewire\Kurir\Belumdikirim::class)->name('kurir.index');
+    Route::get('kurir/belumdikirim', App\Livewire\Kurir\Belumdikirim::class)->name('kurir.belumdikirim');
+    Route::get('kurir/sudahdikirim', App\Livewire\Kurir\Sudahdikirim::class)->name('kurir.sudahdikirim');
+    Route::get('kurir/perludikirim', App\Livewire\Kurir\Perludikirim::class)->name('kurir.perludikirim');
+    Route::get('kurir/detailpengiriman/{id}', App\Livewire\Kurir\DetailPengiriman::class)->name('kurir.detailpengiriman');
 });
 Route::middleware(['auth', 'user', 'mobile'])->group(function () {
     Route::get('user/index', App\Livewire\User\Index::class)->name('user.index');
