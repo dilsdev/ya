@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Kurir;
 
+use App\Models\Pengiriman;
 use Livewire\Component;
 
 class Belumdikirim extends Component
@@ -15,5 +16,11 @@ class Belumdikirim extends Component
     ->orderBy('pengirimans.created_at', 'desc')
     ->get();
         return view('kurir.belumdikirim', ['belumdikirim'=>$belumdikirim]);
+    }
+    public function antar($id){
+        $data = Pengiriman::find($id);
+        $data->status = 'perlu dikirim';
+        $data->save();
+        return redirect()->route('kurir.belumdikirim');
     }
 }

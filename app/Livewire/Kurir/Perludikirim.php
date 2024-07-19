@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Kurir;
 
+use App\Models\Pengiriman;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -18,5 +19,11 @@ class Perludikirim extends Component
         ->orderBy('pengirimans.created_at', 'desc')
         ->get();
         return view('kurir.perludikirim', ['perludikirim'=>$perludikirim]);
+    }
+    public function selesai($id){
+        $data = Pengiriman::find($id);
+        $data->status = "sudah dikirim";
+        $data->save();
+        return redirect()->route('kurir.perludikirim');
     }
 }

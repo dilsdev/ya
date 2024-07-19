@@ -8,10 +8,9 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Pengirim</th>
                             <th>Status</th>
                             <th>Detail</th>
-                            {{-- <th>Aksi</th> --}}
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,11 +18,13 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $sudah->penerima_name }}</td>
-                                <td>{{ $sudah->pengirim_name }}</td>
                                 <td>{{ $sudah->status }}</td>
                                 <td><a class="btn" href="detailpengiriman/{{ $sudah->id_pesanan }}">
                                         Detail
                                     </a></td>
+                                    <td><button class="btn btn-warning" wire:click="selesai({{ $sudah->id }})">
+                                        Selesai
+                                </button></td>
                             </tr>
                         @endforeach
                     </tbody>

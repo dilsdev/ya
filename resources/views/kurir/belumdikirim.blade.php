@@ -10,7 +10,7 @@
                             <th>Nama</th>
                             <th>Pengirim</th>
                             <th>Status</th>
-                            <th>Detail</th>
+                            <th>Aksi</th>
                             {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
@@ -21,9 +21,9 @@
                                 <td>{{ $belum->penerima_name }}</td>
                                 <td>{{ $belum->pengirim_name }}</td>
                                 <td>{{ $belum->status }}</td>
-                                <td><a class="btn" href="detailpengiriman/{{ $belum->id_pesanan }}">
-                                        Detail
-                                    </a></td>
+                                <td><button class="btn" wire:click="antar({{ $belum->id }})">
+                                        Antar sekarang
+                                </button></td>
                             </tr>
                         @endforeach
                     </tbody>

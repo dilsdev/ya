@@ -2,7 +2,7 @@
     <div class="container-xl mt-4">
         <h4>Daftar kurir</h4>
         <div class="m-2 input-icon">
-            <input type="text" class="form-control" wire:model.live="search" placeholder="Cari kuris...">
+            <input type="text" class="form-control" wire:model.live="search" placeholder="Cari kurir...">
             <span wire:loading.class.remove="opacity-0" class="input-icon-addon opacity-0">
                 <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
             </span>
